@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager
+        android:id="@+id/main_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/radiogGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/line"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <!--首页-->
+        <RadioButton
+            android:id="@+id/rb_main1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main_super_admin1"
+            android:gravity="center"
+            android:text="分公司"
+            android:checked="true"
+            android:textColor="#e88383"
+            android:textSize="11sp" />
+        <!--任务-->
+        <RadioButton
+            android:id="@+id/rb_main2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main_super_admin2"
+            android:gravity="center"
+            android:text="消息"
+            android:textColor="#e88383"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main_super_admin3"
+            android:gravity="center"
+            android:text="统计"
+            android:textColor="#e88383"
+            android:textSize="11sp" />
+
+
+    </RadioGroup>
+
+
+</RelativeLayout>

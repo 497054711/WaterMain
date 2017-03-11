@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.com.lsc.android.water_main">
+
+    <!--  添加WiFi以及访问网络的权限：-->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+
+
+    <!--操作外部存储设备文件：-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <!-- 录音时需要的权限：-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+
+    <!--录制视频时需要的权限：-->
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+
+    <!--发送短信：-->
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+
+
+    <!--  收短信:-->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+
+    <!--收彩信：-->
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+
+    <!-- GPS:-->
+    <!-- 權限 : 上網連線     -->
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!-- 權限 : AGPS定位      -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="cn.com.lsc.android.water_main.activity.IndexActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="cn.com.lsc.android.water_main.activity.GuaidActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="cn.com.lsc.android.water_main.activity.MainActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="cn.com.lsc.android.water_main.activity.MainAdminActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="cn.com.lsc.android.water_main.activity.MainSuperAdminActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager
+        android:id="@+id/main_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/radiogGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+        <!--首页-->
+        <RadioButton
+            android:id="@+id/rb_main1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main1"
+            android:gravity="center"
+            android:text="首页"
+            android:checked="true"
+            android:textColor="#1fbba6"
+            android:textSize="11sp" />
+        <!--任务-->
+        <RadioButton
+            android:id="@+id/rb_main2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main2"
+            android:gravity="center"
+            android:text="任务"
+            android:textColor="#1fbba6"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main3"
+            android:gravity="center"
+            android:text="报告"
+            android:textColor="#1fbba6"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main4"
+            android:gravity="center"
+            android:text="记录"
+            android:textColor="#1fbba6"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main5"
+            android:gravity="center"
+            android:text="积分"
+            android:textColor="#1fbba6"
+            android:textSize="11sp" />
+
+    </RadioGroup>
+
+
+</RelativeLayout>
