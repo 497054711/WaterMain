@@ -1,6 +1,7 @@
 package cn.com.lsc.android.water_main.mvp.index.persent;
 
-import cn.com.lsc.android.water_main.mvp.index.model.IIndexListener;
+import cn.com.lsc.android.water_main.mvp.BaseBean;
+import cn.com.lsc.android.water_main.mvp.IOnDataListener;
 import cn.com.lsc.android.water_main.mvp.index.model.IndexModel;
 import cn.com.lsc.android.water_main.mvp.index.view.IIndexView;
 
@@ -17,10 +18,11 @@ public class PIndex {
     }
 
     public void loginUser(){
-        indexModel=new IndexModel(new IIndexListener() {
+        indexModel=new IndexModel(new IOnDataListener() {
+
             @Override
-            public void onSuccess() {
-                iIndexView.loginUser();
+            public void onSuccess(BaseBean baseBean) {
+                iIndexView.loginUser(baseBean);
             }
 
             @Override
@@ -31,10 +33,11 @@ public class PIndex {
         indexModel.loginUser();
     }
     public void loginAdmin(){
-        indexModel=new IndexModel(new IIndexListener() {
+        indexModel=new IndexModel(new IOnDataListener() {
+
             @Override
-            public void onSuccess() {
-                iIndexView.loginAdmin();
+            public void onSuccess(BaseBean baseBean) {
+                iIndexView.loginAdmin(baseBean);
             }
 
             @Override

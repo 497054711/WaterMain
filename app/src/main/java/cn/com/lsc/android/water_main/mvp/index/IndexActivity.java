@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import cn.com.lsc.android.water_main.R;
+import cn.com.lsc.android.water_main.mvp.BaseBean;
 import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
 import cn.com.lsc.android.water_main.mvp.GuaidActivity;
 import cn.com.lsc.android.water_main.mvp.admin.MainAdminActivity;
@@ -49,7 +50,7 @@ public class IndexActivity extends BaseFragmentActivity implements IIndexView{
     }
 
     @Override
-    public void loginUser() {
+    public void loginUser(BaseBean baseBean) {
         intent=new Intent(IndexActivity.this,MainActivity.class);
         intent.putExtra("type",0);
         startActivity(intent);
@@ -57,7 +58,7 @@ public class IndexActivity extends BaseFragmentActivity implements IIndexView{
     }
 
     @Override
-    public void loginAdmin() {
+    public void loginAdmin(BaseBean baseBean) {
         intent=new Intent(IndexActivity.this,MainAdminActivity.class);
         intent.putExtra("type",1);
         startActivity(intent);
