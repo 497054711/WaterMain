@@ -1,6 +1,5 @@
-package cn.com.lsc.android.water_main.activity;
+package cn.com.lsc.android.water_main.mvp.super_admin;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,16 +9,17 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import cn.com.lsc.android.water_main.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.com.lsc.android.water_main.R;
+import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
+import cn.com.lsc.android.water_main.mvp.WebViewFragment;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
 import cn.com.lsc.android.water_main.animation.AnimationPushBotton;
 import cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager;
 
-public class MainActivity extends BaseFragmentActivity implements WebViewFragment.CallBackInterface, AnimationPushBotton.AnimationEndCallBack {
+public class MainSuperAdminActivity extends BaseFragmentActivity implements WebViewFragment.CallBackInterface, AnimationPushBotton.AnimationEndCallBack{
 
     private ForbiddenScrollViewPager main_vp;
     private RadioGroup radiogGroup;
@@ -29,11 +29,11 @@ public class MainActivity extends BaseFragmentActivity implements WebViewFragmen
     private Bundle bundle;
     private AnimationPushBotton animationPushBotton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_super_admin);
+        main_vp= (ForbiddenScrollViewPager) this.findViewById(R.id.main_vp);
         animationPushBotton = new AnimationPushBotton(this);
         animationPushBotton.setAnimationEndCallBack(this);
         main_vp = (ForbiddenScrollViewPager) this.findViewById(R.id.main_vp);
@@ -42,43 +42,29 @@ public class MainActivity extends BaseFragmentActivity implements WebViewFragmen
 
         main1 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/task/user-task-index.html");
+        bundle.putString("url", "file:///android_asset/administrator-branch/branch-index.html");
         main1.setArguments(bundle);
         main1.setCallBackInterface(this);
 
         main2 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/task/task-index.html");
+        bundle.putString("url", "file:///android_asset/administrator-message/message-index.html");
         main2.setArguments(bundle);
         main2.setCallBackInterface(this);
 
         main3 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/report/report-index.html");
+        bundle.putString("url", "file:///android_asset/administrator-statistics/statistics-index.html");
         main3.setArguments(bundle);
         main3.setCallBackInterface(this);
-
-        main4 = new WebViewFragment();
-        bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/record/record-index.html");
-        main4.setArguments(bundle);
-        main4.setCallBackInterface(this);
-
-        main5 = new WebViewFragment();
-        bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/integral/integral-index.html");
-        main5.setArguments(bundle);
-        main5.setCallBackInterface(this);
 
         listFragments = new ArrayList<Fragment>();
         listFragments.add(main1);
         listFragments.add(main2);
         listFragments.add(main3);
-        listFragments.add(main4);
-        listFragments.add(main5);
         commonFragmentPagerAdapter = new CommonFragmentPagerAdapter(getSupportFragmentManager(), listFragments);
         main_vp.setAdapter(commonFragmentPagerAdapter);
-        main_vp.setOffscreenPageLimit(5);
+        main_vp.setOffscreenPageLimit(3);
 
         radiogGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -93,13 +79,6 @@ public class MainActivity extends BaseFragmentActivity implements WebViewFragmen
                     case R.id.rb_main3:
                         main_vp.setCurrentItem(2);
                         break;
-                    case R.id.rb_main4:
-                        main_vp.setCurrentItem(3);
-                        break;
-                    case R.id.rb_main5:
-                        main_vp.setCurrentItem(4);
-                        break;
-
                 }
             }
         });
@@ -121,12 +100,6 @@ public class MainActivity extends BaseFragmentActivity implements WebViewFragmen
                         break;
                     case 2:
                         ((RadioButton) (radiogGroup.getChildAt(2))).setChecked(true);
-                        break;
-                    case 3:
-                        ((RadioButton) (radiogGroup.getChildAt(3))).setChecked(true);
-                        break;
-                    case 4:
-                        ((RadioButton) (radiogGroup.getChildAt(4))).setChecked(true);
                         break;
                 }
             }
@@ -161,31 +134,19 @@ public class MainActivity extends BaseFragmentActivity implements WebViewFragmen
                 } else {
                     main_vp.setCurrentItem(0);
                 }
-            } else if (main_vp.getCurrentItem() == 3) {
-                if ((!radiogGroup.isShown())&&main4.getMain_wb().canGoBack()) {
-                    main4.getMain_wb().goBack();
-                } else {
-                    main_vp.setCurrentItem(0);
-                }
-            } else if (main_vp.getCurrentItem() == 4) {
-                if ((!radiogGroup.isShown())&&main5.getMain_wb().canGoBack()) {
-                    main5.getMain_wb().goBack();
-                } else {
-                    main_vp.setCurrentItem(0);
-                }
             }
             return false;
         }
         return super.onKeyDown(keyCode, event);
     }
-
     @Override
     public void webStartCallBack(String url) {
-        if (url.contains("/task/user-task-index.html") || url.contains("/task/task-index.html") || url.contains("/report/report-index.html")
-                || url.contains("/record/record-index.html") || url.contains("/integral/integral-index.html")) {
+        if (url.contains("/administrator-branch/branch-index.html") || url.contains("/administrator-message/message-index.html") || url.contains("/administrator-statistics/statistics-index.html")) {
             animationPushBotton.startAnimationIn(radiogGroup);
         } else {
-            animationPushBotton.startAnimationOUT(radiogGroup);
+            if (radiogGroup.isShown()) {
+                animationPushBotton.startAnimationOUT(radiogGroup);
+            }
         }
     }
 

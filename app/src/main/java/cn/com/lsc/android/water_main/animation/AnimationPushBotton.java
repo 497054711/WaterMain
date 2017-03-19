@@ -6,8 +6,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import cn.com.lsc.android.water_main.R;
-import cn.com.lsc.android.water_main.activity.MainActivity;
-import cn.com.lsc.android.water_main.activity.WebViewFragment;
 
 /**
  * Created by Administrator on 2017/3/11.

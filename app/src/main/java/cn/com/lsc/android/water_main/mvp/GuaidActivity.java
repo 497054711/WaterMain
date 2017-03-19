@@ -1,4 +1,4 @@
-package cn.com.lsc.android.water_main.activity;
+package cn.com.lsc.android.water_main.mvp;
 
 import android.content.Intent;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package cn.com.lsc.android.water_main.activity;
+package cn.com.lsc.android.water_main.mvp.admin;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,11 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.lsc.android.water_main.R;
+import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
+import cn.com.lsc.android.water_main.mvp.WebViewFragment;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
 import cn.com.lsc.android.water_main.animation.AnimationPushBotton;
 import cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager;
 
-public class MainSuperAdminActivity extends BaseFragmentActivity implements WebViewFragment.CallBackInterface, AnimationPushBotton.AnimationEndCallBack{
+public class MainAdminActivity extends BaseFragmentActivity implements WebViewFragment.CallBackInterface, AnimationPushBotton.AnimationEndCallBack{
 
     private ForbiddenScrollViewPager main_vp;
     private RadioGroup radiogGroup;
@@ -30,8 +32,7 @@ public class MainSuperAdminActivity extends BaseFragmentActivity implements WebV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_super_admin);
-        main_vp= (ForbiddenScrollViewPager) this.findViewById(R.id.main_vp);
+        setContentView(R.layout.main_admin);
         animationPushBotton = new AnimationPushBotton(this);
         animationPushBotton.setAnimationEndCallBack(this);
         main_vp = (ForbiddenScrollViewPager) this.findViewById(R.id.main_vp);
@@ -40,29 +41,36 @@ public class MainSuperAdminActivity extends BaseFragmentActivity implements WebV
 
         main1 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/administrator-branch/branch-index.html");
+        bundle.putString("url", "file:///android_asset/inspect/inspect-road.html");
         main1.setArguments(bundle);
         main1.setCallBackInterface(this);
 
         main2 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/administrator-message/message-index.html");
+        bundle.putString("url", "file:///android_asset/fault/fault-index.html");
         main2.setArguments(bundle);
         main2.setCallBackInterface(this);
 
         main3 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/administrator-statistics/statistics-index.html");
+        bundle.putString("url", "file:///android_asset/message/message-conversation.html");
         main3.setArguments(bundle);
         main3.setCallBackInterface(this);
+
+        main4 = new WebViewFragment();
+        bundle = new Bundle();
+        bundle.putString("url", "file:///android_asset/statistics/statistics-index.html");
+        main4.setArguments(bundle);
+        main4.setCallBackInterface(this);
 
         listFragments = new ArrayList<Fragment>();
         listFragments.add(main1);
         listFragments.add(main2);
         listFragments.add(main3);
+        listFragments.add(main4);
         commonFragmentPagerAdapter = new CommonFragmentPagerAdapter(getSupportFragmentManager(), listFragments);
         main_vp.setAdapter(commonFragmentPagerAdapter);
-        main_vp.setOffscreenPageLimit(3);
+        main_vp.setOffscreenPageLimit(4);
 
         radiogGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -76,6 +84,9 @@ public class MainSuperAdminActivity extends BaseFragmentActivity implements WebV
                         break;
                     case R.id.rb_main3:
                         main_vp.setCurrentItem(2);
+                        break;
+                    case R.id.rb_main4:
+                        main_vp.setCurrentItem(3);
                         break;
                 }
             }
@@ -98,6 +109,9 @@ public class MainSuperAdminActivity extends BaseFragmentActivity implements WebV
                         break;
                     case 2:
                         ((RadioButton) (radiogGroup.getChildAt(2))).setChecked(true);
+                        break;
+                    case 3:
+                        ((RadioButton) (radiogGroup.getChildAt(3))).setChecked(true);
                         break;
                 }
             }
@@ -132,14 +146,22 @@ public class MainSuperAdminActivity extends BaseFragmentActivity implements WebV
                 } else {
                     main_vp.setCurrentItem(0);
                 }
+            } else if (main_vp.getCurrentItem() == 3) {
+                if ((!radiogGroup.isShown())&&main4.getMain_wb().canGoBack()) {
+                    main4.getMain_wb().goBack();
+                } else {
+                    main_vp.setCurrentItem(0);
+                }
             }
             return false;
         }
         return super.onKeyDown(keyCode, event);
     }
+
     @Override
     public void webStartCallBack(String url) {
-        if (url.contains("/administrator-branch/branch-index.html") || url.contains("/administrator-message/message-index.html") || url.contains("/administrator-statistics/statistics-index.html")) {
+        if (url.contains("/inspect/inspect-road.html") || url.contains("/fault/fault-index.html") || url.contains("/message/message-conversation.html")
+                || url.contains("/statistics/statistics-index.html") ) {
             animationPushBotton.startAnimationIn(radiogGroup);
         } else {
             if (radiogGroup.isShown()) {
