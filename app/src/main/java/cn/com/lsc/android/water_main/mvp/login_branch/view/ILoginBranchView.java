@@ -1,4 +1,4 @@
-package cn.com.lsc.android.water_main.mvp.index.view;
+package cn.com.lsc.android.water_main.mvp.login_branch.view;
 
 import cn.com.lsc.android.water_main.mvp.BaseBean;
 
@@ -7,7 +7,7 @@ import cn.com.lsc.android.water_main.mvp.BaseBean;
  * index接口
  */
 
-public interface IIndexView {
+public interface ILoginBranchView {
     public void loginUser(BaseBean baseBean);//用户登录
     public void loginAdmin(BaseBean baseBean);//管理员登录
 }

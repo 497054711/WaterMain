@@ -53,7 +53,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="cn.com.lsc.android.water_main.mvp.index.IndexActivity"
+            android:name="cn.com.lsc.android.water_main.mvp.login_branch.LoginBranchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,10 +74,10 @@
         <activity
             android:name="cn.com.lsc.android.water_main.mvp.admin.MainAdminActivity"
             android:screenOrientation="portrait">
-
         </activity>
+
         <activity
-            android:name="cn.com.lsc.android.water_main.mvp.super_admin.MainSuperAdminActivity"
+            android:name="cn.com.lsc.android.water_main.mvp.BaseDisplayActivity"
             android:screenOrientation="portrait">
 
         </activity>
