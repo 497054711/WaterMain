@@ -42,19 +42,19 @@ public class MainSuperAdminActivity extends BaseFragmentActivity implements WebV
 
         main1 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/administrator-branch/branch-index.html");
+        bundle.putString("url", "file:///android_asset/administrator-branch/branch-login_branch.html");
         main1.setArguments(bundle);
         main1.setCallBackInterface(this);
 
         main2 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/administrator-message/message-index.html");
+        bundle.putString("url", "file:///android_asset/administrator-message/message-login_branch.html");
         main2.setArguments(bundle);
         main2.setCallBackInterface(this);
 
         main3 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/administrator-statistics/statistics-index.html");
+        bundle.putString("url", "file:///android_asset/administrator-statistics/statistics-login_branch.html");
         main3.setArguments(bundle);
         main3.setCallBackInterface(this);
 

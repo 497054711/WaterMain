@@ -2,79 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/index_bg"
-    android:gravity="center_horizontal"
+    android:background="@color/background"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:src="@mipmap/index_logo" />
+    <include layout="@layout/water_main_title" />
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:id="@+id/index_banner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@mipmap/index_text" />
+        android:scaleType="fitXY"
+        android:src="@drawable/index_banner" />
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/index_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:paddingBottom="40dp">
+        android:dividerHeight="10dp"
+        android:divider="#00000000">
 
-        <RelativeLayout
-            android:id="@+id/rv_index1"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:background="@drawable/shape_corner"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="8dp">
+    </ListView>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/index_icon" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="用户"
-                android:textColor="#ffffff"
-                android:textSize="15sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rv_index2"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_corner"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/index_icon" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="管理员"
-                android:textColor="#ffffff"
-                android:textSize="15sp" />
-        </RelativeLayout>
-
-    </LinearLayout>
 </LinearLayout>

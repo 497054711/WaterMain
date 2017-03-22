@@ -20,7 +20,7 @@ import cn.com.lsc.android.water_main.db.GuaidDb;
  * Created by Administrator on 2017/3/11.
  */
 
-public class LoginBranchActivity extends BaseFragmentActivity implements ILoginBranchView {
+public class LoginBranchActivity extends BaseFragmentActivity implements ILoginBranchView ,View.OnClickListener{
     private RelativeLayout rv_index1,rv_index2,rv_index3;
     private PLoginBranch pLoginBranch;
     private Intent intent;
@@ -32,21 +32,9 @@ public class LoginBranchActivity extends BaseFragmentActivity implements ILoginB
             startActivity(intent);
         }
         pLoginBranch =new PLoginBranch(this);
-        this.setContentView(R.layout.index);
+        this.setContentView(R.layout.login_branch);
         rv_index1= (RelativeLayout) this.findViewById(R.id.rv_index1);
         rv_index2= (RelativeLayout) this.findViewById(R.id.rv_index2);
-        rv_index1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {//用户
-                pLoginBranch.loginUser();
-            }
-        });
-        rv_index2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {//管理员
-                pLoginBranch.loginAdmin();
-            }
-        });
     }
 
     @Override
@@ -63,5 +51,17 @@ public class LoginBranchActivity extends BaseFragmentActivity implements ILoginB
         intent.putExtra("type",1);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.rv_index1:
+                pLoginBranch.loginUser();
+                break;
+            case R.id.rv_index2:
+                pLoginBranch.loginAdmin();
+                break;
+        }
     }
 }

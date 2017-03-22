@@ -3,16 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#1fbba6"
-    android:paddingTop="10dp"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     android:paddingBottom="10dp"
-    android:orientation="vertical">
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/back"
         android:layout_width="12dp"
         android:layout_height="21dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
         android:src="@drawable/icon_back" />
 
     <TextView
@@ -24,10 +25,10 @@
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:textStyle="bold" />
+
     <ImageView
-        android:layout_width="12dp"
-        android:layout_height="21dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/icon_back" />
+        android:id="@+id/right"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>

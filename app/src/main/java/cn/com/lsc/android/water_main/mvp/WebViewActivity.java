@@ -69,7 +69,7 @@ public class WebViewActivity extends BaseFragmentActivity {
             }
 
         });
-//        main_wb.loadUrl("file:///android_asset/report/report-index.html");
+//        main_wb.loadUrl("file:///android_asset/report/report-login_branch.html");
         main_wb.loadUrl(url);
     }
 }

@@ -18,17 +18,18 @@ import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
 import cn.com.lsc.android.water_main.mvp.WebViewFragment;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
 import cn.com.lsc.android.water_main.animation.AnimationPushBotton;
+import cn.com.lsc.android.water_main.mvp.index.IndexFragment;
 import cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager;
 
-public class MainActivity extends BaseFragmentActivity implements WebViewFragment.CallBackInterface, AnimationPushBotton.AnimationEndCallBack {
+public class MainActivity extends BaseFragmentActivity {
 
     private ForbiddenScrollViewPager main_vp;
     private RadioGroup radiogGroup;
-    private WebViewFragment main1, main2, main3, main4, main5;
     private List<Fragment> listFragments;
     private CommonFragmentPagerAdapter commonFragmentPagerAdapter;
     private Bundle bundle;
     private AnimationPushBotton animationPushBotton;
+    private IndexFragment indexFragment;
 
 
     @Override
@@ -36,47 +37,15 @@ public class MainActivity extends BaseFragmentActivity implements WebViewFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         animationPushBotton = new AnimationPushBotton(this);
-        animationPushBotton.setAnimationEndCallBack(this);
         main_vp = (ForbiddenScrollViewPager) this.findViewById(R.id.main_vp);
         main_vp.setNoScroll(true);
         radiogGroup = (RadioGroup) this.findViewById(R.id.radiogGroup);
 
-        main1 = new WebViewFragment();
-        bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/task/user-task-index.html");
-        main1.setArguments(bundle);
-        main1.setCallBackInterface(this);
-
-        main2 = new WebViewFragment();
-        bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/task/task-index.html");
-        main2.setArguments(bundle);
-        main2.setCallBackInterface(this);
-
-        main3 = new WebViewFragment();
-        bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/report/report-index.html");
-        main3.setArguments(bundle);
-        main3.setCallBackInterface(this);
-
-        main4 = new WebViewFragment();
-        bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/record/record-index.html");
-        main4.setArguments(bundle);
-        main4.setCallBackInterface(this);
-
-        main5 = new WebViewFragment();
-        bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/integral/integral-index.html");
-        main5.setArguments(bundle);
-        main5.setCallBackInterface(this);
+        indexFragment=new IndexFragment();
 
         listFragments = new ArrayList<Fragment>();
-        listFragments.add(main1);
-        listFragments.add(main2);
-        listFragments.add(main3);
-        listFragments.add(main4);
-        listFragments.add(main5);
+        listFragments.add(indexFragment);
+
         commonFragmentPagerAdapter = new CommonFragmentPagerAdapter(getSupportFragmentManager(), listFragments);
         main_vp.setAdapter(commonFragmentPagerAdapter);
         main_vp.setOffscreenPageLimit(5);
@@ -143,62 +112,9 @@ public class MainActivity extends BaseFragmentActivity implements WebViewFragmen
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (main_vp.getCurrentItem() == 0) {
-                if ((!radiogGroup.isShown())&&main1.getMain_wb().canGoBack()) {
-                    main1.getMain_wb().goBack();
-                } else {
-                    finish();
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                }
-            } else if (main_vp.getCurrentItem() == 1) {
-                if ((!radiogGroup.isShown())&&main2.getMain_wb().canGoBack()) {
-                    main2.getMain_wb().goBack();
-                } else {
-                    main_vp.setCurrentItem(0);
-                }
-            } else if (main_vp.getCurrentItem() == 2) {
-                if ((!radiogGroup.isShown())&&main3.getMain_wb().canGoBack()) {
-                    main3.getMain_wb().goBack();
-                } else {
-                    main_vp.setCurrentItem(0);
-                }
-            } else if (main_vp.getCurrentItem() == 3) {
-                if ((!radiogGroup.isShown())&&main4.getMain_wb().canGoBack()) {
-                    main4.getMain_wb().goBack();
-                } else {
-                    main_vp.setCurrentItem(0);
-                }
-            } else if (main_vp.getCurrentItem() == 4) {
-                if ((!radiogGroup.isShown())&&main5.getMain_wb().canGoBack()) {
-                    main5.getMain_wb().goBack();
-                } else {
-                    main_vp.setCurrentItem(0);
-                }
-            }
+
             return false;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public void webStartCallBack(String url) {
-        if (url.contains("/task/user-task-index.html") || url.contains("/task/task-index.html") || url.contains("/report/report-index.html")
-                || url.contains("/record/record-index.html") || url.contains("/integral/integral-index.html")) {
-            animationPushBotton.startAnimationIn(radiogGroup);
-        } else {
-            animationPushBotton.startAnimationOUT(radiogGroup);
-        }
-    }
-
-    @Override
-    public void animationInEndcallBack() {
-        Log.i("animationInEndcallBack", "visible===");
-        radiogGroup.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void animationOutEndcallBack() {
-        Log.i("animationInEndcallBack", "gone===");
-        radiogGroup.setVisibility(View.GONE);
     }
 }

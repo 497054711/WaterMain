@@ -47,7 +47,7 @@ public class MainAdminActivity extends BaseFragmentActivity implements WebViewFr
 
         main2 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/fault/fault-index.html");
+        bundle.putString("url", "file:///android_asset/fault/fault-login_branch.html");
         main2.setArguments(bundle);
         main2.setCallBackInterface(this);
 
@@ -59,7 +59,7 @@ public class MainAdminActivity extends BaseFragmentActivity implements WebViewFr
 
         main4 = new WebViewFragment();
         bundle = new Bundle();
-        bundle.putString("url", "file:///android_asset/statistics/statistics-index.html");
+        bundle.putString("url", "file:///android_asset/statistics/statistics-login_branch.html");
         main4.setArguments(bundle);
         main4.setCallBackInterface(this);
 
