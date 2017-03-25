@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="right"
+        android:gravity="left"
         android:lineSpacingMultiplier="1.5"
         android:paddingLeft="10dp"
         android:text="起：周桥 -- 止：高速公路管理局\n全长：4.8公里预计时长：60分钟"

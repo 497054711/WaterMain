@@ -7,24 +7,29 @@ import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import cn.com.lsc.android.water_main.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
+import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
 import cn.com.lsc.android.water_main.mvp.integral.index.IntegralIndexFragment;
 import cn.com.lsc.android.water_main.mvp.record.index.RecordIndexFragment;
 import cn.com.lsc.android.water_main.mvp.report.ReportIndexFragment;
-import cn.com.lsc.android.water_main.mvp.user_task.index.IndexFragment;
 import cn.com.lsc.android.water_main.mvp.task.index.TaskIndexFragment;
+import cn.com.lsc.android.water_main.mvp.user_task.index.IndexFragment;
 import cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager;
 
 public class MainActivity extends BaseFragmentActivity {
 
-    private ForbiddenScrollViewPager main_vp;
-    private RadioGroup radiogGroup;
+    @BindView(R.id.main_vp)
+    ForbiddenScrollViewPager main_vp;
+    @BindView(R.id.radiogGroup)
+    RadioGroup radiogGroup;
+
     private List<Fragment> listFragments;
     private CommonFragmentPagerAdapter commonFragmentPagerAdapter;
     private IndexFragment indexFragment;
@@ -32,21 +37,19 @@ public class MainActivity extends BaseFragmentActivity {
     private IntegralIndexFragment integralIndexFragment;
     private RecordIndexFragment recordIndexFragment;
     private ReportIndexFragment reportIndexFragment;
-
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        main_vp = (ForbiddenScrollViewPager) this.findViewById(R.id.main_vp);
+        unbinder= ButterKnife.bind(this);
         main_vp.setNoScroll(true);
-        radiogGroup = (RadioGroup) this.findViewById(R.id.radiogGroup);
-
-        indexFragment=new IndexFragment();
-        taskIndexFragment=new TaskIndexFragment();
-        integralIndexFragment=new IntegralIndexFragment();
-        recordIndexFragment=new RecordIndexFragment();
-        reportIndexFragment =new ReportIndexFragment();
+        indexFragment = new IndexFragment();
+        taskIndexFragment = new TaskIndexFragment();
+        integralIndexFragment = new IntegralIndexFragment();
+        recordIndexFragment = new RecordIndexFragment();
+        reportIndexFragment = new ReportIndexFragment();
 
         listFragments = new ArrayList<Fragment>();
         listFragments.add(indexFragment);
@@ -115,6 +118,12 @@ public class MainActivity extends BaseFragmentActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     @Override

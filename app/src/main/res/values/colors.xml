@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="background">#F2F5FA</color>
+    <color name="systen_green">#F2F5FA</color>
 </resources>

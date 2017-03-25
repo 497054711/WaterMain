@@ -1,5 +1,6 @@
 package cn.com.lsc.android.water_main.mvp.user_task.index;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +17,11 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
+import cn.com.lsc.android.water_main.mvp.BaseDisplayActivity;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
+import cn.com.lsc.android.water_main.mvp.setting.SettingIndexFragment;
+import cn.com.lsc.android.water_main.mvp.task.detail.integrate.TaskDetailIntegrateFragment;
+import cn.com.lsc.android.water_main.mvp.task.detail.pipe.TaskDetailPipeFragment;
 import cn.com.lsc.android.water_main.mvp.user_task.index.present.IIndexPresent;
 import cn.com.lsc.android.water_main.mvp.user_task.index.view.IIndexView;
 import cn.com.lsc.android.water_main.widget.MyAlertDialog;
@@ -62,7 +67,9 @@ public class IndexFragment extends BaseFragment implements IIndexView, View.OnCl
 
     @Override
     public void toSetting() {
-        Log.i("toSetting", "setting");
+        Intent intent=new Intent(this.getActivity(), BaseDisplayActivity.class);
+        intent.putExtra("class", SettingIndexFragment.class);
+        startActivity(intent);
     }
 
     @Override
@@ -102,7 +109,7 @@ public class IndexFragment extends BaseFragment implements IIndexView, View.OnCl
         }
 
         @Override
-        public View getView(int i, View convertView, ViewGroup viewGroup) {
+        public View getView(final int i, View convertView, ViewGroup viewGroup) {
            ViewHolder holder;
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.user_task_index_task_item, null);
@@ -128,7 +135,7 @@ public class IndexFragment extends BaseFragment implements IIndexView, View.OnCl
                 holder.ivIndexTaskItemCode.setImageResource(R.drawable.icon_pipe);
                 holder.lvIndexTaskItemCode.setBackgroundColor(Color.parseColor("#55BC75"));
                 holder.tvIndexTaskItemTitle.setText("排污管线龙江小区北门至门庙坡");
-                holder.tvIndexTaskItemContent.setText(" 起：龙江小区北门 -- 止：门庙坡\n全长：4.8公里预计时长：60分钟");
+                holder.tvIndexTaskItemContent.setText("起：龙江小区北门 -- 止：门庙坡\n全长：4.8公里预计时长：60分钟");
             }
 
             holder.tvIndexItemGrabSingle.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +162,19 @@ public class IndexFragment extends BaseFragment implements IIndexView, View.OnCl
             holder.tvIndexItemDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(i==0){
+                        Intent intent=new Intent(IndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                        intent.putExtra("class", TaskDetailPipeFragment.class);
+                        startActivity(intent);
+                    }else if(i==1){
+                        Intent intent=new Intent(IndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                        intent.putExtra("class", TaskDetailIntegrateFragment.class);
+                        startActivity(intent);
+                    }else if(i==2){
+                        Intent intent=new Intent(IndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                        intent.putExtra("class", TaskDetailPipeFragment.class);
+                        startActivity(intent);
+                    }
 
                 }
             });
