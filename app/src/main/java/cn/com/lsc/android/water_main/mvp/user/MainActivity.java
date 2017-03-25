@@ -3,9 +3,7 @@ package cn.com.lsc.android.water_main.mvp.user;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -15,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
-import cn.com.lsc.android.water_main.mvp.WebViewFragment;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
-import cn.com.lsc.android.water_main.animation.AnimationPushBotton;
-import cn.com.lsc.android.water_main.mvp.index.IndexFragment;
+import cn.com.lsc.android.water_main.mvp.integral.index.IntegralIndexFragment;
+import cn.com.lsc.android.water_main.mvp.record.index.RecordIndexFragment;
+import cn.com.lsc.android.water_main.mvp.report.ReportIndexFragment;
+import cn.com.lsc.android.water_main.mvp.user_task.index.IndexFragment;
+import cn.com.lsc.android.water_main.mvp.task.index.TaskIndexFragment;
 import cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager;
 
 public class MainActivity extends BaseFragmentActivity {
@@ -27,24 +27,33 @@ public class MainActivity extends BaseFragmentActivity {
     private RadioGroup radiogGroup;
     private List<Fragment> listFragments;
     private CommonFragmentPagerAdapter commonFragmentPagerAdapter;
-    private Bundle bundle;
-    private AnimationPushBotton animationPushBotton;
     private IndexFragment indexFragment;
+    private TaskIndexFragment taskIndexFragment;
+    private IntegralIndexFragment integralIndexFragment;
+    private RecordIndexFragment recordIndexFragment;
+    private ReportIndexFragment reportIndexFragment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        animationPushBotton = new AnimationPushBotton(this);
         main_vp = (ForbiddenScrollViewPager) this.findViewById(R.id.main_vp);
         main_vp.setNoScroll(true);
         radiogGroup = (RadioGroup) this.findViewById(R.id.radiogGroup);
 
         indexFragment=new IndexFragment();
+        taskIndexFragment=new TaskIndexFragment();
+        integralIndexFragment=new IntegralIndexFragment();
+        recordIndexFragment=new RecordIndexFragment();
+        reportIndexFragment =new ReportIndexFragment();
 
         listFragments = new ArrayList<Fragment>();
         listFragments.add(indexFragment);
+        listFragments.add(taskIndexFragment);
+        listFragments.add(reportIndexFragment);
+        listFragments.add(recordIndexFragment);
+        listFragments.add(integralIndexFragment);
 
         commonFragmentPagerAdapter = new CommonFragmentPagerAdapter(getSupportFragmentManager(), listFragments);
         main_vp.setAdapter(commonFragmentPagerAdapter);

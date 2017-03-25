@@ -93,22 +93,22 @@
         android:showDividers="middle">
 
         <TextView
-            android:id="@+id/tv_index_item_grabSingle"
+            android:id="@+id/tv_index_item_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="抢单"
+            android:text="开始巡检"
             android:textColor="#9A93A0"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tv_index_item_detail"
+            android:id="@+id/tv_index_item_giveUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="查看详情"
+            android:text="放弃任务"
             android:textColor="#9A93A0"
             android:textSize="14sp" />
     </LinearLayout>

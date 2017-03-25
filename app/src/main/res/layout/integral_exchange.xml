@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+
+    android:orientation="vertical">
+
+    <include layout="@layout/water_main_title" />
+
+    <LinearLayout
+        style="@style/layoutLeftAndRight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_integral_exchange_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="100元手机话费"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_integral_exchange_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="兑换将消耗500积分"
+            android:textColor="#9A93A0"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/tv_integral_exchange_phone"
+            style="@style/itemEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:hint="请输入手机号码"
+            android:padding="20dp" />
+
+        <TextView
+            android:id="@+id/tv_integralIndex_exchange"
+            style="@style/itemButonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="立即兑换" />
+
+    </LinearLayout>
+</LinearLayout>

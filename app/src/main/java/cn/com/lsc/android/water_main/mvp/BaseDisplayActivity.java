@@ -19,6 +19,7 @@ public class BaseDisplayActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.base_dispaly);
         init();
     }
     private void init() {
