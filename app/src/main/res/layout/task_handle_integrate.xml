@@ -158,21 +158,8 @@
                 android:layout_height="120dp"
                 android:layout_weight="1">
 
-
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/task_detail_grabSingle"
-        style="@style/itemButonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="抢单" />
 
 </LinearLayout>

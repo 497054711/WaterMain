@@ -1,5 +1,6 @@
 package cn.com.lsc.android.water_main.mvp.task.index;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +16,15 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
+import cn.com.lsc.android.water_main.mvp.BaseDisplayActivity;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
 import cn.com.lsc.android.water_main.mvp.record.index.RecordIndexFragment;
+import cn.com.lsc.android.water_main.mvp.task.detail.integrate.TaskDetailIntegrateFragment;
+import cn.com.lsc.android.water_main.mvp.task.detail.pipe.TaskDetailPipeFragment;
+import cn.com.lsc.android.water_main.mvp.task.handle.integrate.TaskHandleIntegrateFragment;
+import cn.com.lsc.android.water_main.mvp.task.handle.pipe.TaskHandlePipeFragment;
 import cn.com.lsc.android.water_main.mvp.task.index.view.ITaskIndexView;
+import cn.com.lsc.android.water_main.mvp.user_task.index.IndexFragment;
 import cn.com.lsc.android.water_main.widget.MyAlertDialog;
 
 /**
@@ -72,7 +79,7 @@ public class TaskIndexFragment extends BaseFragment implements ITaskIndexView {
         }
 
         @Override
-        public View getView(int i, View convertView, ViewGroup viewGroup) {
+        public View getView(final int i, View convertView, ViewGroup viewGroup) {
             ViewHolder holder;
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.task_index_item, null);
@@ -125,6 +132,19 @@ public class TaskIndexFragment extends BaseFragment implements ITaskIndexView {
             holder.tvIndexItemCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(i==0){
+                        Intent intent=new Intent(TaskIndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                        intent.putExtra("class", TaskHandlePipeFragment.class);
+                        startActivity(intent);
+                    }else if(i==1){
+                        Intent intent=new Intent(TaskIndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                        intent.putExtra("class", TaskHandleIntegrateFragment.class);
+                        startActivity(intent);
+                    }else if(i==2){
+                        Intent intent=new Intent(TaskIndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                        intent.putExtra("class", TaskHandlePipeFragment.class);
+                        startActivity(intent);
+                    }
 
                 }
             });

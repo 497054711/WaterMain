@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:orientation="vertical">
 
     <include layout="@layout/water_main_title" />
@@ -57,18 +56,6 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:gravity="left"
-        android:lineSpacingMultiplier="1.5"
-        android:text="线路:"
-        android:textColor="#9A93A0"
-        android:textSize="14sp" />
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,33 +70,13 @@
             android:background="#A9AFAC" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_task_detail_pipe"
+            android:id="@+id/lv_task_handle_pipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="#00000000"
             android:listSelector="#00000000"
-            android:paddingBottom="40dp"
             android:scrollbars="none" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingBottom="10dp"
-            android:background="#FFFFFF"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/task_detail_grabSingle"
-                style="@style/itemButonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="抢单" />
-        </LinearLayout>
-
     </RelativeLayout>
-
 
 </LinearLayout>
