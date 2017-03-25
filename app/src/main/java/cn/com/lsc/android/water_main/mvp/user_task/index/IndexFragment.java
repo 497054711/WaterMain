@@ -17,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
-import cn.com.lsc.android.water_main.mvp.record.index.RecordIndexFragment;
 import cn.com.lsc.android.water_main.mvp.user_task.index.present.IIndexPresent;
 import cn.com.lsc.android.water_main.mvp.user_task.index.view.IIndexView;
 import cn.com.lsc.android.water_main.widget.MyAlertDialog;
@@ -40,13 +39,12 @@ public class IndexFragment extends BaseFragment implements IIndexView, View.OnCl
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.index, null);
+        return inflater.inflate(R.layout.user_task_index, null);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        title = (TextView) this.getView().findViewById(R.id.title);
         title.setText("首页");
         index_banner.setOnClickListener(this);
         back.setVisibility(View.GONE);
@@ -107,7 +105,7 @@ public class IndexFragment extends BaseFragment implements IIndexView, View.OnCl
         public View getView(int i, View convertView, ViewGroup viewGroup) {
            ViewHolder holder;
             if (convertView == null) {
-                convertView = inflater.inflate(R.layout.index_task_item, null);
+                convertView = inflater.inflate(R.layout.user_task_index_task_item, null);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
             } else {
