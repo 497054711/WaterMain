@@ -1,6 +1,5 @@
-package cn.com.lsc.android.water_main.mvp.task.handle.pipe;
+package cn.com.lsc.android.water_main.mvp.record.detail.pipe;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,48 +7,46 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
-import cn.com.lsc.android.water_main.mvp.task.handle.pipe.present.TaskHandlePiePresent;
-import cn.com.lsc.android.water_main.mvp.task.handle.pipe.view.ITaskHandlePipeView;
+import cn.com.lsc.android.water_main.mvp.record.detail.pipe.present.RecordDetailPipePresent;
+import cn.com.lsc.android.water_main.mvp.record.detail.pipe.view.IRecordDetailPipeView;
 import cn.com.lsc.android.water_main.utils.LoadLocalImageUtil;
-import cn.com.lsc.android.water_main.widget.MyAlertDialog;
 
 /**
- * Created by Administrator on 2017/3/25.
+ * Created by Administrator on 2017/3/31.
  */
 
-public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandlePipeView {
-    @BindView(R.id.lv_task_handle_pipe)
-    RecyclerView lvTaskHandlePipe;
-    private TaskHandlePiePresent taskDetailPresent;
-    private TaskHandlePipeAdapter taskHandlePipeAdapter;
+public class RecordDetailPipeFragment extends BaseFragment implements IRecordDetailPipeView {
+
+    @BindView(R.id.rv_record_detail_pipe)
+    RecyclerView rvRecordDetailPipe;
+    private RecordDetailPipePresent recordDetailPipePresent;
+    private RecordDetailPipeAdapter recordDetailPipeAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.task_handle_pipe, null);
+        View view = inflater.inflate(R.layout.record_detail_pipe, null);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        taskDetailPresent = new TaskHandlePiePresent(this);
-        taskHandlePipeAdapter = new TaskHandlePipeAdapter();
+        recordDetailPipePresent = new RecordDetailPipePresent(this);
+        recordDetailPipeAdapter = new RecordDetailPipeAdapter();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-        lvTaskHandlePipe.setLayoutManager(layoutManager);
-        lvTaskHandlePipe.setAdapter(taskHandlePipeAdapter);
+        rvRecordDetailPipe.setLayoutManager(layoutManager);
+        rvRecordDetailPipe.setAdapter(recordDetailPipeAdapter);
     }
 
-    class TaskHandlePipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    class RecordDetailPipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
         private int icon[] = new int[]{R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_zi,
                 R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv,};
         private String title[] = new String[]{"井盖：W0031", "井盖：W0031", "井盖：W0521", "泵房：一号泵", "井盖：W0522", "井盖：WS1356", "变电所井盖：F0256", "井盖：PY1296"};
@@ -64,7 +61,7 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                    TaskHandlePipeFragment.this.getActivity()).inflate(R.layout.task_handle_pipe_item, parent,
+                    RecordDetailPipeFragment.this.getActivity()).inflate(R.layout.record_detail_pipe_item, parent,
                     false));
             return holder;
         }
@@ -77,8 +74,8 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
             holder.tvPlace2.setText(places2[position]);
             holder.tvDate.setText(date[position]);
             holder.tvStatus.setText(status[position]);
-            if(position<5){
-                LoadLocalImageUtil.getInstance(TaskHandlePipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
+            if (position < 5) {
+                LoadLocalImageUtil.getInstance(RecordDetailPipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
             }
             if (position == 5) {
                 holder.ivDamage.setVisibility(View.GONE);

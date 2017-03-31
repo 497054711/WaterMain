@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +20,9 @@ import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseDisplayActivity;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
-import cn.com.lsc.android.water_main.mvp.record.index.RecordIndexFragment;
-import cn.com.lsc.android.water_main.mvp.task.detail.integrate.TaskDetailIntegrateFragment;
-import cn.com.lsc.android.water_main.mvp.task.detail.pipe.TaskDetailPipeFragment;
 import cn.com.lsc.android.water_main.mvp.task.handle.integrate.TaskHandleIntegrateFragment;
 import cn.com.lsc.android.water_main.mvp.task.handle.pipe.TaskHandlePipeFragment;
 import cn.com.lsc.android.water_main.mvp.task.index.view.ITaskIndexView;
-import cn.com.lsc.android.water_main.mvp.user_task.index.IndexFragment;
 import cn.com.lsc.android.water_main.widget.MyAlertDialog;
 
 /**
@@ -32,6 +30,9 @@ import cn.com.lsc.android.water_main.widget.MyAlertDialog;
  */
 
 public class TaskIndexFragment extends BaseFragment implements ITaskIndexView {
+    @BindView(R.id.rv_task_index)
+    RecyclerView rvTaskIndex;
+
     private ListView task_index_list;
     private TextView title;
     private ImageView back;
@@ -50,57 +51,37 @@ public class TaskIndexFragment extends BaseFragment implements ITaskIndexView {
         title.setText("任务");
         back = (ImageView) this.getView().findViewById(R.id.back);
         back.setVisibility(View.GONE);
-        task_index_list = (ListView) this.getView().findViewById(R.id.task_index_list);
         taskIndexAdapter = new TaskIndexAdapter();
-        task_index_list.setAdapter(taskIndexAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        rvTaskIndex.setLayoutManager(layoutManager);
+        rvTaskIndex.setAdapter(taskIndexAdapter);
     }
 
-    public class TaskIndexAdapter extends BaseAdapter {
-        private LayoutInflater inflater;
+    public class TaskIndexAdapter extends RecyclerView.Adapter<MyViewHolder>{
         private MyAlertDialog myAlertDialog;
-
-        public TaskIndexAdapter() {
+        private LayoutInflater inflater;
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             inflater = TaskIndexFragment.this.getActivity().getLayoutInflater();
+            MyViewHolder holder = new MyViewHolder(inflater.inflate(R.layout.task_index_item, parent, false));
+            return holder;
         }
 
         @Override
-        public int getCount() {
-            return 3;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return i;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(final int i, View convertView, ViewGroup viewGroup) {
-            ViewHolder holder;
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.task_index_item, null);
-                holder = new ViewHolder(convertView);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            if (i == 0) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
+            if (position == 0) {
                 holder.tvIndexTaskItemCode.setText("管网巡检：G161213012");
                 holder.ivIndexTaskItemCode.setImageResource(R.drawable.icon_pipe);
                 holder.lvIndexTaskItemCode.setBackgroundColor(Color.parseColor("#55BC75"));
                 holder.tvIndexTaskItemTitle.setText("排污管线周桥至高速公路管理局");
                 holder.tvIndexTaskItemContent.setText("起：周桥 -- 止：高速公路管理局\n全长：4.8公里预计时长：60分钟");
-            } else if (i == 1) {
+            } else if (position == 1) {
                 holder.tvIndexTaskItemCode.setText("一体化巡检：Y161213514");
                 holder.ivIndexTaskItemCode.setImageResource(R.drawable.icon_inte);
                 holder.lvIndexTaskItemCode.setBackgroundColor(Color.parseColor("#EB6740"));
                 holder.tvIndexTaskItemTitle.setText("排污管线四惠街至七家庄东");
                 holder.tvIndexTaskItemContent.setText("起：四惠街45号 -- 止：七家庄东55号\n全长：3公里预计时长：15分钟");
-            } else if (i == 2) {
+            } else if (position == 2) {
                 holder.tvIndexTaskItemCode.setText("管网巡检：G161213016");
                 holder.ivIndexTaskItemCode.setImageResource(R.drawable.icon_pipe);
                 holder.lvIndexTaskItemCode.setBackgroundColor(Color.parseColor("#55BC75"));
@@ -132,44 +113,49 @@ public class TaskIndexFragment extends BaseFragment implements ITaskIndexView {
             holder.tvIndexItemCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(i==0){
-                        Intent intent=new Intent(TaskIndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                    if (position == 0) {
+                        Intent intent = new Intent(TaskIndexFragment.this.getActivity(), BaseDisplayActivity.class);
                         intent.putExtra("class", TaskHandlePipeFragment.class);
                         startActivity(intent);
-                    }else if(i==1){
-                        Intent intent=new Intent(TaskIndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                    } else if (position == 1) {
+                        Intent intent = new Intent(TaskIndexFragment.this.getActivity(), BaseDisplayActivity.class);
                         intent.putExtra("class", TaskHandleIntegrateFragment.class);
                         startActivity(intent);
-                    }else if(i==2){
-                        Intent intent=new Intent(TaskIndexFragment.this.getActivity(),BaseDisplayActivity.class);
+                    } else if (position == 2) {
+                        Intent intent = new Intent(TaskIndexFragment.this.getActivity(), BaseDisplayActivity.class);
                         intent.putExtra("class", TaskHandlePipeFragment.class);
                         startActivity(intent);
                     }
 
                 }
             });
-            return convertView;
         }
 
-        public class ViewHolder {
-            @BindView(R.id.iv_index_task_item_code)
-            ImageView ivIndexTaskItemCode;
-            @BindView(R.id.tv_index_task_item_code)
-            TextView tvIndexTaskItemCode;
-            @BindView(R.id.lv_index_task_item_code)
-            LinearLayout lvIndexTaskItemCode;
-            @BindView(R.id.tv_index_task_item_title)
-            TextView tvIndexTaskItemTitle;
-            @BindView(R.id.tv_index_task_item_content)
-            TextView tvIndexTaskItemContent;
-            @BindView(R.id.tv_index_item_check)
-            TextView tvIndexItemCheck;
-            @BindView(R.id.tv_index_item_giveUp)
-            TextView tvIndexItemGiveUp;
+        @Override
+        public int getItemCount() {
+            return 3;
+        }
+    }
 
-            ViewHolder(View view) {
-                ButterKnife.bind(this, view);
-            }
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_index_task_item_code)
+        ImageView ivIndexTaskItemCode;
+        @BindView(R.id.tv_index_task_item_code)
+        TextView tvIndexTaskItemCode;
+        @BindView(R.id.lv_index_task_item_code)
+        LinearLayout lvIndexTaskItemCode;
+        @BindView(R.id.tv_index_task_item_title)
+        TextView tvIndexTaskItemTitle;
+        @BindView(R.id.tv_index_task_item_content)
+        TextView tvIndexTaskItemContent;
+        @BindView(R.id.tv_index_item_check)
+        TextView tvIndexItemCheck;
+        @BindView(R.id.tv_index_item_giveUp)
+        TextView tvIndexItemGiveUp;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -81,7 +81,8 @@ public class TaskDetailPipeFragment extends BaseFragment implements ITaskDetailP
         });
         myAlertDialog.show();
     }
-    class TaskHandlePipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
+
+    public class TaskHandlePipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
         private LayoutInflater inflater;
         private int icon[] = new int[]{R.drawable.icon_jinggai_lv ,R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_zi,
                 R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv,};
