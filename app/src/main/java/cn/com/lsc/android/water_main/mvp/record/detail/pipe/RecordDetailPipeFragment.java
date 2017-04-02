@@ -2,6 +2,7 @@ package cn.com.lsc.android.water_main.mvp.record.detail.pipe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ public class RecordDetailPipeFragment extends BaseFragment implements IRecordDet
     }
 
     class RecordDetailPipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
+
         private int icon[] = new int[]{R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_zi,
                 R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv,};
         private String title[] = new String[]{"井盖：W0031", "井盖：W0031", "井盖：W0521", "泵房：一号泵", "井盖：W0522", "井盖：WS1356", "变电所井盖：F0256", "井盖：PY1296"};
@@ -77,19 +79,24 @@ public class RecordDetailPipeFragment extends BaseFragment implements IRecordDet
             if (position < 5) {
                 LoadLocalImageUtil.getInstance(RecordDetailPipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
             }
+            holder.ivDamage.setVisibility(View.VISIBLE);
+            holder.cvUserIcon.setVisibility(View.VISIBLE);
+            holder.tvStatus.setVisibility(View.VISIBLE);
+            holder.tvUserName.setVisibility(View.VISIBLE);
+
             if (position == 5) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.ivUserIcon.setVisibility(View.GONE);
+                holder.cvUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 6) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.ivUserIcon.setVisibility(View.GONE);
+                holder.cvUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 7) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.ivUserIcon.setVisibility(View.GONE);
+                holder.cvUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             }
@@ -120,6 +127,8 @@ public class RecordDetailPipeFragment extends BaseFragment implements IRecordDet
         ImageView ivDamage;
         @BindView(R.id.tv_date)
         TextView tvDate;
+        @BindView(R.id.cv_user_icon)
+        CardView cvUserIcon;
 
         public MyViewHolder(View itemView) {
             super(itemView);

@@ -1,16 +1,15 @@
 package cn.com.lsc.android.water_main.mvp.task.handle.pipe;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -20,7 +19,6 @@ import cn.com.lsc.android.water_main.mvp.BaseFragment;
 import cn.com.lsc.android.water_main.mvp.task.handle.pipe.present.TaskHandlePiePresent;
 import cn.com.lsc.android.water_main.mvp.task.handle.pipe.view.ITaskHandlePipeView;
 import cn.com.lsc.android.water_main.utils.LoadLocalImageUtil;
-import cn.com.lsc.android.water_main.widget.MyAlertDialog;
 
 /**
  * Created by Administrator on 2017/3/25.
@@ -50,6 +48,7 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
     }
 
     class TaskHandlePipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
+
         private int icon[] = new int[]{R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_zi,
                 R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv,};
         private String title[] = new String[]{"井盖：W0031", "井盖：W0031", "井盖：W0521", "泵房：一号泵", "井盖：W0522", "井盖：WS1356", "变电所井盖：F0256", "井盖：PY1296"};
@@ -77,22 +76,26 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
             holder.tvPlace2.setText(places2[position]);
             holder.tvDate.setText(date[position]);
             holder.tvStatus.setText(status[position]);
-            if(position<5){
+            if (position < 5) {
                 LoadLocalImageUtil.getInstance(TaskHandlePipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
             }
+            holder.ivDamage.setVisibility(View.VISIBLE);
+            holder.cvUserIcon.setVisibility(View.VISIBLE);
+            holder.tvStatus.setVisibility(View.VISIBLE);
+            holder.tvUserName.setVisibility(View.VISIBLE);
             if (position == 5) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.ivUserIcon.setVisibility(View.GONE);
+                holder.cvUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 6) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.ivUserIcon.setVisibility(View.GONE);
+                holder.cvUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 7) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.ivUserIcon.setVisibility(View.GONE);
+                holder.cvUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             }
@@ -123,6 +126,8 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
         ImageView ivDamage;
         @BindView(R.id.tv_date)
         TextView tvDate;
+        @BindView(R.id.cv_user_icon)
+        CardView cvUserIcon;
 
         public MyViewHolder(View itemView) {
             super(itemView);

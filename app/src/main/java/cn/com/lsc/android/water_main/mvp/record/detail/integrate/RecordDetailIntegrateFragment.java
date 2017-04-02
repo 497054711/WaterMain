@@ -20,8 +20,7 @@ import cn.com.lsc.android.water_main.widget.MyAlertDialog;
  */
 
 public class RecordDetailIntegrateFragment extends BaseFragment implements IRecordDetailIntegrateView {
-    @BindView(R.id.task_detail_grabSingle)
-    TextView taskDetailGrabSingle;
+
     private RecordDetailIntegratePresent taskDetailPresent;
     private MyAlertDialog myAlertDialog;
 
@@ -42,11 +41,6 @@ public class RecordDetailIntegrateFragment extends BaseFragment implements IReco
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    @OnClick(R.id.task_detail_grabSingle)
-    public void toGrabSingle() {
-        taskDetailPresent.toGrabSingle();
     }
 
     @Override
