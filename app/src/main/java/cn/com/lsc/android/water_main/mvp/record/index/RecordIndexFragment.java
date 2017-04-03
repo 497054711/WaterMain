@@ -21,6 +21,7 @@ import cn.com.lsc.android.water_main.mvp.BaseFragment;
 import cn.com.lsc.android.water_main.mvp.record.detail.fault.RecordDetailFaultFragment;
 import cn.com.lsc.android.water_main.mvp.record.detail.integrate.RecordDetailIntegrateFragment;
 import cn.com.lsc.android.water_main.mvp.record.detail.pipe.RecordDetailPipeFragment;
+import cn.com.lsc.android.water_main.mvp.record.detail.traine.RecordDetailTraineFragment;
 import cn.com.lsc.android.water_main.mvp.record.index.view.IRecordIndexView;
 
 /**
@@ -99,9 +100,13 @@ public class RecordIndexFragment extends BaseFragment implements IRecordIndexVie
                         Intent intent = new Intent(RecordIndexFragment.this.getActivity(), BaseDisplayActivity.class);
                         intent.putExtra("class", RecordDetailIntegrateFragment.class);
                         startActivity(intent);
-                    }else if(position == 1){
+                    }else if(position == 2){
                         Intent intent = new Intent(RecordIndexFragment.this.getActivity(), BaseDisplayActivity.class);
                         intent.putExtra("class", RecordDetailFaultFragment.class);
+                        startActivity(intent);
+                    }else if(position == 3){
+                        Intent intent = new Intent(RecordIndexFragment.this.getActivity(), BaseDisplayActivity.class);
+                        intent.putExtra("class", RecordDetailTraineFragment.class);
                         startActivity(intent);
                     }
 
