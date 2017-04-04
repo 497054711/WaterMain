@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lv_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
     android:background="#ffffff"
     android:orientation="vertical">
 
@@ -14,25 +16,25 @@
         android:paddingTop="10dp">
 
         <LinearLayout
-            android:id="@+id/lv_index_task_item_code"
+            android:id="@+id/lv_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/iv_index_task_item_code"
+                android:id="@+id/iv_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_pipe" />
 
             <TextView
-                android:id="@+id/tv_index_task_item_code"
+                android:id="@+id/tv_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="一体化巡检：Y161213514"
-                android:textColor="#ffffff"
+                android:textColor="#97A0BE"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -40,7 +42,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_index_task_item_title"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -52,14 +54,36 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_index_task_item_content"
+        android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="left"
         android:lineSpacingMultiplier="1.5"
         android:paddingLeft="10dp"
-        android:text="起：周桥 -- 止：高速公路管理局\n全长：4.8公里预计时长：60分钟"
+        android:text="起：周桥 -- 止：高速公路管理局"
         android:textColor="#9A93A0"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:lineSpacingMultiplier="1.5"
+        android:paddingLeft="10dp"
+        android:text="巡检中"
+        android:textColor="#9A93A0"
+        android:textSize="14sp" />
+
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_margin="10dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/progressbar" />
 </LinearLayout>

@@ -13,14 +13,20 @@ import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
 import cn.com.lsc.android.water_main.mvp.WaterMainApplication;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
+import cn.com.lsc.android.water_main.mvp.fault.index.FaultIndexFragment;
 import cn.com.lsc.android.water_main.mvp.inspect.index.InspectIndexFragment;
+import cn.com.lsc.android.water_main.mvp.message.index.MessageIndexFragment;
+import cn.com.lsc.android.water_main.mvp.statistics.index.StatisticsIndexFragment;
 import cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager;
 
 public class MainAdminActivity extends BaseFragmentActivity {
 
     private ForbiddenScrollViewPager main_vp;
     private RadioGroup radiogGroup;
-    private InspectIndexFragment main1, main2, main3, main4, main5;
+    private InspectIndexFragment main1;
+    private FaultIndexFragment main2;
+    private MessageIndexFragment main3;
+    private StatisticsIndexFragment main4;
     private List<Fragment> listFragments;
     private CommonFragmentPagerAdapter commonFragmentPagerAdapter;
     private Bundle bundle;
@@ -37,15 +43,15 @@ public class MainAdminActivity extends BaseFragmentActivity {
         bundle = new Bundle();
         main1.setArguments(bundle);
 
-        main2 = new InspectIndexFragment();
+        main2 = new FaultIndexFragment();
         bundle = new Bundle();
         main2.setArguments(bundle);
 
-        main3 = new InspectIndexFragment();
+        main3 = new MessageIndexFragment();
         bundle = new Bundle();
         main3.setArguments(bundle);
 
-        main4 = new InspectIndexFragment();
+        main4 = new StatisticsIndexFragment();
         bundle = new Bundle();
         main4.setArguments(bundle);
 
