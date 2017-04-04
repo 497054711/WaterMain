@@ -6,4 +6,5 @@ package cn.com.lsc.android.water_main.mvp.task.detail.integrate.view;
 
 public interface ITaskDetailIntegrateView {
     public void grabSingle();
+    public void changeMode();
 }

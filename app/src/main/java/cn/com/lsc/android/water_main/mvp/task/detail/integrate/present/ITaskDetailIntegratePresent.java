@@ -6,4 +6,5 @@ package cn.com.lsc.android.water_main.mvp.task.detail.integrate.present;
 
 public interface ITaskDetailIntegratePresent {
     public void toGrabSingle();
+    public void changeMode();
 }

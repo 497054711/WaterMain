@@ -35,7 +35,7 @@ public class RecordDetailIntegrateFragment extends BaseFragment implements IReco
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         taskDetailPresent=new RecordDetailIntegratePresent(this);
-
+        title.setText("报告详情");
     }
 
     @Override

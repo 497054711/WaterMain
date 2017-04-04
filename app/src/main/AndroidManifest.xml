@@ -51,6 +51,7 @@
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:name=".mvp.WaterMainApplication"
         android:theme="@style/AppTheme">
         <activity

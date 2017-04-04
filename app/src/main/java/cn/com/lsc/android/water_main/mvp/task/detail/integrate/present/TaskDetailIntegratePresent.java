@@ -16,4 +16,9 @@ public class TaskDetailIntegratePresent implements ITaskDetailIntegratePresent {
     public void toGrabSingle() {
         iTaskDetailView.grabSingle();
     }
+
+    @Override
+    public void changeMode() {
+        iTaskDetailView.changeMode();
+    }
 }

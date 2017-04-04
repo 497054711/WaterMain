@@ -28,6 +28,6 @@ public class RecordDetailTraineFragment extends BaseFragment implements ITraineV
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        title.setText("报告详情");
     }
 }

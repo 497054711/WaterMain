@@ -1,7 +1,10 @@
 package cn.com.lsc.android.water_main.mvp.record.detail.pipe;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +14,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
 import cn.com.lsc.android.water_main.mvp.record.detail.pipe.present.RecordDetailPipePresent;
 import cn.com.lsc.android.water_main.mvp.record.detail.pipe.view.IRecordDetailPipeView;
+import cn.com.lsc.android.water_main.mvp.task.handle.pipe.TaskHandlePipeFragment;
 import cn.com.lsc.android.water_main.utils.LoadLocalImageUtil;
 
 /**
@@ -40,6 +47,7 @@ public class RecordDetailPipeFragment extends BaseFragment implements IRecordDet
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        title.setText("报告详情");
         recordDetailPipePresent = new RecordDetailPipePresent(this);
         recordDetailPipeAdapter = new RecordDetailPipeAdapter();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
@@ -69,7 +77,7 @@ public class RecordDetailPipeFragment extends BaseFragment implements IRecordDet
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(final MyViewHolder holder, int position) {
             holder.ivIcon.setImageResource(icon[position]);
             holder.tvTitle.setText(title[position]);
             holder.tvPlace.setText(places[position]);
@@ -79,24 +87,34 @@ public class RecordDetailPipeFragment extends BaseFragment implements IRecordDet
             if (position < 5) {
                 LoadLocalImageUtil.getInstance(RecordDetailPipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
             }
+            Glide.with(RecordDetailPipeFragment.this.getActivity()).load(R.drawable.user).asBitmap().centerCrop().into(new BitmapImageViewTarget( holder.ivUserIcon) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(RecordDetailPipeFragment.this.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.ivUserIcon.setImageDrawable(circularBitmapDrawable);
+                }
+            });
+
             holder.ivDamage.setVisibility(View.VISIBLE);
-            holder.cvUserIcon.setVisibility(View.VISIBLE);
+            holder.ivUserIcon.setVisibility(View.VISIBLE);
             holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvUserName.setVisibility(View.VISIBLE);
 
             if (position == 5) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.cvUserIcon.setVisibility(View.GONE);
+                holder.ivUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 6) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.cvUserIcon.setVisibility(View.GONE);
+                holder.ivUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 7) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.cvUserIcon.setVisibility(View.GONE);
+                holder.ivUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             }
@@ -127,8 +145,6 @@ public class RecordDetailPipeFragment extends BaseFragment implements IRecordDet
         ImageView ivDamage;
         @BindView(R.id.tv_date)
         TextView tvDate;
-        @BindView(R.id.cv_user_icon)
-        CardView cvUserIcon;
 
         public MyViewHolder(View itemView) {
             super(itemView);

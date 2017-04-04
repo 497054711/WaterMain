@@ -6,4 +6,5 @@ package cn.com.lsc.android.water_main.mvp.task.detail.pipe.view;
 
 public interface ITaskDetailPipeView {
     public void grabSingle();
+    public void changeMode();
 }

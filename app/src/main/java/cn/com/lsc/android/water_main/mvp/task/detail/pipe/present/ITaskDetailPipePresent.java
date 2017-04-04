@@ -6,4 +6,5 @@ package cn.com.lsc.android.water_main.mvp.task.detail.pipe.present;
 
 public interface ITaskDetailPipePresent {
     public void toGrabSingle();
+    public void changeMode();
 }

@@ -1,7 +1,10 @@
 package cn.com.lsc.android.water_main.mvp.task.handle.pipe;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +15,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
+import cn.com.lsc.android.water_main.mvp.integral.index.IntegralIndexFragment;
 import cn.com.lsc.android.water_main.mvp.task.handle.pipe.present.TaskHandlePiePresent;
 import cn.com.lsc.android.water_main.mvp.task.handle.pipe.view.ITaskHandlePipeView;
 import cn.com.lsc.android.water_main.utils.LoadLocalImageUtil;
@@ -69,7 +76,7 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(final MyViewHolder holder, int position) {
             holder.ivIcon.setImageResource(icon[position]);
             holder.tvTitle.setText(title[position]);
             holder.tvPlace.setText(places[position]);
@@ -79,23 +86,32 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
             if (position < 5) {
                 LoadLocalImageUtil.getInstance(TaskHandlePipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
             }
+            Glide.with(TaskHandlePipeFragment.this.getActivity()).load(R.drawable.user).asBitmap().centerCrop().into(new BitmapImageViewTarget( holder.ivUserIcon) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(TaskHandlePipeFragment.this.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.ivUserIcon.setImageDrawable(circularBitmapDrawable);
+                }
+            });
             holder.ivDamage.setVisibility(View.VISIBLE);
-            holder.cvUserIcon.setVisibility(View.VISIBLE);
+            holder.ivUserIcon.setVisibility(View.VISIBLE);
             holder.tvStatus.setVisibility(View.VISIBLE);
             holder.tvUserName.setVisibility(View.VISIBLE);
             if (position == 5) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.cvUserIcon.setVisibility(View.GONE);
+                holder.ivUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 6) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.cvUserIcon.setVisibility(View.GONE);
+                holder.ivUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             } else if (position == 7) {
                 holder.ivDamage.setVisibility(View.GONE);
-                holder.cvUserIcon.setVisibility(View.GONE);
+                holder.ivUserIcon.setVisibility(View.GONE);
                 holder.tvStatus.setVisibility(View.GONE);
                 holder.tvUserName.setVisibility(View.GONE);
             }
@@ -126,8 +142,6 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
         ImageView ivDamage;
         @BindView(R.id.tv_date)
         TextView tvDate;
-        @BindView(R.id.cv_user_icon)
-        CardView cvUserIcon;
 
         public MyViewHolder(View itemView) {
             super(itemView);

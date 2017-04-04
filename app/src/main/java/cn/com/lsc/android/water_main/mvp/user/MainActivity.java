@@ -16,6 +16,7 @@ import butterknife.Unbinder;
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
 import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
+import cn.com.lsc.android.water_main.mvp.WaterMainApplication;
 import cn.com.lsc.android.water_main.mvp.integral.index.IntegralIndexFragment;
 import cn.com.lsc.android.water_main.mvp.record.index.RecordIndexFragment;
 import cn.com.lsc.android.water_main.mvp.report.ReportIndexFragment;
@@ -85,39 +86,6 @@ public class MainActivity extends BaseFragmentActivity {
                 }
             }
         });
-        main_vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                switch (position) {
-                    case 0:
-                        ((RadioButton) (radiogGroup.getChildAt(0))).setChecked(true);
-                        break;
-                    case 1:
-                        ((RadioButton) (radiogGroup.getChildAt(1))).setChecked(true);
-                        break;
-                    case 2:
-                        ((RadioButton) (radiogGroup.getChildAt(2))).setChecked(true);
-                        break;
-                    case 3:
-                        ((RadioButton) (radiogGroup.getChildAt(3))).setChecked(true);
-                        break;
-                    case 4:
-                        ((RadioButton) (radiogGroup.getChildAt(4))).setChecked(true);
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     @Override
@@ -130,7 +98,12 @@ public class MainActivity extends BaseFragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
+            if(main_vp.getCurrentItem()==0){
+                WaterMainApplication.getInstance().exitsApp();
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }else{
+                ((RadioButton)radiogGroup.getChildAt(0)).setChecked(true);
+            }
             return false;
         }
         return super.onKeyDown(keyCode, event);

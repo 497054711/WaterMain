@@ -44,7 +44,7 @@ public class RecordIndexFragment extends BaseFragment implements IRecordIndexVie
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        title.setText("报告详情");
+        title.setText("我的记录");
         back.setVisibility(View.GONE);
         recordIndexAdapter = new RecordIndexAdapter();
         rvRecordIndex.setAdapter(recordIndexAdapter);

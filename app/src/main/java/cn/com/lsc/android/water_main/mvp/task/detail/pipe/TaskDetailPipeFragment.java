@@ -1,5 +1,6 @@
 package cn.com.lsc.android.water_main.mvp.task.detail.pipe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,20 +16,26 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.com.lsc.android.water_main.R;
+import cn.com.lsc.android.water_main.mvp.BaseDisplayActivity;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
 import cn.com.lsc.android.water_main.mvp.task.detail.pipe.present.TaskDetailPipePresent;
 import cn.com.lsc.android.water_main.mvp.task.detail.pipe.view.ITaskDetailPipeView;
+import cn.com.lsc.android.water_main.mvp.task.map.pipe.TaskMapPipeFragment;
+import cn.com.lsc.android.water_main.mvp.user_task.index.IndexFragment;
 import cn.com.lsc.android.water_main.widget.MyAlertDialog;
 
 /**
  * Created by Administrator on 2017/3/25.
  */
 
-public class TaskDetailPipeFragment extends BaseFragment implements ITaskDetailPipeView {
+public class TaskDetailPipeFragment extends BaseFragment implements ITaskDetailPipeView, View.OnClickListener {
     @BindView(R.id.task_detail_grabSingle)
     TextView taskDetailGrabSingle;
     @BindView(R.id.rv_task_detail_pipe)
     RecyclerView rvTaskDetailPipe;
+    @BindView(R.id.right)
+    public ImageView right;
+
     private TaskDetailPipePresent taskDetailPresent;
     private MyAlertDialog myAlertDialog;
     private TaskHandlePipeAdapter taskHandlePipeAdapter;
@@ -49,16 +56,15 @@ public class TaskDetailPipeFragment extends BaseFragment implements ITaskDetailP
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         rvTaskDetailPipe.setLayoutManager(layoutManager);
         rvTaskDetailPipe.setAdapter(taskHandlePipeAdapter);
+        right.setImageResource(R.drawable.icon_gps);
+        right.setOnClickListener(this);
+        taskDetailGrabSingle.setOnClickListener(this);
+        title.setText("G161213012");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    @OnClick(R.id.task_detail_grabSingle)
-    public void toGrabSingle() {
-        taskDetailPresent.toGrabSingle();
     }
 
     @Override
@@ -82,17 +88,38 @@ public class TaskDetailPipeFragment extends BaseFragment implements ITaskDetailP
         myAlertDialog.show();
     }
 
+    @Override
+    public void changeMode() {//更改模式
+        Intent intent = new Intent(TaskDetailPipeFragment.this.getActivity(), BaseDisplayActivity.class);
+        intent.putExtra("class", TaskMapPipeFragment.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.task_detail_grabSingle:
+                taskDetailPresent.toGrabSingle();
+                break;
+            case R.id.right:
+                taskDetailPresent.changeMode();
+                break;
+        }
+
+    }
+
     public class TaskHandlePipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
         private LayoutInflater inflater;
-        private int icon[] = new int[]{R.drawable.icon_jinggai_lv ,R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_zi,
+        private int icon[] = new int[]{R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_zi,
                 R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv, R.drawable.icon_jinggai_lv,};
         private String places[] = new String[]{"周桥", "王庄", "一号泵", "二道桥 ", "变电所", "化工厂 ", "高速公路管理局"};
         private String places2[] = new String[]{"北口向西150米", "", "新华路25号", "北山门东南角", "向北50米", "西门125号", "向北65米", "东南角210米"};
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            inflater=TaskDetailPipeFragment.this.getActivity().getLayoutInflater();
-            MyViewHolder holder = new MyViewHolder(inflater.inflate(R.layout.task_detail_pipe_item, parent,false));
+            inflater = TaskDetailPipeFragment.this.getActivity().getLayoutInflater();
+            MyViewHolder holder = new MyViewHolder(inflater.inflate(R.layout.task_detail_pipe_item, parent, false));
             return holder;
         }
 
@@ -116,6 +143,7 @@ public class TaskDetailPipeFragment extends BaseFragment implements ITaskDetailP
         TextView tvPlace;
         @BindView(R.id.tv_place2)
         TextView tvPlace2;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

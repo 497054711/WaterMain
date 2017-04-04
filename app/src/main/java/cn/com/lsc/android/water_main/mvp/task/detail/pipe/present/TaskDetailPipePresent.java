@@ -16,4 +16,9 @@ public class TaskDetailPipePresent implements ITaskDetailPipePresent {
     public void toGrabSingle() {
         iTaskDetailView.grabSingle();
     }
+
+    @Override
+    public void changeMode() {
+        iTaskDetailView.changeMode();
+    }
 }

@@ -6,6 +6,16 @@
 
     <include layout="@layout/water_main_title" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F2F5FA"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="安徽省合肥市保安区大兴县大崔庄"
+        android:textColor="#AAAAAA"
+        android:textSize="12sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

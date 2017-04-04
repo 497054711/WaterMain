@@ -1,13 +1,19 @@
 package cn.com.lsc.android.water_main.mvp.integral.index;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.io.Serializable;
 
@@ -36,6 +42,9 @@ public class IntegralIndexFragment extends BaseFragment implements IIntegralInde
     @BindView(R.id.integralIndex_exchange500)
     TextView integralIndexExchange500;
     Unbinder unbinder;
+    @BindView(R.id.user_icon)
+    ImageView userIcon;
+
     private IntegralIndexModel integralIndexModel;
     private IntegralIndexPresent integralIndexPresent;
 
@@ -56,6 +65,16 @@ public class IntegralIndexFragment extends BaseFragment implements IIntegralInde
         integralIndexExchange500.setOnClickListener(this);
         integralIndexModel = new IntegralIndexModel();
         integralIndexPresent = new IntegralIndexPresent(this);
+
+        Glide.with(this.getActivity()).load(R.drawable.user).asBitmap().centerCrop().into(new BitmapImageViewTarget(userIcon) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(IntegralIndexFragment.this.getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                userIcon.setImageDrawable(circularBitmapDrawable);
+            }
+        });
     }
 
     @Override
