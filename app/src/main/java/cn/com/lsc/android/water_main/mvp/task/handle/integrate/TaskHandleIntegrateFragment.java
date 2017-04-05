@@ -34,7 +34,7 @@ public class TaskHandleIntegrateFragment extends BaseFragment implements ITaskHa
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         taskDetailPresent=new TaskHandleIntegratePresent(this);
-
+        title.setText("Y161213514");
     }
 
     @Override

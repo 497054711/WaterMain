@@ -41,6 +41,8 @@ public class StatisticsIndexFragment extends BaseFragment implements IStatistics
         lvDamageCover.setOnClickListener(this);
         lvDamageIntegrate.setOnClickListener(this);
         statisticsIndexPresent=new StatisticsIndexPresent(this);
+        title.setText("统计");
+        back.setVisibility(View.GONE);
     }
 
     @Override

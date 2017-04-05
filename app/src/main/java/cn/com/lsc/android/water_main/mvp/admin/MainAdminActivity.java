@@ -14,7 +14,7 @@ import cn.com.lsc.android.water_main.mvp.BaseFragmentActivity;
 import cn.com.lsc.android.water_main.mvp.WaterMainApplication;
 import cn.com.lsc.android.water_main.adapter.CommonFragmentPagerAdapter;
 import cn.com.lsc.android.water_main.mvp.fault.index.FaultIndexFragment;
-import cn.com.lsc.android.water_main.mvp.inspect.index.InspectIndexFragment;
+import cn.com.lsc.android.water_main.mvp.inspect.index.road.InspectIndexFragment;
 import cn.com.lsc.android.water_main.mvp.message.index.MessageIndexFragment;
 import cn.com.lsc.android.water_main.mvp.statistics.index.StatisticsIndexFragment;
 import cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager;

@@ -52,6 +52,7 @@ public class TaskHandlePipeFragment extends BaseFragment implements ITaskHandleP
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         lvTaskHandlePipe.setLayoutManager(layoutManager);
         lvTaskHandlePipe.setAdapter(taskHandlePipeAdapter);
+        title.setText("G161213012");
     }
 
     class TaskHandlePipeAdapter extends RecyclerView.Adapter<MyViewHolder> {

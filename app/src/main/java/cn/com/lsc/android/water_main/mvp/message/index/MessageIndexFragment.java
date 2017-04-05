@@ -41,6 +41,7 @@ public class MessageIndexFragment extends BaseFragment implements IMessageIndexV
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         title.setText("消息");
+        back.setVisibility(View.GONE);
         Glide.with(MessageIndexFragment.this.getActivity()).load(R.drawable.user_administrator).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivUser) {
             @Override
             protected void setResource(Bitmap resource) {

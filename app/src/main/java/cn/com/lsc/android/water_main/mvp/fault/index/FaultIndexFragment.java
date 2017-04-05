@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseDisplayActivity;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
+import cn.com.lsc.android.water_main.mvp.fault.detail.cover.FaultDetailCoverFragment;
 import cn.com.lsc.android.water_main.mvp.fault.index.present.IFaultIndexPresent;
 import cn.com.lsc.android.water_main.mvp.fault.index.view.IFaultIndexView;
 import cn.com.lsc.android.water_main.mvp.inspect.detail.pipe.InspectDetailPipeFragment;
@@ -111,15 +112,9 @@ public class FaultIndexFragment extends BaseFragment implements IFaultIndexView,
             holder.lvRoot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (position != 2) {
-                        Intent intent = new Intent(FaultIndexFragment.this.getActivity(), BaseDisplayActivity.class);
-                        intent.putExtra("class", InspectDetailPipeFragment.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(FaultIndexFragment.this.getActivity(), BaseDisplayActivity.class);
-                        intent.putExtra("class", InspectDetailPipeGrabSingleFragment.class);
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(FaultIndexFragment.this.getActivity(), BaseDisplayActivity.class);
+                    intent.putExtra("class", FaultDetailCoverFragment.class);
+                    startActivity(intent);
                 }
             });
         }

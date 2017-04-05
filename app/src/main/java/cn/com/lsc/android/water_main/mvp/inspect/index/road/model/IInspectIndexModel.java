@@ -1,4 +1,4 @@
-package cn.com.lsc.android.water_main.mvp.inspect.index.model;
+package cn.com.lsc.android.water_main.mvp.inspect.index.road.model;
 
 /**
  * Created by Administrator on 2017/3/20.

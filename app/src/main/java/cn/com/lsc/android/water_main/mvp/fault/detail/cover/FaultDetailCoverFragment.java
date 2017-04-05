@@ -1,4 +1,4 @@
-package cn.com.lsc.android.water_main.mvp.statistics.damage_integrate;
+package cn.com.lsc.android.water_main.mvp.fault.detail.cover;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,23 +8,26 @@ import android.view.ViewGroup;
 
 import cn.com.lsc.android.water_main.R;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
-import cn.com.lsc.android.water_main.mvp.statistics.damage_integrate.view.IStatisticsDamageIntegrateView;
+import cn.com.lsc.android.water_main.mvp.fault.detail.cover.view.IFaultDetailCoverView;
 
 /**
- * Created by Administrator on 2017/4/4.
+ * @name WaterMain
+ * @class name：cn.com.lsc.android.water_main.mvp.fault.detail.cover
+ * @class TODO
+ * @anthor liaoshucai
+ * @mail :liaoshucai@vjwealth.com
+ * @time 2017/4/5 15:11
  */
-
-public class StatisticsDamageIntegrateFragment extends BaseFragment implements IStatisticsDamageIntegrateView {
-    
+public class FaultDetailCoverFragment extends BaseFragment implements IFaultDetailCoverView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.statistics_damage_integrate,null);
+        return inflater.inflate(R.layout.fault_detail_cover,null);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        title.setText("一体化设备故障率");
+        title.setText("故障 82991");
     }
 }

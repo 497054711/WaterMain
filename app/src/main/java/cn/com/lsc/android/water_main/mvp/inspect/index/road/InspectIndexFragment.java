@@ -1,11 +1,10 @@
-package cn.com.lsc.android.water_main.mvp.inspect.index;
+package cn.com.lsc.android.water_main.mvp.inspect.index.road;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,9 @@ import cn.com.lsc.android.water_main.mvp.BaseDisplayActivity;
 import cn.com.lsc.android.water_main.mvp.BaseFragment;
 import cn.com.lsc.android.water_main.mvp.inspect.detail.pipe.InspectDetailPipeFragment;
 import cn.com.lsc.android.water_main.mvp.inspect.detail.pipe_grab_single.InspectDetailPipeGrabSingleFragment;
-import cn.com.lsc.android.water_main.mvp.inspect.index.present.IInspecIndexPresent;
-import cn.com.lsc.android.water_main.mvp.inspect.index.view.IInspectIndexView;
-import cn.com.lsc.android.water_main.mvp.setting.SettingIndexFragment;
+import cn.com.lsc.android.water_main.mvp.inspect.index.map.InspectIndexMapFragment;
+import cn.com.lsc.android.water_main.mvp.inspect.index.road.present.InspecIndexPresent;
+import cn.com.lsc.android.water_main.mvp.inspect.index.road.view.IInspectIndexView;
 
 /**
  * Created by Administrator on 2017/3/20.管理员 巡检
@@ -36,7 +35,7 @@ public class InspectIndexFragment extends BaseFragment implements IInspectIndexV
     @BindView(R.id.rv_index)
     RecyclerView rvIndex;
 
-    private IInspecIndexPresent iInspecIndexPresent;
+    private InspecIndexPresent inspecIndexPresent;
     private IndexAdapter indexAdapter;
 
     @Nullable
@@ -53,7 +52,7 @@ public class InspectIndexFragment extends BaseFragment implements IInspectIndexV
         back.setVisibility(View.GONE);
         right.setImageResource(R.drawable.icon_gps);
         right.setOnClickListener(this);
-        iInspecIndexPresent = new IInspecIndexPresent(this);
+        inspecIndexPresent = new InspecIndexPresent(this);
         indexAdapter = new IndexAdapter();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         rvIndex.setLayoutManager(layoutManager);
@@ -62,28 +61,20 @@ public class InspectIndexFragment extends BaseFragment implements IInspectIndexV
     }
 
     @Override
-    public void toIntegral() {
-        Log.i("toIntegral", "Integral");
-    }
-
-    @Override
-    public void toSetting() {
-        Intent intent = new Intent(this.getActivity(), BaseDisplayActivity.class);
-        intent.putExtra("class", SettingIndexFragment.class);
-        startActivity(intent);
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.index_banner:
-                iInspecIndexPresent.toIntegral();
-                break;
             case R.id.right:
-                iInspecIndexPresent.toSetting();
+                inspecIndexPresent.changeMode();
                 break;
         }
 
+    }
+
+    @Override
+    public void changeMode() {
+        Intent intent = new Intent(InspectIndexFragment.this.getActivity(), BaseDisplayActivity.class);
+        intent.putExtra("class", InspectIndexMapFragment.class);
+        startActivity(intent);
     }
 
     public class IndexAdapter extends RecyclerView.Adapter<MyViewHolder> {
