@@ -55,7 +55,7 @@
         android:name=".mvp.WaterMainApplication"
         android:theme="@style/AppTheme">
         <activity
-            android:name="cn.com.lsc.android.water_main.mvp.login_branch.LoginBranchActivity"
+            android:name="cn.com.lsc.android.water_main.mvp.login.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
