@@ -5,7 +5,7 @@
 
         <variable
             name="baseBean"
-            type="cn.com.lsc.android.water_main.mvp.BaseBean" />
+            type="com.cn.watermain.mvp.BaseBean" />
     </data>
 
     <LinearLayout

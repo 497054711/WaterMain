@@ -5,7 +5,7 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <cn.com.lsc.android.water_main.widget.ForbiddenScrollViewPager
+    <com.cn.watermain.widget.ForbiddenScrollViewPager
         android:id="@+id/main_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

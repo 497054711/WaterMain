@@ -1,23 +1,44 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply from: 'tinker-support.gradle'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
-        applicationId "water_main.lsc.com.cn.watermain"
+        applicationId "com.cn.watermain"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    // 签名配置
+    signingConfigs {
+        release {
+            try {
+                storeFile file("./keystore/watermain.jks")
+                storePassword "watermain"
+                keyAlias "watermain"
+                keyPassword "watermain"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
+    }
+    productFlavors {
+        watermain {
+            applicationId "com.cn.watermain"
+            versionName "1.0"
+        }
     }
     dataBinding{
         enabled true
