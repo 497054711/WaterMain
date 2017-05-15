@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.cn.watermain.nethelp.ICallBackListener;
 import com.cn.watermain.nethelp.NetUtil;
+import com.cn.watermain.nethelp.BaseCallBack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -183,11 +184,11 @@ public class HRetrofitNetHelper implements HttpLoggingInterceptor.Logger, Interc
             @Override
             public void onError(Throwable e) {
                 Log.e(TAG, "[onError]" + e.getMessage());
-                RetrofitBaseCallBack mRetrofitBaseCallBack = new RetrofitBaseCallBack();
-                mRetrofitBaseCallBack.setResCode("400");
-                mRetrofitBaseCallBack.setResMsg("请求失败");
-                mRetrofitBaseCallBack.setResObj(null);
-                mICallBackListener.onFaild(mRetrofitBaseCallBack);
+                BaseCallBack mBaseCallBack = new BaseCallBack();
+                mBaseCallBack.setResCode("400");
+                mBaseCallBack.setResMsg("请求失败");
+                mBaseCallBack.setResObj(null);
+                mICallBackListener.onFaild(mBaseCallBack);
                 return;
             }
 
@@ -205,11 +206,12 @@ public class HRetrofitNetHelper implements HttpLoggingInterceptor.Logger, Interc
             public void onNext(String s) {
                 Log.i(TAG, "[onNext]" + s);
                 Gson gosn = new Gson();
-                RetrofitBaseCallBack mRetrofitBaseCallBack = gosn.fromJson(s, RetrofitBaseCallBack.class);
-                if (mRetrofitBaseCallBack.getResCode().equals("200")) {
-                    mICallBackListener.onSuccess(mRetrofitBaseCallBack);
+                BaseCallBack mBaseCallBack = gosn.fromJson(s, BaseCallBack.class);
+                mBaseCallBack.setResCode("200");
+                if (mBaseCallBack.getResCode().equals("200")) {
+                    mICallBackListener.onSuccess(mBaseCallBack);
                 } else {
-                    mICallBackListener.onFaild(mRetrofitBaseCallBack);
+                    mICallBackListener.onFaild(mBaseCallBack);
                 }
             }
         };

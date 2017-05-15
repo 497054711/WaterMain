@@ -21,6 +21,8 @@ import java.util.List;
 import com.cn.watermain.R;
 import com.cn.watermain.adapter.MyViewPagerAdapter;
 import com.cn.watermain.db.GuaidDb;
+import com.cn.watermain.db.LoginInfoDB;
+import com.cn.watermain.mvp.login.LoginActivity;
 import com.cn.watermain.utils.PixelTransform;
 
 /**
@@ -80,6 +82,11 @@ public class GuaidActivity extends BaseFragmentActivity {
                 iv_guaid_vp_item_use.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(!LoginInfoDB.isLogin(GuaidActivity.this)){
+                            Intent intent = new Intent(GuaidActivity.this, BaseDisplayActivity.class);
+                            intent.putExtra("class", LoginActivity.class);
+                            startActivity(intent);
+                        }
                         GuaidDb.setShowGuaid(GuaidActivity.this,false);
                         GuaidActivity.this.finish();
                     }

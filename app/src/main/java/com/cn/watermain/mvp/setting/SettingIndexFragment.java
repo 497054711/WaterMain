@@ -15,7 +15,7 @@ import butterknife.Unbinder;
 import com.cn.watermain.R;
 import com.cn.watermain.mvp.BaseFragment;
 import com.cn.watermain.mvp.WaterMainApplication;
-import com.cn.watermain.mvp.login_branch.LoginBranchActivity;
+import com.cn.watermain.mvp.login.LoginActivity;
 import com.cn.watermain.mvp.setting.index.present.SettingIndexPresent;
 import com.cn.watermain.mvp.setting.index.view.ISettingIndexView;
 import com.cn.watermain.widget.MyAlertDialog;
@@ -69,7 +69,7 @@ public class SettingIndexFragment extends BaseFragment implements ISettingIndexV
             @Override
             public void clickSure() {
                 myAlertDialog.dismiss();
-                Intent intent=new Intent(SettingIndexFragment.this.getActivity(), LoginBranchActivity.class);
+                Intent intent=new Intent(SettingIndexFragment.this.getActivity(), LoginActivity.class);
                 startActivity(intent);
                 WaterMainApplication.getInstance().exitsApp();
             }

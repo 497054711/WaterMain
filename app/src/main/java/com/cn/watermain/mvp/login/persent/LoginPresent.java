@@ -1,9 +1,13 @@
 package com.cn.watermain.mvp.login.persent;
 
+import android.content.Context;
+
+import com.cn.watermain.db.LoginInfoDB;
 import com.cn.watermain.mvp.BaseBean;
-import com.cn.watermain.mvp.IOnDataListener;
 import com.cn.watermain.mvp.login.model.LoginModel;
 import com.cn.watermain.mvp.login.view.ILoginView;
+import com.cn.watermain.nethelp.BaseCallBack;
+import com.cn.watermain.nethelp.ICallBackListener;
 
 /**
  * Created by Administrator on 2017/3/19.
@@ -12,26 +16,30 @@ import com.cn.watermain.mvp.login.view.ILoginView;
 public class LoginPresent implements ILoginPresent{
     private ILoginView iLoginView;
     private LoginModel loginModel;
+    private Context context;
 
-    public LoginPresent(ILoginView iLoginView) {
+    public LoginPresent(Context context,ILoginView iLoginView) {
         this.iLoginView = iLoginView;
+        this.context=context;
     }
 
     @Override
     public void toLogin() {
-        loginModel =new LoginModel(new IOnDataListener() {
-
+        iLoginView.loadingShow();
+        loginModel=new LoginModel(context);
+        loginModel.login(new ICallBackListener() {
             @Override
-            public void onSuccess(BaseBean baseBean) {
-                iLoginView.toLogin(baseBean);
+            public void onSuccess(BaseCallBack mBaseCallBack) {
+                LoginInfoDB.writeLoginInfo(context,"123");
+                iLoginView.toLogin(mBaseCallBack);
+                iLoginView.loadingDismiss();
             }
 
             @Override
-            public void onFailed() {
-
+            public void onFaild(BaseCallBack mBaseCallBack) {
+                iLoginView.loadingDismiss();
             }
         });
-        loginModel.login();
     }
 
     @Override

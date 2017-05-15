@@ -54,8 +54,9 @@
         android:hardwareAccelerated="true"
         android:name=".mvp.WaterMainApplication"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name=".mvp.login.LoginActivity"
+            android:name=".mvp.user.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,16 +66,6 @@
         </activity>
         <activity
             android:name=".mvp.GuaidActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".mvp.user.MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".mvp.admin.MainAdminActivity"
             android:screenOrientation="portrait">
         </activity>
 

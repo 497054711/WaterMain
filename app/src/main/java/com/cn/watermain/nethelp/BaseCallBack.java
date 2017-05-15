@@ -1,4 +1,4 @@
-package com.cn.watermain.nethelp.retrofit;
+package com.cn.watermain.nethelp;
 
 /**
  * Author:zcmain on 2016/5/13 13:38
@@ -6,7 +6,7 @@ package com.cn.watermain.nethelp.retrofit;
  * 说明：统一回调实体
  * ｛"resCode":"200","resMsg":"请求成功","resObj":obj｝
  */
-public class RetrofitBaseCallBack {
+public class BaseCallBack {
     String resCode;
     String resMsg;
     Object resObj;

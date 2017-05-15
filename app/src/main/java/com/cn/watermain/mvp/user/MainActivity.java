@@ -1,5 +1,6 @@
 package com.cn.watermain.mvp.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -14,9 +15,14 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.cn.watermain.R;
 import com.cn.watermain.adapter.CommonFragmentPagerAdapter;
+import com.cn.watermain.db.GuaidDb;
+import com.cn.watermain.db.LoginInfoDB;
+import com.cn.watermain.mvp.BaseDisplayActivity;
 import com.cn.watermain.mvp.BaseFragmentActivity;
+import com.cn.watermain.mvp.GuaidActivity;
 import com.cn.watermain.mvp.WaterMainApplication;
 import com.cn.watermain.mvp.integral.index.IntegralIndexFragment;
+import com.cn.watermain.mvp.login.LoginActivity;
 import com.cn.watermain.mvp.record.index.RecordIndexFragment;
 import com.cn.watermain.mvp.report.ReportIndexFragment;
 import com.cn.watermain.mvp.task.index.TaskIndexFragment;
@@ -42,6 +48,17 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (GuaidDb.isShowGuaid(this)) {
+            Intent intent = new Intent(this, GuaidActivity.class);
+            startActivity(intent);
+        }else{
+            if(!LoginInfoDB.isLogin(this)){
+                Intent intent = new Intent(this, BaseDisplayActivity.class);
+                intent.putExtra("class", LoginActivity.class);
+                startActivity(intent);
+            }
+        }
+
         setContentView(R.layout.main);
         unbinder= ButterKnife.bind(this);
         main_vp.setNoScroll(true);

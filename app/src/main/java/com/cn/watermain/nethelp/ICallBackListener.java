@@ -1,8 +1,6 @@
 package com.cn.watermain.nethelp;
 
 
-import com.cn.watermain.nethelp.retrofit.RetrofitBaseCallBack;
-
 /**
  * Author:zcmain on 2016/5/13 13:39
  * E-Mail:zcmain@163.com
@@ -10,7 +8,7 @@ import com.cn.watermain.nethelp.retrofit.RetrofitBaseCallBack;
  */
 public interface ICallBackListener {
 
-    public void onSuccess(RetrofitBaseCallBack mRetrofitBaseCallBack);
-    public void onFaild(RetrofitBaseCallBack mRetrofitBaseCallBack);
+    public void onSuccess(BaseCallBack mBaseCallBack);
+    public void onFaild(BaseCallBack mBaseCallBack);
 
 }
