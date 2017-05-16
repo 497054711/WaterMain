@@ -10,9 +10,13 @@ import android.view.ViewGroup;
 
 import com.cn.android.R;
 import com.cn.android.databinding.LoginBinding;
+import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
+import com.cn.android.mvp.integral.exchange.IntegralExchangeFragment;
 import com.cn.android.mvp.login_regist.persent.LoginRegistPresent;
 import com.cn.android.mvp.login_regist.view.ILoginRegistView;
+
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/3/11.
@@ -53,21 +57,17 @@ public class LoginRegistActivity extends BaseFragment implements ILoginRegistVie
 
     @Override
     public void toLogin() {
+        Intent intent = new Intent(this.getActivity(), BaseDisplayActivity.class);
+        intent.putExtra("class", LoginRegistActivity.class);
+        startActivity(intent);
         this.getActivity().finish();
     }
 
     @Override
     public void toRegist() {
-
-    }
-
-    @Override
-    public void loadingShow() {
-
-    }
-
-    @Override
-    public void loadingDismiss() {
-
+        Intent intent = new Intent(this.getActivity(), BaseDisplayActivity.class);
+        intent.putExtra("class", LoginRegistActivity.class);
+        startActivity(intent);
+        this.getActivity().finish();
     }
 }

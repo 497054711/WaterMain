@@ -7,7 +7,7 @@ import com.cn.android.mvp.IBaseView;
  * index接口
  */
 
-public interface ILoginRegistView extends IBaseView{
+public interface ILoginRegistView {
     public void toLogin();//用户登录
     public void toRegist();//用户注册
 }

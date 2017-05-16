@@ -3,9 +3,6 @@
 
     <data>
 
-        <variable
-            name="baseBean"
-            type="com.cn.android.mvp.BaseBean" />
     </data>
 
     <LinearLayout
