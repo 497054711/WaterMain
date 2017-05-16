@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cn.watermain">
+    package="com.cn.android">
 
     <!--  添加WiFi以及访问网络的权限：-->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"></uses-permission>
@@ -52,11 +52,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
-        android:name=".mvp.WaterMainApplication"
+        android:name="com.cn.android.mvp.WaterMainApplication"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".mvp.user.MainActivity"
+            android:name="com.cn.android.mvp.user.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,12 +65,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mvp.GuaidActivity"
+            android:name="com.cn.android.mvp.GuaidActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name=".mvp.BaseDisplayActivity"
+            android:name="com.cn.android.mvp.BaseDisplayActivity"
             android:screenOrientation="portrait">
 
         </activity>
