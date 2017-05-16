@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 
 import com.cn.android.mvp.BaseFragmentActivity;
 import com.cn.android.mvp.demo.present.DemoPresent;
+import com.cn.android.nethelp.BaseCallBack;
+import com.cn.android.nethelp.ICallBackListener;
 
 /**
  * @name MVP
@@ -21,5 +23,16 @@ public class DemoActivity extends BaseFragmentActivity implements IDemoView  {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         demoPresent=new DemoPresent(this,this);
+        demoPresent.getDemo(new ICallBackListener() {
+            @Override
+            public void onSuccess(BaseCallBack mBaseCallBack) {
+
+            }
+
+            @Override
+            public void onFaild(BaseCallBack mBaseCallBack) {
+
+            }
+        });
     }
 }
