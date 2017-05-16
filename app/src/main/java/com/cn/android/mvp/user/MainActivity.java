@@ -71,9 +71,9 @@ public class MainActivity extends BaseFragmentActivity {
         listFragments = new ArrayList<Fragment>();
         listFragments.add(indexFragment);
         listFragments.add(taskIndexFragment);
-        listFragments.add(reportIndexFragment);
         listFragments.add(recordIndexFragment);
         listFragments.add(integralIndexFragment);
+        listFragments.add(reportIndexFragment);
 
         commonFragmentPagerAdapter = new CommonFragmentPagerAdapter(getSupportFragmentManager(), listFragments);
         main_vp.setAdapter(commonFragmentPagerAdapter);

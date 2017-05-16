@@ -15,8 +15,8 @@
         android:id="@+id/radiogGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/line"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/line"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
@@ -28,11 +28,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:checked="true"
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/main1"
             android:gravity="center"
             android:text="首页"
-            android:checked="true"
             android:textColor="#1fbba6"
             android:textSize="11sp" />
         <!--任务-->
@@ -49,18 +49,6 @@
             android:textColor="#1fbba6"
             android:textSize="11sp" />
 
-        <RadioButton
-            android:id="@+id/rb_main3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawablePadding="5dp"
-            android:drawableTop="@drawable/main3"
-            android:gravity="center"
-            android:text="报告"
-            android:textColor="#1fbba6"
-            android:textSize="11sp" />
 
         <RadioButton
             android:id="@+id/rb_main4"
@@ -88,6 +76,18 @@
             android:textColor="#1fbba6"
             android:textSize="11sp" />
 
+        <RadioButton
+            android:id="@+id/rb_main3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/main3"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="#1fbba6"
+            android:textSize="11sp" />
     </RadioGroup>
 
 

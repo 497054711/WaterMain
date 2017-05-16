@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cn.android.R;
-import com.cn.android.databinding.LoginBinding;
+import com.cn.android.databinding.LoginRegistBinding;
 import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.integral.exchange.IntegralExchangeFragment;
+import com.cn.android.mvp.login.view.LoginActivity;
 import com.cn.android.mvp.login_regist.persent.LoginRegistPresent;
 import com.cn.android.mvp.login_regist.view.ILoginRegistView;
 
@@ -25,21 +26,21 @@ import java.io.Serializable;
 public class LoginRegistActivity extends BaseFragment implements ILoginRegistView, View.OnClickListener {
     private LoginRegistPresent loginPresent;
     private Intent intent;
-    private LoginBinding loginBinding;
+    private LoginRegistBinding loginRegistBinding;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         loginBinding=DataBindingUtil.inflate(inflater, R.layout.login_regist, container, false);
-        return loginBinding.getRoot();
+        loginRegistBinding=DataBindingUtil.inflate(inflater, R.layout.login_regist, container, false);
+        return loginRegistBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         loginPresent = new LoginRegistPresent(this.getActivity(),this);
-        loginBinding.btLogin.setOnClickListener(this);
-        loginBinding.btRegist.setOnClickListener(this);
+        loginRegistBinding.btLogin.setOnClickListener(this);
+        loginRegistBinding.btRegist.setOnClickListener(this);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class LoginRegistActivity extends BaseFragment implements ILoginRegistVie
     @Override
     public void toLogin() {
         Intent intent = new Intent(this.getActivity(), BaseDisplayActivity.class);
-        intent.putExtra("class", LoginRegistActivity.class);
+        intent.putExtra("class", LoginActivity.class);
         startActivity(intent);
         this.getActivity().finish();
     }
@@ -66,7 +67,7 @@ public class LoginRegistActivity extends BaseFragment implements ILoginRegistVie
     @Override
     public void toRegist() {
         Intent intent = new Intent(this.getActivity(), BaseDisplayActivity.class);
-        intent.putExtra("class", LoginRegistActivity.class);
+        intent.putExtra("class", LoginActivity.class);
         startActivity(intent);
         this.getActivity().finish();
     }
