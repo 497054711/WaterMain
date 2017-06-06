@@ -18,14 +18,4 @@ public class LoginRegistPresent implements ILoginRegistPresent {
         this.iLoginRegistView = iLoginRegistView;
         this.context=context;
     }
-
-    @Override
-    public void toLogin() {
-        iLoginRegistView.toLogin();
-    }
-
-    @Override
-    public void toRegist() {
-        iLoginRegistView.toRegist();
-    }
 }

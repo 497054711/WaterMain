@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.cn.android.nethelp.ICallBackListener;
 import com.cn.android.nethelp.NetUtil;
-import com.cn.android.nethelp.BaseCallBack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,11 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -49,13 +43,14 @@ public class HRetrofitNetHelper implements HttpLoggingInterceptor.Logger, Interc
     private Interceptor mUrlInterceptor;
     private Context mContext;
     public Gson mGson;
-    public static final String BASE_URL = "http://www.simfg.cn:8080";
+    public static final String BASE_URL = "http://106.14.118.220:60340/mockjs/4/";
+    public static final int STATUS_SUCCESS=200;
 
     private HRetrofitNetHelper(Context context) {
         this.mContext = context;
         mGson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .registerTypeAdapter(String.class, new DeserializerData())
+//                .registerTypeAdapter(String.class, new DeserializerData())
                 .create();
         mHttpLogInterceptor = new HttpLoggingInterceptor(this);
         mHttpLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -107,6 +102,9 @@ public class HRetrofitNetHelper implements HttpLoggingInterceptor.Logger, Interc
 
     public Map<String, String> getBaseParams(Context context) {//通用参数
         Map<String, String> params = new HashMap<>();
+        params.put("userId", "US201507140000000035");
+        params.put("uuid", "UU20170521191615F479FD978FCF49FA");
+        params.put("userChannelType", "Android");
         return params;
     }
 
@@ -147,75 +145,42 @@ public class HRetrofitNetHelper implements HttpLoggingInterceptor.Logger, Interc
                     .build();
         }
     }
-
-    public void flowableSubscribe(Flowable<String> flowable, final ICallBackListener mICallBackListener) {
-        flowable
-                // Subscriber前面执行的代码都是在I/O线程中运行
-                .subscribeOn(Schedulers.io())
-                .onBackpressureBuffer()
-                // 操作observeOn之后操作主线程中运行.
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        createSubscriber(mICallBackListener).onNext(s);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        createSubscriber(mICallBackListener).onError(throwable);
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        createSubscriber(mICallBackListener).onComplete();
-                    }
-                });
-    }
-
-    /**
-     * 创建 Subscriber
-     *
-     * @param mICallBackListener
-     * @return Subscriber
-     */
-    public Subscriber createSubscriber(final ICallBackListener mICallBackListener) {
-        Subscriber mSubscriber = new Subscriber<String>() {
+    public Subscriber<RetrofitBaseCallBack> createSubcribe(final ICallBackListener mICallBackListener){
+        //创建订阅者
+        Subscriber<RetrofitBaseCallBack> subscriber = new Subscriber<RetrofitBaseCallBack>() {
             @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "[onError]" + e.getMessage());
-                BaseCallBack mBaseCallBack = new BaseCallBack();
-                mBaseCallBack.setResCode("400");
-                mBaseCallBack.setResMsg("请求失败");
-                mBaseCallBack.setResObj(null);
-                mICallBackListener.onFaild(mBaseCallBack);
-                return;
+            public void onSubscribe(Subscription s) {
+                //这一步是必须，我们通常可以在这里做一些初始化操作，调用request()方法表示初始化工作已经完成
+                //调用request()方法，会立即触发onNext()方法
+                //在onComplete()方法完成，才会再执行request()后边的代码
+                s.request(10);
+            }
+
+            @Override
+            public void onNext(RetrofitBaseCallBack mRetrofitBaseCallBack) {
+                Log.i(TAG, "[onNext]");
+                if (mRetrofitBaseCallBack!=null&&mRetrofitBaseCallBack.getRet()==STATUS_SUCCESS) {
+                    mICallBackListener.onSuccess(mRetrofitBaseCallBack);
+                } else {
+                    mICallBackListener.onFaild(mRetrofitBaseCallBack);
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                Log.e(TAG, "[onError]" + throwable.getMessage());
+                RetrofitBaseCallBack mRetrofitBaseCallBack = new RetrofitBaseCallBack();
+                mRetrofitBaseCallBack.setMsg("网络异常,请检查网络");
+                mICallBackListener.onFaild(mRetrofitBaseCallBack);
             }
 
             @Override
             public void onComplete() {
-                Log.i(TAG, "[onCompleted]");
-            }
-
-            @Override
-            public void onSubscribe(Subscription s) {
-                Log.i(TAG, "[onSubscribe]");
-            }
-
-            @Override
-            public void onNext(String s) {
-                Log.i(TAG, "[onNext]" + s);
-                Gson gosn = new Gson();
-                BaseCallBack mBaseCallBack = gosn.fromJson(s, BaseCallBack.class);
-                mBaseCallBack.setResCode("200");
-                if (mBaseCallBack.getResCode().equals("200")) {
-                    mICallBackListener.onSuccess(mBaseCallBack);
-                } else {
-                    mICallBackListener.onFaild(mBaseCallBack);
-                }
+                //由于Reactive-Streams的兼容性，方法onCompleted被重命名为onComplete
+                Log.e(TAG, "[onComplete]");
             }
         };
-        return mSubscriber;
+        return subscriber;
     }
 
     public Cache getCache() {

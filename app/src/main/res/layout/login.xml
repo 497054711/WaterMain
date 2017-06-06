@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+   <data>
+    <import
+        alias="ILoginView"
+        type="com.cn.android.mvp.login.view.ILoginView" />
 
-    </data>
+    <variable
+        name="iLoginView"
+        type="ILoginView" />
+</data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +41,7 @@
             <Button
                 style="@style/buttonStyle"
                 android:layout_marginTop="20dp"
+                android:onClick="@{iLoginView.login}"
                 android:text="登录" />
 
         </LinearLayout>

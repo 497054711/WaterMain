@@ -24,11 +24,6 @@ public class LoginRegistModel implements ILoginRegistModel {
 
     @Override
     public void login(ICallBackListener mICallBackListener) {
-        ILoginRegistServiceApi iLoginRegistServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(ILoginRegistServiceApi.class);
-        Map<String, String> mParamsMap = new HashMap<>();
-        mParamsMap.put("name", "ssdf");
-        mParamsMap.put("password", "asdfaaaaaaaaa");
-        Flowable<String> flowable = iLoginRegistServiceApi.login(mParamsMap);
-        HRetrofitNetHelper.getInstance(context).flowableSubscribe(flowable,mICallBackListener);
+
     }
 }

@@ -29,11 +29,6 @@ public class LoginModel implements ILoginModel {
 
     @Override
     public void getDeomo(ICallBackListener mICallBackListener) {
-        ILoginServiceApi iLoginServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(ILoginServiceApi.class);
-        Map<String, String> mParamsMap = new HashMap<>();
-        mParamsMap.put("name", "ssdf");
-        mParamsMap.put("password", "asdfaaaaaaaaa");
-        Flowable<String> flowable = iLoginServiceApi.getDemo(mParamsMap);
-        HRetrofitNetHelper.getInstance(context).flowableSubscribe(flowable,mICallBackListener);
+
     }
 }

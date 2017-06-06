@@ -5,7 +5,5 @@ package com.cn.android.mvp.login_regist.persent;
  */
 
 public interface ILoginRegistPresent {
-    public void toLogin();
-    public void toRegist();
 
 }

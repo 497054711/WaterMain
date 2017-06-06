@@ -34,6 +34,6 @@ public class DemoModel implements IDemoModel{
         mParamsMap.put("name", "ssdf");
         mParamsMap.put("password", "asdfaaaaaaaaa");
         Flowable<String> flowable = iDemoServiceApi.getDemo(mParamsMap);
-        HRetrofitNetHelper.getInstance(context).flowableSubscribe(flowable,mICallBackListener);
+//        HRetrofitNetHelper.getInstance(context).flowableSubscribe(flowable,mICallBackListener);
     }
 }

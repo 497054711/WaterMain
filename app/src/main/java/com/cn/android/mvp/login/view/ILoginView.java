@@ -1,6 +1,8 @@
 package com.cn.android.mvp.login.view;
 
 
+import android.view.View;
+
 /**
  * @name MVP
  * @class name：com.cn.android.mvp.demo.view
@@ -10,5 +12,6 @@ package com.cn.android.mvp.login.view;
  * @time 2017/5/16 14:06
  */
 public interface ILoginView {
+    public void login(View view);
 
 }

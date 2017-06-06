@@ -33,4 +33,9 @@ public class LoginActivity extends BaseFragment implements ILoginView {
         super.onActivityCreated(savedInstanceState);
         loginPresent=new LoginPresent(this.getActivity(),this);
     }
+
+    @Override
+    public void login(View view) {
+
+    }
 }
