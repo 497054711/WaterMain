@@ -16,7 +16,7 @@ import com.cn.android.R;
  * Created by Administrator on 2017/3/11.
  */
 
-public class BaseFragment extends Fragment {
+public class BaseFragment extends Fragment implements IBaseView {
     @BindView(R.id.title)
     public TextView title;
     @BindView(R.id.back)
@@ -38,5 +38,20 @@ public class BaseFragment extends Fragment {
     @OnClick(R.id.back)
     public void goBack() {
         this.getActivity().finish();
+    }
+
+    @Override
+    public void loadingShow() {
+
+    }
+
+    @Override
+    public void loadingDismiss() {
+
+    }
+
+    @Override
+    public void initLoading() {
+
     }
 }

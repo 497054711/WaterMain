@@ -6,6 +6,8 @@ import com.cn.android.mvp.login.model.LoginModel;
 import com.cn.android.mvp.login.model.ILoginModel;
 import com.cn.android.mvp.login.view.ILoginView;
 import com.cn.android.nethelp.ICallBackListener;
+import com.cn.android.nethelp.Params;
+import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
 
 /**
  * @name MVP
@@ -24,7 +26,18 @@ public class LoginPresent implements ILoginPresent {
     }
 
     @Override
-    public void getDemo(ICallBackListener mICallBackListener) {
-        iLoginModel.getDeomo(mICallBackListener);
+    public void login(Params params) {
+        iLoginView.baseLoadingShow();
+        iLoginModel.login(new ICallBackListener() {
+            @Override
+            public void onSuccess(RetrofitBaseCallBack mRetrofitBaseCallBack) {
+                iLoginView.baseLoadingDismiss();
+            }
+
+            @Override
+            public void onFaild(RetrofitBaseCallBack mRetrofitBaseCallBack) {
+                iLoginView.baseLoadingDismiss();
+            }
+        },params);
     }
 }

@@ -31,4 +31,9 @@ public class BaseFragmentActivity extends FragmentActivity implements IBaseView{
     public void loadingDismiss() {
 
     }
+
+    @Override
+    public void initLoading() {
+
+    }
 }

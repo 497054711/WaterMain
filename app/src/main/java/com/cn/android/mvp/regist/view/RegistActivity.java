@@ -43,6 +43,7 @@ public class RegistActivity extends BaseFragment implements IRegistView {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         registPresent=new RegistPresent(this.getActivity(),this);
+        registBinding.waterMainTitle.title.setText("注册");
         registBinding.setRegistView(this);
     }
 

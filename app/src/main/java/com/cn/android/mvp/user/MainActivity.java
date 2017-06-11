@@ -48,16 +48,16 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (GuaidDb.isShowGuaid(this)) {
-            Intent intent = new Intent(this, GuaidActivity.class);
-            startActivity(intent);
-        }else{
-            if(!LoginInfoDB.isLogin(this)){
-                Intent intent = new Intent(this, BaseDisplayActivity.class);
-                intent.putExtra("class", LoginRegistActivity.class);
-                startActivity(intent);
-            }
-        }
+//        if (GuaidDb.isShowGuaid(this)) {
+//            Intent intent = new Intent(this, GuaidActivity.class);
+//            startActivity(intent);
+//        }else{
+//            if(!LoginInfoDB.isLogin(this)){
+//                Intent intent = new Intent(this, BaseDisplayActivity.class);
+//                intent.putExtra("class", LoginRegistActivity.class);
+//                startActivity(intent);
+//            }
+//        }
 
         setContentView(R.layout.main);
         unbinder= ButterKnife.bind(this);

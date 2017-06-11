@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical">
+<layout>
+    <data>
 
-    <include layout="@layout/water_main_title" />
+        <import
+            alias="IIndexView"
+            type="com.cn.android.mvp.user_task.index.view.IIndexView" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F2F5FA"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="共3条任务"
-        android:textColor="#AAAAAA"
-        android:textSize="12sp" />
-
-    <ImageView
-        android:id="@+id/index_banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/index_banner" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_index"
+        <variable
+            name="indexView"
+            type="IIndexView" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#00000000"
-        android:listSelector="#00000000"
-        android:scrollbars="none" />
+        android:background="@color/background"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <include
+            android:id="@+id/include_waterMainTitle"
+            layout="@layout/water_main_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F2F5FA"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="共3条任务"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/index_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/index_banner" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_index"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#00000000"
+            android:listSelector="#00000000"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+</layout>

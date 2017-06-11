@@ -1,6 +1,7 @@
 package com.cn.android.mvp.login.present;
 
 import com.cn.android.nethelp.ICallBackListener;
+import com.cn.android.nethelp.Params;
 
 /**
  * @name MVP
@@ -11,5 +12,5 @@ import com.cn.android.nethelp.ICallBackListener;
  * @time 2017/5/16 14:07
  */
 public interface ILoginPresent {
-    public void getDemo(ICallBackListener mICallBackListener);
+    public void login(Params params);
 }

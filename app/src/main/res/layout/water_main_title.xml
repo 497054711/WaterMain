@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rv_waterMainTitle"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#1fbba6"
-    android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+<layout>
 
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="12dp"
-        android:layout_height="21dp"
-        android:layout_centerVertical="true"
-        android:src="@drawable/icon_back" />
+    <data>
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+        <import
+            alias="IBaseTitleView"
+            type="com.cn.android.mvp.IBaseTitleView" />
+
+        <variable
+            name="baseTitleView"
+            type="IBaseTitleView" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rv_waterMainTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="水总管"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:background="#1fbba6"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
 
-    <ImageView
-        android:id="@+id/right"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignParentRight="true"/>
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="12dp"
+            android:layout_height="21dp"
+            android:layout_centerVertical="true"
+            android:onClick="@{baseTitleView.back}"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="水总管"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:onClick="@{baseTitleView.right}"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</layout>

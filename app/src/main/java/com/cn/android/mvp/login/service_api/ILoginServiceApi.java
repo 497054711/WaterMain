@@ -1,5 +1,8 @@
 package com.cn.android.mvp.login.service_api;
 
+import com.cn.android.mvp.login.model.biz.LoginResult;
+import com.cn.android.mvp.regist.model.biz.SendNoticeResult;
+
 import java.util.Map;
 
 import io.reactivex.Flowable;
@@ -15,6 +18,7 @@ public interface ILoginServiceApi {
 
     //获取产品列表
     @FormUrlEncoded
-    @POST("/Android/requestKeyValue.action")
-    Flowable<String> getDemo(@FieldMap Map<String, String> params);
+    @POST("user/login")
+    Flowable<LoginResult> login(@FieldMap Map<String, String> params);
+
 }

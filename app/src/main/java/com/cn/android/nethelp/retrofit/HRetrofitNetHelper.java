@@ -43,14 +43,14 @@ public class HRetrofitNetHelper implements HttpLoggingInterceptor.Logger, Interc
     private Interceptor mUrlInterceptor;
     private Context mContext;
     public Gson mGson;
-    public static final String BASE_URL = "http://106.14.118.220:60340/mockjs/4/";
+//    public static final String BASE_URL = "http://106.14.118.220:60340/mockjsdata/4/";
+public static final String BASE_URL = "https://www.gongziqianbao.com/";
     public static final int STATUS_SUCCESS=200;
 
     private HRetrofitNetHelper(Context context) {
         this.mContext = context;
         mGson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
-//                .registerTypeAdapter(String.class, new DeserializerData())
                 .create();
         mHttpLogInterceptor = new HttpLoggingInterceptor(this);
         mHttpLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
