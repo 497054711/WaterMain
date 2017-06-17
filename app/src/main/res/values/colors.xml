@@ -5,4 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="background">#F2F5FA</color>
     <color name="systen_green">#F2F5FA</color>
+
+    <color name="office_inspection_bg">#459E4A</color>//官方巡检
+    <color name="office_inspection_txt">#FFFFFF</color>//官方巡检
+    <color name="office_inspection_code_txt">#459E4A</color>//官方巡检
+
+    <color name="integration_inspection_bg">#E86740</color>//一体化巡检
+    <color name="integration_inspection_txt">#FFFFFF</color>//一体化巡检
+    <color name="integration_inspection_code_txt">#E86740</color>//官方巡检
 </resources>

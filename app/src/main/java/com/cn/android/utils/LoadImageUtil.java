@@ -14,19 +14,19 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.util.Util;
 
 
-public class LoadLocalImageUtil {
+public class LoadImageUtil {
 	private Context context;
 	private Activity activity;
 
-	private LoadLocalImageUtil(Context context) {
+	private LoadImageUtil(Context context) {
 		this.context=context;
 		activity=(Activity)context;
 	}
 
-	private static LoadLocalImageUtil instance = null;
+	private static LoadImageUtil instance = null;
 
-	public static LoadLocalImageUtil getInstance(Context context) {
-		instance = new LoadLocalImageUtil(context);
+	public static LoadImageUtil getInstance(Context context) {
+		instance = new LoadImageUtil(context);
 		return instance;
 	}
 

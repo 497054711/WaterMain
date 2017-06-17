@@ -72,9 +72,6 @@ public class FaultIndexFragment extends BaseFragment implements IFaultIndexView,
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.index_banner:
-                iFaultIndexPresent.toIntegral();
-                break;
             case R.id.right:
                 iFaultIndexPresent.toSetting();
                 break;

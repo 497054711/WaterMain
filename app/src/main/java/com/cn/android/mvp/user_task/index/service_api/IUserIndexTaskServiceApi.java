@@ -19,13 +19,12 @@ public interface IUserIndexTaskServiceApi {
 
     //获取产品列表
     @FormUrlEncoded
-//    @POST("common/pic/banner/home")
-    @POST("wallet-mobile/api/v3.8/app/index/queryIndex?uuid=&userId=&userChannelType=Android&")
+    @POST("common/pic/banner/home")
     Flowable<UserTaskIndexBannerResult> getBanner(@FieldMap Map<String, String> params);
 
     //获取产品列表
     @FormUrlEncoded
-    @POST("user/task/list")
+    @POST("user/task/page")
     Flowable<UserTaskIndexTaskResult> getTask(@FieldMap Map<String, String> params);
 
 }

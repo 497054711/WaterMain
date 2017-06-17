@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 import com.cn.android.R;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.record.detail.fault.view.IRecordDetailFaultView;
-import com.cn.android.utils.LoadLocalImageUtil;
+import com.cn.android.utils.LoadImageUtil;
 
 /**
  * Created by Administrator on 2017/3/31.
@@ -76,7 +76,7 @@ public class RecordDetailFaultFragment extends BaseFragment implements IRecordDe
             holder.tvDate.setText(date[position]);
             holder.tvUserName.setText(userName[position]);
             holder.tvStatus.setText(status[position]);
-            LoadLocalImageUtil.getInstance(RecordDetailFaultFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
+            LoadImageUtil.getInstance(RecordDetailFaultFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
             Glide.with(RecordDetailFaultFragment.this.getActivity()).load(userIcon[position]).asBitmap().centerCrop().into(new BitmapImageViewTarget( holder.ivUserIcon) {
                 @Override
                 protected void setResource(Bitmap resource) {

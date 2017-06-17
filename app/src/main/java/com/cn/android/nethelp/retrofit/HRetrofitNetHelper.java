@@ -43,9 +43,8 @@ public class HRetrofitNetHelper implements HttpLoggingInterceptor.Logger, Interc
     private Interceptor mUrlInterceptor;
     private Context mContext;
     public Gson mGson;
-//    public static final String BASE_URL = "http://106.14.118.220:60340/mockjsdata/4/";
-public static final String BASE_URL = "https://www.gongziqianbao.com/";
-    public static final int STATUS_SUCCESS=200;
+    public static final String BASE_URL = "http://106.14.118.220:60340/mockjsdata/4/";
+    public static final int STATUS_SUCCESS=0;
 
     private HRetrofitNetHelper(Context context) {
         this.mContext = context;
@@ -102,8 +101,6 @@ public static final String BASE_URL = "https://www.gongziqianbao.com/";
 
     public Map<String, String> getBaseParams(Context context) {//通用参数
         Map<String, String> params = new HashMap<>();
-        params.put("userId", "US201507140000000035");
-        params.put("uuid", "UU20170521191615F479FD978FCF49FA");
         params.put("userChannelType", "Android");
         return params;
     }
@@ -171,6 +168,7 @@ public static final String BASE_URL = "https://www.gongziqianbao.com/";
                 Log.e(TAG, "[onError]" + throwable.getMessage());
                 RetrofitBaseCallBack mRetrofitBaseCallBack = new RetrofitBaseCallBack();
                 mRetrofitBaseCallBack.setMsg("网络异常,请检查网络");
+                mRetrofitBaseCallBack.setRet(-1);
                 mICallBackListener.onFaild(mRetrofitBaseCallBack);
             }
 

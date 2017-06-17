@@ -39,7 +39,14 @@
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
     </style>
+    <!-- 布局距离样式 -->
+    <style name="contentPadding">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
 
+    </style>
     <!-- 常用电话号码输入框样式 -->
     <style name="itemTextPhoneStyle">
         <item name="android:textColor">#4a4a4a</item>

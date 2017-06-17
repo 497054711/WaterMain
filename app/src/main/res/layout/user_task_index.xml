@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
 
         <import
@@ -10,6 +11,7 @@
             name="indexView"
             type="IIndexView" />
     </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,30 +22,59 @@
             android:id="@+id/include_waterMainTitle"
             layout="@layout/water_main_title" />
 
-        <TextView
+        <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
+            android:id="@+id/asvp_indexBanner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F2F5FA"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="共3条任务"
-            android:textColor="#AAAAAA"
-            android:textSize="12sp" />
+            android:layout_height="100dp" />
 
-        <ImageView
-            android:id="@+id/index_banner"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/index_banner" />
+            android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_index"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="#00000000"
-            android:listSelector="#00000000"
-            android:scrollbars="none" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.andview.refreshview.XRefreshView
+                    android:id="@+id/xrv_index"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_index"
+                        style="@style/contentPadding"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="#00000000"
+                        android:listSelector="#00000000"
+                        android:overScrollMode="never"
+                        android:paddingTop="5dp"
+                        android:scrollbars="none" />
+
+                </com.andview.refreshview.XRefreshView>
+
+                <com.andview.refreshview.XRefreshView
+                    android:id="@+id/xrv_index_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <com.andview.refreshview.XScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="120dp"
+                        android:scrollbars="none">
+
+                        <include
+                            android:id="@+id/include_emptyView"
+                            layout="@layout/base_empty_view" />
+                    </com.andview.refreshview.XScrollView>
+                </com.andview.refreshview.XRefreshView>
+            </LinearLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
 </layout>

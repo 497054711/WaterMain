@@ -22,7 +22,7 @@ import com.cn.android.R;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.inspect.detail.pipe.present.InspectDetailPipePresent;
 import com.cn.android.mvp.inspect.detail.pipe.view.IInspectDetailPipeView;
-import com.cn.android.utils.LoadLocalImageUtil;
+import com.cn.android.utils.LoadImageUtil;
 
 /**
  * Created by Administrator on 2017/3/25.
@@ -82,7 +82,7 @@ public class InspectDetailPipeFragment extends BaseFragment implements IInspectD
             holder.tvDate.setText(date[position]);
             holder.tvStatus.setText(status[position]);
             if (position < 5) {
-                LoadLocalImageUtil.getInstance(InspectDetailPipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
+                LoadImageUtil.getInstance(InspectDetailPipeFragment.this.getActivity()).displayFromDrawable(damages[position], holder.ivDamage);
             }
             Glide.with(InspectDetailPipeFragment.this.getActivity()).load(R.drawable.user).asBitmap().centerCrop().into(new BitmapImageViewTarget( holder.ivUserIcon) {
                 @Override

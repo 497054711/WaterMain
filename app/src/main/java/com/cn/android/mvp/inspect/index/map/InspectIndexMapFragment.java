@@ -12,7 +12,7 @@ import com.cn.android.R;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.inspect.index.map.present.InspectIndexMapPresent;
 import com.cn.android.mvp.inspect.index.map.view.IInspectIndexMapView;
-import com.cn.android.utils.LoadLocalImageUtil;
+import com.cn.android.utils.LoadImageUtil;
 
 /**
  * Created by Administrator on 2017/4/4.
@@ -39,7 +39,7 @@ public class InspectIndexMapFragment extends BaseFragment implements IInspectInd
         taskMapPipePresent = new InspectIndexMapPresent(this);
         right.setOnClickListener(this);
         right.setImageResource(R.drawable.icon_list);
-        LoadLocalImageUtil.getInstance(this.getActivity()).displayFromDrawable(R.drawable.map03,ivMap);
+        LoadImageUtil.getInstance(this.getActivity()).displayFromDrawable(R.drawable.map03,ivMap);
         title.setText("G161213012");
     }
 

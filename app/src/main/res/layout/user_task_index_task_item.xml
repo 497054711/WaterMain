@@ -15,6 +15,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="#ffffff"
         android:orientation="vertical">
 
@@ -22,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:onClick="@{userTaskIndexTaskRecord.onDescription}"
+            android:orientation="horizontal"
             android:paddingRight="10dp"
             android:paddingTop="10dp">
 
@@ -36,9 +37,11 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/tv_index_task_item_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:padding="5dp"
                     android:text="@{userTaskIndexTaskRecord.name}"
                     android:textColor="#ffffff"
                     android:textSize="14sp" />
@@ -48,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:padding="5dp"
                     android:text="@{userTaskIndexTaskRecord.code}"
                     android:textColor="#ffffff"
                     android:textSize="14sp" />
@@ -105,8 +109,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:maxLines="1"
                 android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="#9A93A0"
                 android:textSize="14sp" />
 
@@ -129,23 +133,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/line"
-            android:divider="@drawable/driver_v"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
             android:showDividers="middle">
 
             <TextView
                 android:id="@+id/tv_index_item_grabSingle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
+                android:background="@drawable/shape_corner_blue"
                 android:gravity="center"
                 android:onClick="@{userTaskIndexTaskRecord.onGrabSingle}"
+                android:padding="10dp"
                 android:text="抢单"
-                android:textColor="#9A93A0"
+                android:textColor="#3C90ED"
                 android:textSize="14sp" />
 
         </LinearLayout>

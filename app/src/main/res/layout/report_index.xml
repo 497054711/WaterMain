@@ -100,7 +100,7 @@
                 style="@style/itemButonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_corner_blue"
+                android:background="@drawable/shape_corner_green"
                 android:text="录制故障声音" />
         </LinearLayout>
     </LinearLayout>

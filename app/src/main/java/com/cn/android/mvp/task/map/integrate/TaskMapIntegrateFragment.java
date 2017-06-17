@@ -12,7 +12,7 @@ import com.cn.android.R;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.task.map.pipe.present.TaskMapPipePresent;
 import com.cn.android.mvp.task.map.pipe.view.ITaskMapPipeView;
-import com.cn.android.utils.LoadLocalImageUtil;
+import com.cn.android.utils.LoadImageUtil;
 
 /**
  * Created by Administrator on 2017/4/4.
@@ -39,7 +39,7 @@ public class TaskMapIntegrateFragment extends BaseFragment implements ITaskMapPi
         taskMapPipePresent = new TaskMapPipePresent(this);
         right.setOnClickListener(this);
         right.setImageResource(R.drawable.icon_list);
-        LoadLocalImageUtil.getInstance(this.getActivity()).displayFromDrawable(R.drawable.map02,ivMap);
+        LoadImageUtil.getInstance(this.getActivity()).displayFromDrawable(R.drawable.map02,ivMap);
         title.setText("Y161213514");
     }
 
