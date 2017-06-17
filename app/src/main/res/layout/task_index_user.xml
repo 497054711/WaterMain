@@ -4,12 +4,12 @@
     <data>
 
         <import
-            alias="IIndexView"
-            type="com.cn.android.mvp.task.index.view.IIndexView" />
+            alias="ITaskIndexUserView"
+            type="com.cn.android.mvp.task.user.view.ITaskIndexUserView" />
 
         <variable
-            name="indexView"
-            type="IIndexView" />
+            name="taskIndexUserView"
+            type="ITaskIndexUserView" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,12 +21,6 @@
         <include
             android:id="@+id/include_waterMainTitle"
             layout="@layout/water_main_title" />
-
-        <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
-            android:id="@+id/asvp_indexBanner"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="#ffffff" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +38,7 @@
                     android:layout_height="match_parent">
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_index"
+                        android:id="@+id/rv_task_index"
                         style="@style/contentPadding"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -76,6 +70,6 @@
             </LinearLayout>
         </LinearLayout>
 
-
     </LinearLayout>
+
 </layout>

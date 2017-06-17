@@ -1,4 +1,4 @@
-package com.cn.android.mvp.task.index.model.biz;
+package com.cn.android.mvp.task.user.model.biz;
 
 import com.cn.android.mvp.BaseBean;
 
@@ -8,15 +8,15 @@ import java.util.List;
  * Created by Administrator on 2017/6/11.
  */
 
-public class TaskIndexTaskData extends BaseBean {
-    private List<TaskIndexTaskRecord> records;
+public class TaskIndexUserData extends BaseBean {
+    private List<TaskIndexUserRecord> records;
     private boolean isMore;
 
-    public List<TaskIndexTaskRecord> getRecords() {
+    public List<TaskIndexUserRecord> getRecords() {
         return records;
     }
 
-    public void setRecords(List<TaskIndexTaskRecord> records) {
+    public void setRecords(List<TaskIndexUserRecord> records) {
         this.records = records;
     }
 

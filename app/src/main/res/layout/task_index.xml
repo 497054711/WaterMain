@@ -1,29 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical">
+<layout>
 
-    <include layout="@layout/water_main_title" />
+    <data>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F2F5FA"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="当前任务3"
-        android:textColor="#AAAAAA"
-        android:textSize="12sp" />
+        <import
+            alias="IIndexView"
+            type="com.cn.android.mvp.task.index.view.IIndexView" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_task_index"
+        <variable
+            name="indexView"
+            type="IIndexView" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#00000000"
-        android:listSelector="#00000000"
-        android:scrollbars="none" />
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_waterMainTitle"
+            layout="@layout/water_main_title" />
+
+        <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
+            android:id="@+id/asvp_indexBanner"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.andview.refreshview.XRefreshView
+                    android:id="@+id/xrv_index"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_index"
+                        style="@style/contentPadding"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="#00000000"
+                        android:listSelector="#00000000"
+                        android:overScrollMode="never"
+                        android:paddingTop="5dp"
+                        android:scrollbars="none" />
+
+                </com.andview.refreshview.XRefreshView>
+
+                <com.andview.refreshview.XRefreshView
+                    android:id="@+id/xrv_index_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <com.andview.refreshview.XScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="120dp"
+                        android:scrollbars="none">
+
+                        <include
+                            android:id="@+id/include_emptyView"
+                            layout="@layout/base_empty_view" />
+                    </com.andview.refreshview.XScrollView>
+                </com.andview.refreshview.XRefreshView>
+            </LinearLayout>
+        </LinearLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

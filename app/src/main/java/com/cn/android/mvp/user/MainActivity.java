@@ -19,7 +19,7 @@ import com.cn.android.mvp.WaterMainApplication;
 import com.cn.android.mvp.integral.index.IntegralIndexFragment;
 import com.cn.android.mvp.record.index.RecordIndexFragment;
 import com.cn.android.mvp.report.ReportIndexFragment;
-import com.cn.android.mvp.task.user.TaskIndexFragment;
+import com.cn.android.mvp.task.user.TaskIndexUserFragment;
 import com.cn.android.mvp.task.index.IndexFragment;
 import com.cn.android.widget.ForbiddenScrollViewPager;
 
@@ -33,7 +33,7 @@ public class MainActivity extends BaseFragmentActivity {
     private List<Fragment> listFragments;
     private CommonFragmentPagerAdapter commonFragmentPagerAdapter;
     private IndexFragment indexFragment;
-    private TaskIndexFragment taskIndexFragment;
+    private TaskIndexUserFragment userTaskIndexFragment;
     private IntegralIndexFragment integralIndexFragment;
     private RecordIndexFragment recordIndexFragment;
     private ReportIndexFragment reportIndexFragment;
@@ -57,14 +57,14 @@ public class MainActivity extends BaseFragmentActivity {
         unbinder= ButterKnife.bind(this);
         main_vp.setNoScroll(true);
         indexFragment = new IndexFragment();
-        taskIndexFragment = new TaskIndexFragment();
+        userTaskIndexFragment = new TaskIndexUserFragment();
         integralIndexFragment = new IntegralIndexFragment();
         recordIndexFragment = new RecordIndexFragment();
         reportIndexFragment = new ReportIndexFragment();
 
         listFragments = new ArrayList<Fragment>();
         listFragments.add(indexFragment);
-        listFragments.add(taskIndexFragment);
+        listFragments.add(userTaskIndexFragment);
         listFragments.add(recordIndexFragment);
         listFragments.add(integralIndexFragment);
         listFragments.add(reportIndexFragment);

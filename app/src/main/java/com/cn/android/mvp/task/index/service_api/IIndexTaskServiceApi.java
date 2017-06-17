@@ -1,7 +1,7 @@
 package com.cn.android.mvp.task.index.service_api;
 
 import com.cn.android.mvp.task.index.model.biz.TaskIndexBannerResult;
-import com.cn.android.mvp.task.index.model.biz.TaskIndexTaskResult;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexResult;
 
 import java.util.Map;
 
@@ -24,6 +24,6 @@ public interface IIndexTaskServiceApi {
     //获取产品列表
     @FormUrlEncoded
     @POST("task/page")
-    Flowable<TaskIndexTaskResult> getTask(@FieldMap Map<String, String> params);
+    Flowable<TaskIndexResult> getTask(@FieldMap Map<String, String> params);
 
 }

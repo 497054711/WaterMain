@@ -1,115 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffffff"
-    android:orientation="vertical">
+<layout>
 
-    <LinearLayout
+    <data>
+
+        <import
+            alias="TaskIndexRecord"
+            type="com.cn.android.mvp.task.index.model.biz.TaskIndexRecord" />
+
+        <variable
+            name="taskIndexRecord"
+            type="TaskIndexRecord" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp">
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <LinearLayout
-            android:id="@+id/lv_index_task_item_code"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:padding="10dp">
+            android:onClick="@{taskIndexRecord.onDescription}"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
-            <ImageView
-                android:id="@+id/iv_index_task_item_code"
+            <LinearLayout
+                android:id="@+id/lv_index_task_item_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_pipe" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_index_task_item_name"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{taskIndexRecord.name}"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_index_task_item_code"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@{taskIndexRecord.code}"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:gravity="right|center_vertical"
+                    android:text="查看详情"
+                    android:textColor="#9A93A0"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_index_task_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:text="@{taskIndexRecord.description}"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:lineSpacingMultiplier="1.5"
+            android:text="@{taskIndexRecord.startAddress +'-'+ taskIndexRecord.endAddress}"
+            android:textColor="#9A93A0"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_index_task_item_code"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="一体化巡检：Y161213514"
-                android:textColor="#ffffff"
-                android:textSize="14sp" />
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text='@{String.valueOf(taskIndexRecord.kilometers) + @string/kilometre}'
+                android:textColor="#9A93A0"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{String.valueOf(taskIndexRecord.expectDuration) + @string/minute}'
+                android:textColor="#9A93A0"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text='@{@string/index_des1+String.valueOf(taskIndexRecord.presetTime) + @string/index_des2}'
+                android:textColor="#9A93A0"
+                android:textSize="12sp" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right">
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:showDividers="middle">
 
             <TextView
+                android:id="@+id/tv_index_item_grabSingle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:drawableLeft="@drawable/index_limit_time"
-                android:drawablePadding="5dp"
-                android:gravity="right|center_vertical"
-                android:text="截止：12月26日"
-                android:textColor="#9A93A0"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_corner_blue"
+                android:gravity="center"
+                android:onClick="@{taskIndexRecord.onGrabSingle}"
+                android:padding="10dp"
+                android:text="立即抢单"
+                android:textColor="#3C90ED"
                 android:textSize="14sp" />
+
         </LinearLayout>
-
-
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_index_task_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="right"
-        android:paddingLeft="10dp"
-        android:text="排污管线周桥至高速公路管理局"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_index_task_item_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="right"
-        android:lineSpacingMultiplier="1.5"
-        android:paddingLeft="10dp"
-        android:text="起：周桥 -- 止：高速公路管理局\n全长：4.8公里预计时长：60分钟"
-        android:textColor="#9A93A0"
-        android:textSize="14sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/line"
-        android:divider="@drawable/driver_v"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:showDividers="middle">
-
-        <TextView
-            android:id="@+id/tv_index_item_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="开始巡检"
-            android:textColor="#9A93A0"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tv_index_item_giveUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="放弃任务"
-            android:textColor="#9A93A0"
-            android:textSize="14sp" />
-    </LinearLayout>
-</LinearLayout>
+</layout>

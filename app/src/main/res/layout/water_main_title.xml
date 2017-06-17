@@ -16,7 +16,7 @@
         android:id="@+id/rv_waterMainTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1fbba6"
+        android:background="#398DEF"
         android:orientation="vertical"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"

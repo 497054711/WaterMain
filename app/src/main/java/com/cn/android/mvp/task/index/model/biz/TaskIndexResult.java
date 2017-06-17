@@ -6,14 +6,14 @@ import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
  * Created by Administrator on 2017/6/10.
  */
 
-public class TaskIndexTaskResult extends RetrofitBaseCallBack {
-    private TaskIndexTaskData data;
+public class TaskIndexResult extends RetrofitBaseCallBack {
+    private TaskIndexData data;
 
-    public TaskIndexTaskData getData() {
+    public TaskIndexData getData() {
         return data;
     }
 
-    public void setData(TaskIndexTaskData data) {
+    public void setData(TaskIndexData data) {
         this.data = data;
     }
 }

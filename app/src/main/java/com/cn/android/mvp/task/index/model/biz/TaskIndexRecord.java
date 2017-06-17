@@ -14,7 +14,7 @@ import com.cn.android.widget.MyAlertDialog;
  * Created by Administrator on 2017/6/11.
  */
 
-public class TaskIndexTaskRecord extends BaseBean {
+public class TaskIndexRecord extends BaseBean {
     private String code;
     private String deadlineDate;
     private String description;

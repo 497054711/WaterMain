@@ -17,15 +17,15 @@ import com.cn.android.R;
 import com.cn.android.adapter.BaseRecycleAdapter;
 import com.cn.android.adapter.MyViewPagerAdapter;
 import com.cn.android.databinding.BannerItemBinding;
-import com.cn.android.databinding.UserTaskIndexBinding;
-import com.cn.android.databinding.UserTaskIndexTaskItemBinding;
+import com.cn.android.databinding.TaskIndexBinding;
+import com.cn.android.databinding.TaskIndexItemBinding;
 import com.cn.android.databinding.WaterMainTitleBinding;
 import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.IBaseTitleView;
 import com.cn.android.mvp.setting.SettingIndexFragment;
-import com.cn.android.mvp.task.index.model.biz.TaskIndexTaskRecord;
-import com.cn.android.mvp.task.index.model.biz.TaskIndexTaskResult;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexRecord;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexResult;
 import com.cn.android.mvp.task.index.present.IIndexPresent;
 import com.cn.android.mvp.task.index.present.IndexPresent;
 import com.cn.android.mvp.task.index.view.IIndexView;
@@ -49,10 +49,10 @@ import java.util.Map;
 public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitleView {
 
     private TaskAdapter taskAdapter;
-    private UserTaskIndexBinding userTaskIndexBinding;
+    private TaskIndexBinding taskIndexBinding;
     private WaterMainTitleBinding waterMainTitleBinding;
     private IIndexPresent iIndexPresent;
-    private List<TaskIndexTaskRecord> records;
+    private List<TaskIndexRecord> records;
     private boolean optionPullRefresh = false;//执行下拉刷新操作
     private int page = 1;
     private int pageTemp;
@@ -62,26 +62,26 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        userTaskIndexBinding = DataBindingUtil.inflate(inflater, R.layout.user_task_index, container, false);
-        return userTaskIndexBinding.getRoot();
+        taskIndexBinding = DataBindingUtil.inflate(inflater, R.layout.task_index, container, false);
+        return taskIndexBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         title.setText("首页");
-        userTaskIndexBinding.includeWaterMainTitle.back.setVisibility(View.GONE);
-        userTaskIndexBinding.includeWaterMainTitle.right.setImageResource(R.drawable.index_setting);
-        userTaskIndexBinding.setIndexView(this);
-        waterMainTitleBinding = userTaskIndexBinding.includeWaterMainTitle;
+        taskIndexBinding.includeWaterMainTitle.back.setVisibility(View.GONE);
+        taskIndexBinding.includeWaterMainTitle.right.setImageResource(R.drawable.index_setting);
+        taskIndexBinding.setIndexView(this);
+        waterMainTitleBinding = taskIndexBinding.includeWaterMainTitle;
         waterMainTitleBinding.setBaseTitleView(this);
 
         iIndexPresent = new IndexPresent(this.getActivity(), this);
         records = new ArrayList<>();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-        userTaskIndexBinding.rvIndex.setLayoutManager(layoutManager);
-        taskAdapter = new TaskAdapter(records, R.layout.user_task_index_task_item, BR.taskIndexTaskRecord);
-        userTaskIndexBinding.rvIndex.setAdapter(taskAdapter);
+        taskIndexBinding.rvIndex.setLayoutManager(layoutManager);
+        taskAdapter = new TaskAdapter(records, R.layout.task_index_item, BR.taskIndexRecord);
+        taskIndexBinding.rvIndex.setAdapter(taskAdapter);
         initXrvMessageEmpty();
         initXrvMessage();
         banner();
@@ -126,14 +126,14 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     @Override
     public void initXrvMessageEmpty() {
         //初始化xrvLatestDynamicEmpty
-        userTaskIndexBinding.xrvIndexEmpty.setPullLoadEnable(false);
-        userTaskIndexBinding.xrvIndexEmpty.setPullRefreshEnable(true);
-        userTaskIndexBinding.xrvIndexEmpty.setMoveFootWhenDisablePullLoadMore(true);
+        taskIndexBinding.xrvIndexEmpty.setPullLoadEnable(false);
+        taskIndexBinding.xrvIndexEmpty.setPullRefreshEnable(true);
+        taskIndexBinding.xrvIndexEmpty.setMoveFootWhenDisablePullLoadMore(true);
 
         //设置headler
         CommonXRefreshViewHeader commonXRefreshViewHeaderEmpty = new CommonXRefreshViewHeader(this.getActivity());
-        userTaskIndexBinding.xrvIndexEmpty.setCustomHeaderView(commonXRefreshViewHeaderEmpty);
-        userTaskIndexBinding.xrvIndexEmpty.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+        taskIndexBinding.xrvIndexEmpty.setCustomHeaderView(commonXRefreshViewHeaderEmpty);
+        taskIndexBinding.xrvIndexEmpty.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
             public void onRefresh(boolean isPullDown) {
                 super.onRefresh(isPullDown);
@@ -144,18 +144,18 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
 
     @Override
     public void initXrvMessage() {
-        userTaskIndexBinding.xrvIndex.setPullLoadEnable(true);
-        userTaskIndexBinding.xrvIndex.setPullRefreshEnable(true);
-        userTaskIndexBinding.xrvIndex.setMoveFootWhenDisablePullLoadMore(true);
+        taskIndexBinding.xrvIndex.setPullLoadEnable(true);
+        taskIndexBinding.xrvIndex.setPullRefreshEnable(true);
+        taskIndexBinding.xrvIndex.setMoveFootWhenDisablePullLoadMore(true);
 
         //设置headler
         CommonXRefreshViewHeader commonXRefreshViewHeader = new CommonXRefreshViewHeader(this.getActivity());
-        userTaskIndexBinding.xrvIndex.setCustomHeaderView(commonXRefreshViewHeader);
+        taskIndexBinding.xrvIndex.setCustomHeaderView(commonXRefreshViewHeader);
 
         CommonXRefreshViewFooter commonXRefreshViewFooter = new CommonXRefreshViewFooter(this.getActivity());
-        userTaskIndexBinding.xrvIndex.setCustomFooterView(commonXRefreshViewFooter);
-        userTaskIndexBinding.xrvIndex.setHeadMoveLargestDistence(PixelTransform.dip2px(this.getActivity(), 10));
-        userTaskIndexBinding.xrvIndex.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+        taskIndexBinding.xrvIndex.setCustomFooterView(commonXRefreshViewFooter);
+        taskIndexBinding.xrvIndex.setHeadMoveLargestDistence(PixelTransform.dip2px(this.getActivity(), 10));
+        taskIndexBinding.xrvIndex.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
             public void onRefresh(boolean isPullDown) {
                 super.onRefresh(isPullDown);
@@ -174,10 +174,10 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     @Override
     public void upDateTask(RetrofitBaseCallBack mRetrofitBaseCallBack) {
 
-        userTaskIndexBinding.xrvIndex.stopRefresh();
-        userTaskIndexBinding.xrvIndex.stopLoadMore();
+        taskIndexBinding.xrvIndex.stopRefresh();
+        taskIndexBinding.xrvIndex.stopLoadMore();
 
-        userTaskIndexBinding.xrvIndexEmpty.stopRefresh();
+        taskIndexBinding.xrvIndexEmpty.stopRefresh();
 
         if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
             if (optionPullRefresh) {
@@ -185,21 +185,21 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
                 optionPullRefresh = false;
             }
             pageTemp = page;
-            TaskIndexTaskResult taskIndexTaskResult = (TaskIndexTaskResult) mRetrofitBaseCallBack;
-            records.addAll(taskIndexTaskResult.getData().getRecords());
+            TaskIndexResult taskIndexResult = (TaskIndexResult) mRetrofitBaseCallBack;
+            records.addAll(taskIndexResult.getData().getRecords());
             taskAdapter.notifyDataSetChanged();
-            if (!taskIndexTaskResult.getData().isMore()) {
-                userTaskIndexBinding.xrvIndex.setPullLoadEnable(false);
+            if (!taskIndexResult.getData().isMore()) {
+                taskIndexBinding.xrvIndex.setPullLoadEnable(false);
             }
         } else {
             page = pageTemp;
         }
         if (records.size() == 0) {
-            userTaskIndexBinding.xrvIndex.setVisibility(View.GONE);
-            userTaskIndexBinding.xrvIndexEmpty.setVisibility(View.VISIBLE);
+            taskIndexBinding.xrvIndex.setVisibility(View.GONE);
+            taskIndexBinding.xrvIndexEmpty.setVisibility(View.VISIBLE);
         } else {
-            userTaskIndexBinding.xrvIndex.setVisibility(View.VISIBLE);
-            userTaskIndexBinding.xrvIndexEmpty.setVisibility(View.GONE);
+            taskIndexBinding.xrvIndex.setVisibility(View.VISIBLE);
+            taskIndexBinding.xrvIndexEmpty.setVisibility(View.GONE);
         }
     }
 
@@ -214,8 +214,8 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
             LoadImageUtil.getInstance(this.getActivity()).displayFromNet("",bannerItemBinding.ivBannerItem);
         }
         myViewPagerAdapter = new MyViewPagerAdapter(bannerPagers);
-        userTaskIndexBinding.asvpIndexBanner.setAdapter(myViewPagerAdapter);
-        userTaskIndexBinding.asvpIndexBanner.startAutoScroll();
+        taskIndexBinding.asvpIndexBanner.setAdapter(myViewPagerAdapter);
+        taskIndexBinding.asvpIndexBanner.startAutoScroll();
         myViewPagerAdapter.setPagerOnItemClickListener(new MyViewPagerAdapter.PagerOnItemClickListener() {
             @Override
             public void onClick(int position) {
@@ -237,32 +237,32 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     }
 
     public class TaskAdapter extends BaseRecycleAdapter {
-        private List<TaskIndexTaskRecord> records;
+        private List<TaskIndexRecord> records;
         private String type;
-        private UserTaskIndexTaskItemBinding userTaskIndexTaskItemBinding;
+        private TaskIndexItemBinding taskIndexItemBinding;
 
         public TaskAdapter(List<?> mDatas, int layoutId, int brId) {
             super(mDatas, layoutId, brId);
-            records = (List<TaskIndexTaskRecord>) mDatas;
+            records = (List<TaskIndexRecord>) mDatas;
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             super.onBindViewHolder(holder, position);
             type = records.get(position).getType();
-            userTaskIndexTaskItemBinding = (UserTaskIndexTaskItemBinding) holder.getBinding();
+            taskIndexItemBinding = (TaskIndexItemBinding) holder.getBinding();
             if (type.equals("1")) {
-                userTaskIndexTaskItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_bg));
-                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_code_txt));
-                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.office_inspection_code_bg);
+                taskIndexItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_bg));
+                taskIndexItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_code_txt));
+                taskIndexItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.office_inspection_code_bg);
             } else if (type.equals("2")) {
-                userTaskIndexTaskItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.integration_inspection_bg));
-                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.integration_inspection_code_txt));
-                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.integreation_inspection_code_bg);
+                taskIndexItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.integration_inspection_bg));
+                taskIndexItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.integration_inspection_code_txt));
+                taskIndexItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.integreation_inspection_code_bg);
             } else if (type.equals("3")) {
-                userTaskIndexTaskItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_bg));
-                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_code_txt));
-                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.office_inspection_code_bg);
+                taskIndexItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_bg));
+                taskIndexItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_code_txt));
+                taskIndexItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.office_inspection_code_bg);
             }
         }
     }

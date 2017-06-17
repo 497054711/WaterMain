@@ -3,7 +3,7 @@ package com.cn.android.mvp.task.index.model;
 import android.content.Context;
 
 import com.cn.android.mvp.task.index.model.biz.TaskIndexBannerResult;
-import com.cn.android.mvp.task.index.model.biz.TaskIndexTaskResult;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexResult;
 import com.cn.android.mvp.task.index.service_api.IIndexTaskServiceApi;
 import com.cn.android.nethelp.ICallBackListener;
 import com.cn.android.nethelp.Params;
@@ -36,7 +36,7 @@ public class IndexModel implements IIndexModel {
     @Override
     public void task(ICallBackListener mICallBackListener, Params params) {
         IIndexTaskServiceApi iLoginServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(IIndexTaskServiceApi.class);
-        Flowable<TaskIndexTaskResult> flowable = iLoginServiceApi.getTask(params.getMapParams());
+        Flowable<TaskIndexResult> flowable = iLoginServiceApi.getTask(params.getMapParams());
         flowable.subscribeOn(Schedulers.io())// Subscriber前面执行的代码都是在I/O线程中运行
                 .onBackpressureBuffer()
                 .observeOn(AndroidSchedulers.mainThread())// 操作observeOn之后操作主线程中运行.
