@@ -129,7 +129,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_corner_blue"
+                android:background="@drawable/shape_corner_stroke_blue"
                 android:gravity="center"
                 android:onClick="@{taskIndexUserRecord.onGiveUp}"
                 android:padding="10dp"
@@ -142,12 +142,12 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_corner_blue"
+                android:background="@drawable/shape_corner_soild_blue"
                 android:gravity="center"
                 android:onClick="@{taskIndexUserRecord.onInspection}"
                 android:padding="10dp"
                 android:text="开始巡检"
-                android:textColor="#3C90ED"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
         </LinearLayout>
