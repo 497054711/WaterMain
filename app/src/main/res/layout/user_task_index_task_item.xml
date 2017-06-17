@@ -4,12 +4,12 @@
     <data>
 
         <import
-            alias="UserTaskIndexTaskRecord"
-            type="com.cn.android.mvp.user_task.index.model.biz.UserTaskIndexTaskRecord" />
+            alias="TaskIndexTaskRecord"
+            type="com.cn.android.mvp.task.index.model.biz.TaskIndexTaskRecord" />
 
         <variable
-            name="userTaskIndexTaskRecord"
-            type="UserTaskIndexTaskRecord" />
+            name="taskIndexTaskRecord"
+            type="TaskIndexTaskRecord" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,15 +17,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="#ffffff"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:onClick="@{userTaskIndexTaskRecord.onDescription}"
+            android:onClick="@{taskIndexTaskRecord.onDescription}"
             android:orientation="horizontal"
-            android:paddingRight="10dp"
             android:paddingTop="10dp">
 
             <LinearLayout
@@ -33,28 +34,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_index_task_item_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:padding="5dp"
-                    android:text="@{userTaskIndexTaskRecord.name}"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{taskIndexTaskRecord.name}"
                     android:textColor="#ffffff"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_index_task_item_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:padding="5dp"
-                    android:text="@{userTaskIndexTaskRecord.code}"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@{taskIndexTaskRecord.code}"
                     android:textColor="#ffffff"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -66,7 +70,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
                     android:drawablePadding="5dp"
                     android:gravity="right|center_vertical"
                     android:text="查看详情"
@@ -83,20 +86,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="right"
-            android:paddingLeft="10dp"
-            android:text="@{userTaskIndexTaskRecord.description}"
+            android:text="@{taskIndexTaskRecord.description}"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="left"
             android:lineSpacingMultiplier="1.5"
-            android:paddingLeft="10dp"
-            android:text="@{userTaskIndexTaskRecord.startAddress +'-'+ userTaskIndexTaskRecord.endAddress}"
+            android:text="@{taskIndexTaskRecord.startAddress +'-'+ taskIndexTaskRecord.endAddress}"
             android:textColor="#9A93A0"
             android:textSize="14sp" />
 
@@ -111,22 +112,25 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text='@{String.valueOf(taskIndexTaskRecord.kilometers) + @string/kilometre}'
                 android:textColor="#9A93A0"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text='@{String.valueOf(taskIndexTaskRecord.expectDuration) + @string/minute}'
                 android:textColor="#9A93A0"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:text='@{@string/index_des1+String.valueOf(taskIndexTaskRecord.presetTime) + @string/index_des2}'
                 android:textColor="#9A93A0"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -145,9 +149,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/shape_corner_blue"
                 android:gravity="center"
-                android:onClick="@{userTaskIndexTaskRecord.onGrabSingle}"
+                android:onClick="@{taskIndexTaskRecord.onGrabSingle}"
                 android:padding="10dp"
-                android:text="抢单"
+                android:text="立即抢单"
                 android:textColor="#3C90ED"
                 android:textSize="14sp" />
 

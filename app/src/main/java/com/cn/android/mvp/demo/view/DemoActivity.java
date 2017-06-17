@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 
 import com.cn.android.R;
 import com.cn.android.databinding.DemoBinding;
-import com.cn.android.databinding.RegistBinding;
 import com.cn.android.mvp.BaseFragment;
-import com.cn.android.mvp.regist.present.RegistPresent;
-import com.cn.android.mvp.regist.view.IRegistView;
 
 /**
  * @name MVP

@@ -1,4 +1,4 @@
-package com.cn.android.mvp.user_task.index.model.biz;
+package com.cn.android.mvp.task.index.model.biz;
 
 import android.content.Intent;
 import android.view.View;
@@ -8,24 +8,24 @@ import com.cn.android.mvp.BaseBean;
 import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.task.detail.integrate.TaskDetailIntegrateFragment;
 import com.cn.android.mvp.task.detail.pipe.TaskDetailPipeFragment;
-import com.cn.android.mvp.user_task.index.IndexFragment;
 import com.cn.android.widget.MyAlertDialog;
 
 /**
  * Created by Administrator on 2017/6/11.
  */
 
-public class UserTaskIndexTaskRecord extends BaseBean {
+public class TaskIndexTaskRecord extends BaseBean {
     private String code;
     private String deadlineDate;
     private String description;
     private String endAddress;
-    private String expectDuration;
-    private String kilometers;
+    private int expectDuration;
+    private float kilometers;
     private String name;
     private String startAddress;
     private String status;
     private String type;
+    private int presetTime;
 
     public String getCode() {
         return code;
@@ -59,22 +59,6 @@ public class UserTaskIndexTaskRecord extends BaseBean {
         this.endAddress = endAddress;
     }
 
-    public String getExpectDuration() {
-        return expectDuration;
-    }
-
-    public void setExpectDuration(String expectDuration) {
-        this.expectDuration = expectDuration;
-    }
-
-    public String getKilometers() {
-        return kilometers;
-    }
-
-    public void setKilometers(String kilometers) {
-        this.kilometers = kilometers;
-    }
-
     public String getName() {
         return name;
     }
@@ -105,6 +89,30 @@ public class UserTaskIndexTaskRecord extends BaseBean {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getExpectDuration() {
+        return expectDuration;
+    }
+
+    public void setExpectDuration(int expectDuration) {
+        this.expectDuration = expectDuration;
+    }
+
+    public float getKilometers() {
+        return kilometers;
+    }
+
+    public void setKilometers(float kilometers) {
+        this.kilometers = kilometers;
+    }
+
+    public int getPresetTime() {
+        return presetTime;
+    }
+
+    public void setPresetTime(int presetTime) {
+        this.presetTime = presetTime;
     }
 
     public void onDescription(View view) {

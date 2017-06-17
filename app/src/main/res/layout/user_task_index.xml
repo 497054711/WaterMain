@@ -5,7 +5,7 @@
 
         <import
             alias="IIndexView"
-            type="com.cn.android.mvp.user_task.index.view.IIndexView" />
+            type="com.cn.android.mvp.task.index.view.IIndexView" />
 
         <variable
             name="indexView"
@@ -25,7 +25,8 @@
         <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
             android:id="@+id/asvp_indexBanner"
             android:layout_width="match_parent"
-            android:layout_height="100dp" />
+            android:layout_height="150dp"
+            android:background="#ffffff" />
 
         <LinearLayout
             android:layout_width="match_parent"

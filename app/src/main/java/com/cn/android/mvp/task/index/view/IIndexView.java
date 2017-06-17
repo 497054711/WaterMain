@@ -1,4 +1,4 @@
-package com.cn.android.mvp.user_task.index.view;
+package com.cn.android.mvp.task.index.view;
 
 import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
 

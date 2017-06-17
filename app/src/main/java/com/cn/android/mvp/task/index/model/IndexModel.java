@@ -1,12 +1,10 @@
-package com.cn.android.mvp.user_task.index.model;
+package com.cn.android.mvp.task.index.model;
 
 import android.content.Context;
 
-import com.cn.android.mvp.login.model.biz.LoginResult;
-import com.cn.android.mvp.login.service_api.ILoginServiceApi;
-import com.cn.android.mvp.user_task.index.model.biz.UserTaskIndexBannerResult;
-import com.cn.android.mvp.user_task.index.model.biz.UserTaskIndexTaskResult;
-import com.cn.android.mvp.user_task.index.service_api.IUserIndexTaskServiceApi;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexBannerResult;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexTaskResult;
+import com.cn.android.mvp.task.index.service_api.IIndexTaskServiceApi;
 import com.cn.android.nethelp.ICallBackListener;
 import com.cn.android.nethelp.Params;
 import com.cn.android.nethelp.retrofit.HRetrofitNetHelper;
@@ -27,8 +25,8 @@ public class IndexModel implements IIndexModel {
     }
     @Override
     public void banner(ICallBackListener mICallBackListener, Params params) {
-        IUserIndexTaskServiceApi iLoginServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(IUserIndexTaskServiceApi.class);
-        Flowable<UserTaskIndexBannerResult> flowable = iLoginServiceApi.getBanner(params.getMapParams());
+        IIndexTaskServiceApi iLoginServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(IIndexTaskServiceApi.class);
+        Flowable<TaskIndexBannerResult> flowable = iLoginServiceApi.getBanner(params.getMapParams());
         flowable.subscribeOn(Schedulers.io())// Subscriber前面执行的代码都是在I/O线程中运行
                 .onBackpressureBuffer()
                 .observeOn(AndroidSchedulers.mainThread())// 操作observeOn之后操作主线程中运行.
@@ -37,8 +35,8 @@ public class IndexModel implements IIndexModel {
 
     @Override
     public void task(ICallBackListener mICallBackListener, Params params) {
-        IUserIndexTaskServiceApi iLoginServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(IUserIndexTaskServiceApi.class);
-        Flowable<UserTaskIndexTaskResult> flowable = iLoginServiceApi.getTask(params.getMapParams());
+        IIndexTaskServiceApi iLoginServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(IIndexTaskServiceApi.class);
+        Flowable<TaskIndexTaskResult> flowable = iLoginServiceApi.getTask(params.getMapParams());
         flowable.subscribeOn(Schedulers.io())// Subscriber前面执行的代码都是在I/O线程中运行
                 .onBackpressureBuffer()
                 .observeOn(AndroidSchedulers.mainThread())// 操作observeOn之后操作主线程中运行.

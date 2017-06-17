@@ -1,4 +1,4 @@
-package com.cn.android.mvp.task.index;
+package com.cn.android.mvp.task.user;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,7 +21,7 @@ import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.task.handle.integrate.TaskHandleIntegrateFragment;
 import com.cn.android.mvp.task.handle.pipe.TaskHandlePipeFragment;
-import com.cn.android.mvp.task.index.view.ITaskIndexView;
+import com.cn.android.mvp.task.user.view.ITaskIndexView;
 import com.cn.android.widget.MyAlertDialog;
 
 /**

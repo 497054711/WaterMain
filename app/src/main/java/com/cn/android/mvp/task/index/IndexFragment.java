@@ -1,4 +1,4 @@
-package com.cn.android.mvp.user_task.index;
+package com.cn.android.mvp.task.index;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.andview.refreshview.XRefreshView;
 import com.cn.android.BR;
@@ -25,11 +24,11 @@ import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.IBaseTitleView;
 import com.cn.android.mvp.setting.SettingIndexFragment;
-import com.cn.android.mvp.user_task.index.model.biz.UserTaskIndexTaskRecord;
-import com.cn.android.mvp.user_task.index.model.biz.UserTaskIndexTaskResult;
-import com.cn.android.mvp.user_task.index.present.IIndexPresent;
-import com.cn.android.mvp.user_task.index.present.IndexPresent;
-import com.cn.android.mvp.user_task.index.view.IIndexView;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexTaskRecord;
+import com.cn.android.mvp.task.index.model.biz.TaskIndexTaskResult;
+import com.cn.android.mvp.task.index.present.IIndexPresent;
+import com.cn.android.mvp.task.index.present.IndexPresent;
+import com.cn.android.mvp.task.index.view.IIndexView;
 import com.cn.android.nethelp.Params;
 import com.cn.android.nethelp.retrofit.HRetrofitNetHelper;
 import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
@@ -42,8 +41,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.zip.Inflater;
 
 /**
  * Created by Administrator on 2017/3/20.
@@ -55,7 +52,7 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     private UserTaskIndexBinding userTaskIndexBinding;
     private WaterMainTitleBinding waterMainTitleBinding;
     private IIndexPresent iIndexPresent;
-    private List<UserTaskIndexTaskRecord> records;
+    private List<TaskIndexTaskRecord> records;
     private boolean optionPullRefresh = false;//执行下拉刷新操作
     private int page = 1;
     private int pageTemp;
@@ -83,7 +80,7 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
         records = new ArrayList<>();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         userTaskIndexBinding.rvIndex.setLayoutManager(layoutManager);
-        taskAdapter = new TaskAdapter(records, R.layout.user_task_index_task_item, BR.userTaskIndexTaskRecord);
+        taskAdapter = new TaskAdapter(records, R.layout.user_task_index_task_item, BR.taskIndexTaskRecord);
         userTaskIndexBinding.rvIndex.setAdapter(taskAdapter);
         initXrvMessageEmpty();
         initXrvMessage();
@@ -188,10 +185,10 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
                 optionPullRefresh = false;
             }
             pageTemp = page;
-            UserTaskIndexTaskResult userTaskIndexTaskResult = (UserTaskIndexTaskResult) mRetrofitBaseCallBack;
-            records.addAll(userTaskIndexTaskResult.getData().getRecords());
+            TaskIndexTaskResult taskIndexTaskResult = (TaskIndexTaskResult) mRetrofitBaseCallBack;
+            records.addAll(taskIndexTaskResult.getData().getRecords());
             taskAdapter.notifyDataSetChanged();
-            if (!userTaskIndexTaskResult.getData().isMore()) {
+            if (!taskIndexTaskResult.getData().isMore()) {
                 userTaskIndexBinding.xrvIndex.setPullLoadEnable(false);
             }
         } else {
@@ -240,13 +237,13 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     }
 
     public class TaskAdapter extends BaseRecycleAdapter {
-        private List<UserTaskIndexTaskRecord> records;
+        private List<TaskIndexTaskRecord> records;
         private String type;
         private UserTaskIndexTaskItemBinding userTaskIndexTaskItemBinding;
 
         public TaskAdapter(List<?> mDatas, int layoutId, int brId) {
             super(mDatas, layoutId, brId);
-            records = (List<UserTaskIndexTaskRecord>) mDatas;
+            records = (List<TaskIndexTaskRecord>) mDatas;
         }
 
         @Override
@@ -260,10 +257,12 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
                 userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.office_inspection_code_bg);
             } else if (type.equals("2")) {
                 userTaskIndexTaskItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.integration_inspection_bg));
-                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.integration_inspection_txt));
+                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.integration_inspection_code_txt));
                 userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.integreation_inspection_code_bg);
             } else if (type.equals("3")) {
-
+                userTaskIndexTaskItemBinding.tvIndexTaskItemName.setBackgroundColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_bg));
+                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setTextColor(ContextCompat.getColor(IndexFragment.this.getActivity(), R.color.office_inspection_code_txt));
+                userTaskIndexTaskItemBinding.tvIndexTaskItemCode.setBackgroundResource(R.drawable.office_inspection_code_bg);
             }
         }
     }

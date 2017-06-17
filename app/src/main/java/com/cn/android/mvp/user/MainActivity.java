@@ -1,6 +1,5 @@
 package com.cn.android.mvp.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -15,18 +14,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.cn.android.R;
 import com.cn.android.adapter.CommonFragmentPagerAdapter;
-import com.cn.android.db.GuaidDb;
-import com.cn.android.db.LoginInfoDB;
-import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragmentActivity;
-import com.cn.android.mvp.GuaidActivity;
 import com.cn.android.mvp.WaterMainApplication;
 import com.cn.android.mvp.integral.index.IntegralIndexFragment;
-import com.cn.android.mvp.login_regist.LoginRegistActivity;
 import com.cn.android.mvp.record.index.RecordIndexFragment;
 import com.cn.android.mvp.report.ReportIndexFragment;
-import com.cn.android.mvp.task.index.TaskIndexFragment;
-import com.cn.android.mvp.user_task.index.IndexFragment;
+import com.cn.android.mvp.task.user.TaskIndexFragment;
+import com.cn.android.mvp.task.index.IndexFragment;
 import com.cn.android.widget.ForbiddenScrollViewPager;
 
 public class MainActivity extends BaseFragmentActivity {

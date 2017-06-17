@@ -1,9 +1,9 @@
-package com.cn.android.mvp.user_task.index.present;
+package com.cn.android.mvp.task.index.present;
 
 import android.content.Context;
 
-import com.cn.android.mvp.user_task.index.model.IndexModel;
-import com.cn.android.mvp.user_task.index.view.IIndexView;
+import com.cn.android.mvp.task.index.model.IndexModel;
+import com.cn.android.mvp.task.index.view.IIndexView;
 import com.cn.android.nethelp.ICallBackListener;
 import com.cn.android.nethelp.Params;
 import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;

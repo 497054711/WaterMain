@@ -1,4 +1,4 @@
-package com.cn.android.mvp.user_task.index.model;
+package com.cn.android.mvp.task.index.model;
 
 import com.cn.android.nethelp.ICallBackListener;
 import com.cn.android.nethelp.Params;
