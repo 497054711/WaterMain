@@ -16,14 +16,19 @@ import retrofit2.http.POST;
 
 public interface IIndexTaskServiceApi {
 
-    //获取产品列表
+    //获取banner
     @FormUrlEncoded
     @POST("common/pic/banner/home")
     Flowable<TaskIndexBannerResult> getBanner(@FieldMap Map<String, String> params);
 
-    //获取产品列表
+    //获取首页任务
     @FormUrlEncoded
     @POST("task/page")
     Flowable<TaskIndexResult> getTask(@FieldMap Map<String, String> params);
+
+    //处理任务
+    @FormUrlEncoded
+    @POST("user/task/process/deal")
+    Flowable<TaskIndexResult> taskDeal(@FieldMap Map<String, String> params);
 
 }

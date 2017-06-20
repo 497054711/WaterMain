@@ -10,4 +10,5 @@ import com.cn.android.nethelp.Params;
 public interface IIndexModel {
     public void banner(ICallBackListener mICallBackListener, Params params);
     public void task(ICallBackListener mICallBackListener, Params params);
+    public void taskDeal(ICallBackListener mICallBackListener, Params params);
 }

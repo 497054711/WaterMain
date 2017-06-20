@@ -1,29 +1,19 @@
-package com.cn.android.mvp.task.index.model.biz;
+package com.cn.android.mvp.task.detail.word.model.biz;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 
-import com.cn.android.events.EventTask;
 import com.cn.android.mvp.BaseBean;
 import com.cn.android.mvp.BaseDisplayActivity;
-import com.cn.android.mvp.task.detail.word.TaskDetailWordFragment;
-import com.cn.android.mvp.task.index.model.IndexModel;
-import com.cn.android.nethelp.ICallBackListener;
-import com.cn.android.nethelp.Params;
-import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
+import com.cn.android.mvp.task.handle.integrate.TaskHandleIntegrateFragment;
+import com.cn.android.mvp.task.handle.pipe.TaskHandlePipeFragment;
 import com.cn.android.widget.MyAlertDialog;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2017/6/11.
  */
 
-public class TaskIndexRecord extends BaseBean {
+public class TaskDetailWord extends BaseBean {
     private String code;
     private String deadlineDate;
     private String description;
@@ -124,18 +114,12 @@ public class TaskIndexRecord extends BaseBean {
         this.presetTime = presetTime;
     }
 
-    public void onDescription(View view) {//查看详情
-        Toast.makeText(view.getContext(), getType(), Toast.LENGTH_SHORT).show();
-        String type = getType();
-        Intent intent = new Intent(view.getContext(), BaseDisplayActivity.class);
-        intent.putExtra("class", TaskDetailWordFragment.class);
-        view.getContext().startActivity(intent);
-    }
-
-    public void onGrabSingle(View view) {//抢单
+    //放弃任务
+    public void onGiveUp(View view) {
         final MyAlertDialog myAlertDialog = new MyAlertDialog(view.getContext());
+        myAlertDialog.setMsg("放弃任务有可能扣除积分，确认放弃？");
         myAlertDialog.setConfirmBtEnable(true);
-        myAlertDialog.setNegativeBtEnable(false);
+        myAlertDialog.setNegativeBtEnable(true);
         myAlertDialog.setClickInterface(new MyAlertDialog.ClickInterface() {
             @Override
             public void clickSure() {
@@ -147,28 +131,24 @@ public class TaskIndexRecord extends BaseBean {
                 myAlertDialog.dismiss();
             }
         });
+        myAlertDialog.show();
+    }
 
-        Map<String, String> mParamsMap = new HashMap<>();
-        mParamsMap.put("code",getCode());
-        Params params = new Params();
-        params.setMapParams(mParamsMap);
-
-        IndexModel indexModel=new IndexModel(view.getContext());
-        indexModel.taskDeal(new ICallBackListener() {
-            @Override
-            public void onSuccess(RetrofitBaseCallBack mRetrofitBaseCallBack) {
-                myAlertDialog.setMsg(mRetrofitBaseCallBack.getMsg());
-                myAlertDialog.show();
-                EventBus.getDefault().post(new EventTask());
-            }
-
-            @Override
-            public void onFaild(RetrofitBaseCallBack mRetrofitBaseCallBack) {
-                myAlertDialog.setMsg(mRetrofitBaseCallBack.getMsg());
-                myAlertDialog.show();
-            }
-        },params);
-
-
+    //开始巡检
+    public void onInspection(View view) {
+        String type=getType();
+        if (type.equals("1")) {
+            Intent intent = new Intent(view.getContext(), BaseDisplayActivity.class);
+            intent.putExtra("class", TaskHandlePipeFragment.class);
+            view.getContext().startActivity(intent);
+        } else if (type.equals("2")) {
+            Intent intent = new Intent(view.getContext(), BaseDisplayActivity.class);
+            intent.putExtra("class", TaskHandleIntegrateFragment.class);
+            view.getContext().startActivity(intent);
+        } else if (type.equals("3")) {
+            Intent intent = new Intent(view.getContext(), BaseDisplayActivity.class);
+            intent.putExtra("class", TaskHandlePipeFragment.class);
+            view.getContext().startActivity(intent);
+        }
     }
 }

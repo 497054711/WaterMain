@@ -42,4 +42,14 @@ public class IndexModel implements IIndexModel {
                 .observeOn(AndroidSchedulers.mainThread())// 操作observeOn之后操作主线程中运行.
                 .subscribe(HRetrofitNetHelper.getInstance(context).createSubcribe(mICallBackListener));
     }
+
+    @Override
+    public void taskDeal(ICallBackListener mICallBackListener, Params params) {
+        IIndexTaskServiceApi iLoginServiceApi = HRetrofitNetHelper.getInstance(context).getAPIService(IIndexTaskServiceApi.class);
+        Flowable<TaskIndexResult> flowable = iLoginServiceApi.taskDeal(params.getMapParams());
+        flowable.subscribeOn(Schedulers.io())// Subscriber前面执行的代码都是在I/O线程中运行
+                .onBackpressureBuffer()
+                .observeOn(AndroidSchedulers.mainThread())// 操作observeOn之后操作主线程中运行.
+                .subscribe(HRetrofitNetHelper.getInstance(context).createSubcribe(mICallBackListener));
+    }
 }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import
+            alias="ITaskDetailWordView"
+            type="com.cn.android.mvp.task.detail.word.view.ITaskDetailWordView" />
+
+        <variable
+            name="taskDetailWordView"
+            type="ITaskDetailWordView" />
+
+        <import
+            alias="TaskDetailWordResult"
+            type="com.cn.android.mvp.task.detail.word.model.biz.TaskDetailWordResult" />
+
+        <variable
+            name="taskDetailWordResult"
+            type="TaskDetailWordResult" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_waterMainTitle"
+            layout="@layout/water_main_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{taskDetailWordResult.data.taskDetailWord.name}"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@{taskDetailWordResult.data.taskDetailWord.code}"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:text="@{taskDetailWordResult.data.taskDetailWord.description}"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:lineSpacingMultiplier="1.5"
+            android:text="@{taskDetailWordResult.data.taskDetailWord.startAddress +'-'+ taskDetailWordResult.data.taskDetailWord.endAddress}"
+            android:textColor="#9A93A0"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text='@{String.valueOf(taskDetailWordResult.data.taskDetailWord.kilometers) + @string/kilometre}'
+                android:textColor="#9A93A0"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{String.valueOf(taskDetailWordResult.data.taskDetailWord.expectDuration) + @string/minute}'
+                android:textColor="#9A93A0"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text='@{@string/index_des1+String.valueOf(taskDetailWordResult.data.taskDetailWord.presetTime) + @string/index_des2}'
+                android:textColor="#9A93A0"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.andview.refreshview.XRefreshView
+                    android:id="@+id/xrv_index"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_task_index"
+                        style="@style/contentPadding"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="#00000000"
+                        android:listSelector="#00000000"
+                        android:overScrollMode="never"
+                        android:paddingTop="5dp"
+                        android:scrollbars="none" />
+
+                </com.andview.refreshview.XRefreshView>
+
+                <com.andview.refreshview.XRefreshView
+                    android:id="@+id/xrv_index_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <com.andview.refreshview.XScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="120dp"
+                        android:scrollbars="none">
+
+                        <include
+                            android:id="@+id/include_emptyView"
+                            layout="@layout/base_empty_view" />
+                    </com.andview.refreshview.XScrollView>
+                </com.andview.refreshview.XRefreshView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

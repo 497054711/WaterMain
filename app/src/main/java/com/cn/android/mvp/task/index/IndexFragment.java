@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.cn.android.databinding.BannerItemBinding;
 import com.cn.android.databinding.TaskIndexBinding;
 import com.cn.android.databinding.TaskIndexItemBinding;
 import com.cn.android.databinding.WaterMainTitleBinding;
+import com.cn.android.events.EventTask;
 import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.IBaseTitleView;
@@ -36,6 +38,10 @@ import com.cn.android.utils.LoadImageUtil;
 import com.cn.android.utils.PixelTransform;
 import com.cn.android.widget.CommonXRefreshViewFooter;
 import com.cn.android.widget.CommonXRefreshViewHeader;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,6 +75,7 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        EventBus.getDefault().register(this);
         title.setText("首页");
         taskIndexBinding.includeWaterMainTitle.back.setVisibility(View.GONE);
         taskIndexBinding.includeWaterMainTitle.right.setImageResource(R.drawable.index_setting);
@@ -234,6 +241,24 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
         Intent intent = new Intent(this.getActivity(), BaseDisplayActivity.class);
         intent.putExtra("class", SettingIndexFragment.class);
         startActivity(intent);
+    }
+
+    /**
+     * TODO登录完成执行的事件
+     *
+     * @param event
+     * @return void
+     * @throw
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventTaskRefresh(EventTask event) {
+        onRefresh();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//反注册EventBus
     }
 
     public class TaskAdapter extends BaseRecycleAdapter {
