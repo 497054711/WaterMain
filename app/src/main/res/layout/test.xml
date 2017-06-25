@@ -13,29 +13,23 @@
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
         android:orientation="vertical">
 
         <include
-            android:id="@+id/include_waterMainTitle"
+            android:id="@+id/waterMain_title"
             layout="@layout/water_main_title" />
 
-        <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
-            android:id="@+id/asvp_indexBanner"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="#ffffff" />
-
         <LinearLayout
-            android:id="@+id/ll_indexTask"
+            android:id="@+id/lv_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
         </LinearLayout>
-
 
     </LinearLayout>
 </layout>

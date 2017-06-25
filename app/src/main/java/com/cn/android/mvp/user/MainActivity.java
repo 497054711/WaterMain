@@ -64,6 +64,7 @@ public class MainActivity extends BaseFragmentActivity {
 
         listFragments = new ArrayList<Fragment>();
         listFragments.add(indexFragment);
+//        listFragments.add(testFragment);
         listFragments.add(userTaskIndexFragment);
         listFragments.add(recordIndexFragment);
         listFragments.add(integralIndexFragment);

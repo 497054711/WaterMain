@@ -5,14 +5,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andview.refreshview.XRefreshView;
 import com.cn.android.BR;
 import com.cn.android.R;
 import com.cn.android.adapter.BaseRecycleAdapter;
@@ -25,6 +21,8 @@ import com.cn.android.events.EventTask;
 import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.IBaseTitleView;
+import com.cn.android.mvp.IListViewListener;
+import com.cn.android.mvp.ListViewContainerFragment;
 import com.cn.android.mvp.setting.SettingIndexFragment;
 import com.cn.android.mvp.task.index.model.biz.TaskIndexRecord;
 import com.cn.android.mvp.task.index.model.biz.TaskIndexResult;
@@ -35,9 +33,6 @@ import com.cn.android.nethelp.Params;
 import com.cn.android.nethelp.retrofit.HRetrofitNetHelper;
 import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
 import com.cn.android.utils.LoadImageUtil;
-import com.cn.android.utils.PixelTransform;
-import com.cn.android.widget.CommonXRefreshViewFooter;
-import com.cn.android.widget.CommonXRefreshViewHeader;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -52,18 +47,16 @@ import java.util.Map;
  * Created by Administrator on 2017/3/20.
  */
 
-public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitleView {
+public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitleView ,IListViewListener {
 
     private TaskAdapter taskAdapter;
     private TaskIndexBinding taskIndexBinding;
     private WaterMainTitleBinding waterMainTitleBinding;
     private IIndexPresent iIndexPresent;
     private List<TaskIndexRecord> records;
-    private boolean optionPullRefresh = false;//执行下拉刷新操作
-    private int page = 1;
-    private int pageTemp;
     private List<View> bannerPagers;
     private MyViewPagerAdapter myViewPagerAdapter;
+    private ListViewContainerFragment listViewContainerFragment;
 
     @Nullable
     @Override
@@ -85,12 +78,11 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
 
         iIndexPresent = new IndexPresent(this.getActivity(), this);
         records = new ArrayList<>();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-        taskIndexBinding.rvIndex.setLayoutManager(layoutManager);
+        listViewContainerFragment = new ListViewContainerFragment();
+        this.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ll_indexTask, listViewContainerFragment).commit();//替换Activity布局
         taskAdapter = new TaskAdapter(records, R.layout.task_index_item, BR.taskIndexRecord);
-        taskIndexBinding.rvIndex.setAdapter(taskAdapter);
-        initXrvMessageEmpty();
-        initXrvMessage();
+        listViewContainerFragment.setBaseRecycleAdapter(taskAdapter);
+        listViewContainerFragment.setiListViewListener(this);
         banner();
         task();
     }
@@ -105,109 +97,12 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
 
     @Override
     public void task() {
-        onRefresh();
-    }
-
-    @Override
-    public void onRefresh() {
-        Map<String, String> mParamsMap = new HashMap<>();
-        pageTemp = page;
-        page = 1;
-        mParamsMap.put("page", String.valueOf(page));
-        Params paramsTask = new Params();
-        paramsTask.setMapParams(mParamsMap);
-        iIndexPresent.task(paramsTask);
-    }
-
-    @Override
-    public void onLoadMore() {
-        Map<String, String> mParamsMap = new HashMap<>();
-        pageTemp = page;
-        page++;
-        mParamsMap.put("page", String.valueOf(page));
-        Params paramsTask = new Params();
-        paramsTask.setMapParams(mParamsMap);
-        iIndexPresent.task(paramsTask);
-    }
-
-    @Override
-    public void initXrvMessageEmpty() {
-        //初始化xrvLatestDynamicEmpty
-        taskIndexBinding.xrvIndexEmpty.setPullLoadEnable(false);
-        taskIndexBinding.xrvIndexEmpty.setPullRefreshEnable(true);
-        taskIndexBinding.xrvIndexEmpty.setMoveFootWhenDisablePullLoadMore(true);
-
-        //设置headler
-        CommonXRefreshViewHeader commonXRefreshViewHeaderEmpty = new CommonXRefreshViewHeader(this.getActivity());
-        taskIndexBinding.xrvIndexEmpty.setCustomHeaderView(commonXRefreshViewHeaderEmpty);
-        taskIndexBinding.xrvIndexEmpty.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
-            @Override
-            public void onRefresh(boolean isPullDown) {
-                super.onRefresh(isPullDown);
-                IndexFragment.this.onRefresh();
-            }
-        });
-    }
-
-    @Override
-    public void initXrvMessage() {
-        taskIndexBinding.xrvIndex.setPullLoadEnable(true);
-        taskIndexBinding.xrvIndex.setPullRefreshEnable(true);
-        taskIndexBinding.xrvIndex.setMoveFootWhenDisablePullLoadMore(true);
-
-        //设置headler
-        CommonXRefreshViewHeader commonXRefreshViewHeader = new CommonXRefreshViewHeader(this.getActivity());
-        taskIndexBinding.xrvIndex.setCustomHeaderView(commonXRefreshViewHeader);
-
-        CommonXRefreshViewFooter commonXRefreshViewFooter = new CommonXRefreshViewFooter(this.getActivity());
-        taskIndexBinding.xrvIndex.setCustomFooterView(commonXRefreshViewFooter);
-        taskIndexBinding.xrvIndex.setHeadMoveLargestDistence(PixelTransform.dip2px(this.getActivity(), 10));
-        taskIndexBinding.xrvIndex.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
-            @Override
-            public void onRefresh(boolean isPullDown) {
-                super.onRefresh(isPullDown);
-                optionPullRefresh = true;
-                IndexFragment.this.onRefresh();
-            }
-
-            @Override
-            public void onLoadMore(boolean isSilence) {
-                super.onLoadMore(isSilence);
-                IndexFragment.this.onLoadMore();
-            }
-        });
+        getData(1);
     }
 
     @Override
     public void upDateTask(RetrofitBaseCallBack mRetrofitBaseCallBack) {
-
-        taskIndexBinding.xrvIndex.stopRefresh();
-        taskIndexBinding.xrvIndex.stopLoadMore();
-
-        taskIndexBinding.xrvIndexEmpty.stopRefresh();
-
-        if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
-            if (optionPullRefresh) {
-                records.clear();
-                optionPullRefresh = false;
-            }
-            pageTemp = page;
-            TaskIndexResult taskIndexResult = (TaskIndexResult) mRetrofitBaseCallBack;
-            records.addAll(taskIndexResult.getData().getRecords());
-            taskAdapter.notifyDataSetChanged();
-            if (!taskIndexResult.getData().isMore()) {
-                taskIndexBinding.xrvIndex.setPullLoadEnable(false);
-            }
-        } else {
-            page = pageTemp;
-        }
-        if (records.size() == 0) {
-            taskIndexBinding.xrvIndex.setVisibility(View.GONE);
-            taskIndexBinding.xrvIndexEmpty.setVisibility(View.VISIBLE);
-        } else {
-            taskIndexBinding.xrvIndex.setVisibility(View.VISIBLE);
-            taskIndexBinding.xrvIndexEmpty.setVisibility(View.GONE);
-        }
+        listViewContainerFragment.updateList(mRetrofitBaseCallBack);
     }
 
     @Override
@@ -252,13 +147,44 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventTaskRefresh(EventTask event) {
-        onRefresh();
+       task();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);//反注册EventBus
+    }
+
+    @Override
+    public void clearData() {
+        records.clear();
+    }
+
+    @Override
+    public void upDateList(RetrofitBaseCallBack mRetrofitBaseCallBack) {
+        if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
+            TaskIndexResult taskIndexResult = (TaskIndexResult) mRetrofitBaseCallBack;
+            records.addAll(taskIndexResult.getData().getRecords());
+            taskAdapter.notifyDataSetChanged();
+            if (!taskIndexResult.getData().isMore()) {
+                listViewContainerFragment.setPullLoadEnable(false);
+            }
+        }
+        if(records.size()==0){
+            listViewContainerFragment.upDateXrv(true);
+        }else{
+            listViewContainerFragment.upDateXrv(false);
+        }
+    }
+
+    @Override
+    public void getData(int page) {
+        Map<String, String> mParamsMap = new HashMap<>();
+        mParamsMap.put("page", String.valueOf(page));
+        Params paramsTask = new Params();
+        paramsTask.setMapParams(mParamsMap);
+        iIndexPresent.task(paramsTask);
     }
 
     public class TaskAdapter extends BaseRecycleAdapter {
