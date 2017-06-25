@@ -4,7 +4,7 @@ package com.cn.android.mvp;
  * Created by Administrator on 2017/6/25.
  */
 
-public interface IListViewContainer {
+public interface IRecycleViewContainer {
     public void initXrvMessageEmpty();
     public void initXrvMessage();
     

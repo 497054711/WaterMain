@@ -21,8 +21,8 @@ import com.cn.android.events.EventTask;
 import com.cn.android.mvp.BaseDisplayActivity;
 import com.cn.android.mvp.BaseFragment;
 import com.cn.android.mvp.IBaseTitleView;
-import com.cn.android.mvp.IListViewListener;
-import com.cn.android.mvp.ListViewContainerFragment;
+import com.cn.android.mvp.IRecycleViewListener;
+import com.cn.android.mvp.RecycleViewContainerFragment;
 import com.cn.android.mvp.setting.SettingIndexFragment;
 import com.cn.android.mvp.task.index.model.biz.TaskIndexRecord;
 import com.cn.android.mvp.task.index.model.biz.TaskIndexResult;
@@ -47,7 +47,7 @@ import java.util.Map;
  * Created by Administrator on 2017/3/20.
  */
 
-public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitleView ,IListViewListener {
+public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitleView ,IRecycleViewListener {
 
     private TaskAdapter taskAdapter;
     private TaskIndexBinding taskIndexBinding;
@@ -56,7 +56,7 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     private List<TaskIndexRecord> records;
     private List<View> bannerPagers;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private ListViewContainerFragment listViewContainerFragment;
+    private RecycleViewContainerFragment recycleViewContainerFragment;
 
     @Nullable
     @Override
@@ -78,11 +78,11 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
 
         iIndexPresent = new IndexPresent(this.getActivity(), this);
         records = new ArrayList<>();
-        listViewContainerFragment = new ListViewContainerFragment();
-        this.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ll_indexTask, listViewContainerFragment).commit();//替换Activity布局
+        recycleViewContainerFragment = new RecycleViewContainerFragment();
+        this.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.ll_indexTask, recycleViewContainerFragment).commit();//替换Activity布局
         taskAdapter = new TaskAdapter(records, R.layout.task_index_item, BR.taskIndexRecord);
-        listViewContainerFragment.setBaseRecycleAdapter(taskAdapter);
-        listViewContainerFragment.setiListViewListener(this);
+        recycleViewContainerFragment.setBaseRecycleAdapter(taskAdapter);
+        recycleViewContainerFragment.setiRecycleViewListener(this);
         banner();
         task();
     }
@@ -102,7 +102,34 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
 
     @Override
     public void upDateTask(RetrofitBaseCallBack mRetrofitBaseCallBack) {
-        listViewContainerFragment.updateList(mRetrofitBaseCallBack);
+        recycleViewContainerFragment.updateContainer(mRetrofitBaseCallBack);
+        if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
+            TaskIndexResult taskIndexResult = (TaskIndexResult) mRetrofitBaseCallBack;
+            records.addAll(taskIndexResult.getData().getRecords());
+            taskAdapter.notifyDataSetChanged();
+            if (!taskIndexResult.getData().isMore()) {
+                recycleViewContainerFragment.setPullLoadEnable(false);
+            }
+        }
+        if(records.size()==0){
+            recycleViewContainerFragment.setRecycleViewEmpty(true);
+        }else{
+            recycleViewContainerFragment.setRecycleViewEmpty(false);
+        }
+    }
+
+    @Override
+    public void getData(int page) {
+        Map<String, String> mParamsMap = new HashMap<>();
+        mParamsMap.put("page", String.valueOf(page));
+        Params paramsTask = new Params();
+        paramsTask.setMapParams(mParamsMap);
+        iIndexPresent.task(paramsTask);
+    }
+
+    @Override
+    public void clearData() {
+        records.clear();
     }
 
     @Override
@@ -154,37 +181,6 @@ public class IndexFragment extends BaseFragment implements IIndexView, IBaseTitl
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);//反注册EventBus
-    }
-
-    @Override
-    public void clearData() {
-        records.clear();
-    }
-
-    @Override
-    public void upDateList(RetrofitBaseCallBack mRetrofitBaseCallBack) {
-        if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
-            TaskIndexResult taskIndexResult = (TaskIndexResult) mRetrofitBaseCallBack;
-            records.addAll(taskIndexResult.getData().getRecords());
-            taskAdapter.notifyDataSetChanged();
-            if (!taskIndexResult.getData().isMore()) {
-                listViewContainerFragment.setPullLoadEnable(false);
-            }
-        }
-        if(records.size()==0){
-            listViewContainerFragment.upDateXrv(true);
-        }else{
-            listViewContainerFragment.upDateXrv(false);
-        }
-    }
-
-    @Override
-    public void getData(int page) {
-        Map<String, String> mParamsMap = new HashMap<>();
-        mParamsMap.put("page", String.valueOf(page));
-        Params paramsTask = new Params();
-        paramsTask.setMapParams(mParamsMap);
-        iIndexPresent.task(paramsTask);
     }
 
     public class TaskAdapter extends BaseRecycleAdapter {

@@ -14,96 +14,95 @@ import com.andview.refreshview.XRefreshView;
 import com.cn.android.R;
 import com.cn.android.adapter.BaseRecycleAdapter;
 import com.cn.android.databinding.ListviewContainerBinding;
+import com.cn.android.databinding.RecycleviewContainerBinding;
 import com.cn.android.nethelp.retrofit.HRetrofitNetHelper;
 import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
 import com.cn.android.utils.PixelTransform;
 import com.cn.android.widget.CommonXRefreshViewFooter;
 import com.cn.android.widget.CommonXRefreshViewHeader;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by Administrator on 2017/6/25.
  */
 
-public class ListViewContainerFragment extends Fragment implements IListViewContainer {
-    private ListviewContainerBinding listviewContainerBinding;
+public class RecycleViewContainerFragment extends Fragment implements IRecycleViewContainer {
+    private RecycleviewContainerBinding recycleviewContainerBinding;
     private boolean optionPullRefresh = false;//执行下拉刷新操作
     private int page = 1;
     private int pageTemp;
     private BaseRecycleAdapter baseRecycleAdapter;
-    private IListViewListener iListViewListener;
+    private IRecycleViewListener iRecycleViewListener;
 
     public void setBaseRecycleAdapter(BaseRecycleAdapter baseRecycleAdapter) {
         this.baseRecycleAdapter = baseRecycleAdapter;
     }
 
-    public void setiListViewListener(IListViewListener iListViewListener) {
-        this.iListViewListener = iListViewListener;
+    public void setiRecycleViewListener(IRecycleViewListener iRecycleViewListener) {
+        this.iRecycleViewListener = iRecycleViewListener;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        listviewContainerBinding = DataBindingUtil.inflate(inflater, R.layout.listview_container, container, false);
-        return listviewContainerBinding.getRoot();
+        recycleviewContainerBinding = DataBindingUtil.inflate(inflater, R.layout.recycleview_container, container, false);
+        return recycleviewContainerBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
-        listviewContainerBinding.rv.setLayoutManager(layoutManager);
-        listviewContainerBinding.rv.setAdapter(baseRecycleAdapter);
+        recycleviewContainerBinding.rv.setLayoutManager(layoutManager);
+        recycleviewContainerBinding.rv.setAdapter(baseRecycleAdapter);
         initXrvMessageEmpty();
         initXrvMessage();
     }
 
     @Override
     public void initXrvMessageEmpty() {//初始化xrvLatestDynamicEmpty
-        listviewContainerBinding.xrvEmpty.setPullLoadEnable(false);
-        listviewContainerBinding.xrvEmpty.setPullRefreshEnable(true);
-        listviewContainerBinding.xrvEmpty.setMoveFootWhenDisablePullLoadMore(true);
+        recycleviewContainerBinding.xrvEmpty.setPullLoadEnable(false);
+        recycleviewContainerBinding.xrvEmpty.setPullRefreshEnable(true);
+        recycleviewContainerBinding.xrvEmpty.setMoveFootWhenDisablePullLoadMore(true);
 
         //设置headler
         CommonXRefreshViewHeader commonXRefreshViewHeaderEmpty = new CommonXRefreshViewHeader(this.getActivity());
-        listviewContainerBinding.xrvEmpty.setCustomHeaderView(commonXRefreshViewHeaderEmpty);
-        listviewContainerBinding.xrvEmpty.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+        recycleviewContainerBinding.xrvEmpty.setCustomHeaderView(commonXRefreshViewHeaderEmpty);
+        recycleviewContainerBinding.xrvEmpty.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
             public void onRefresh(boolean isPullDown) {
                 super.onRefresh(isPullDown);
-                ListViewContainerFragment.this.onRefresh();
+                RecycleViewContainerFragment.this.onRefresh();
             }
         });
     }
 
     @Override
     public void initXrvMessage() {
-        listviewContainerBinding.xrv.setPullLoadEnable(true);
-        listviewContainerBinding.xrv.setPullRefreshEnable(true);
-        listviewContainerBinding.xrv.setMoveFootWhenDisablePullLoadMore(true);
+
+        recycleviewContainerBinding.xrv.setPullLoadEnable(true);
+        recycleviewContainerBinding.xrv.setPullRefreshEnable(true);
+        recycleviewContainerBinding.xrv.setMoveFootWhenDisablePullLoadMore(true);
 
         //设置headler
         CommonXRefreshViewHeader commonXRefreshViewHeader = new CommonXRefreshViewHeader(this.getActivity());
-        listviewContainerBinding.xrv.setCustomHeaderView(commonXRefreshViewHeader);
+        recycleviewContainerBinding.xrv.setCustomHeaderView(commonXRefreshViewHeader);
 
         //设置footer
         CommonXRefreshViewFooter commonXRefreshViewFooter = new CommonXRefreshViewFooter(this.getActivity());
-        listviewContainerBinding.xrv.setCustomFooterView(commonXRefreshViewFooter);
-        listviewContainerBinding.xrv.setHeadMoveLargestDistence(PixelTransform.dip2px(this.getActivity(), 10));
-        listviewContainerBinding.xrv.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+        recycleviewContainerBinding.xrv.setCustomFooterView(commonXRefreshViewFooter);
+        recycleviewContainerBinding.xrv.setHeadMoveLargestDistence(PixelTransform.dip2px(this.getActivity(), 10));
+        recycleviewContainerBinding.xrv.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
             public void onRefresh(boolean isPullDown) {
                 super.onRefresh(isPullDown);
                 optionPullRefresh = true;
-                ListViewContainerFragment.this.onRefresh();
+                RecycleViewContainerFragment.this.onRefresh();
             }
 
             @Override
             public void onLoadMore(boolean isSilence) {
                 super.onLoadMore(isSilence);
-                ListViewContainerFragment.this.onLoadMore();
+                RecycleViewContainerFragment.this.onLoadMore();
             }
         });
     }
@@ -112,8 +111,8 @@ public class ListViewContainerFragment extends Fragment implements IListViewCont
     public void onRefresh() {
         pageTemp = page;
         page = 1;
-        if(iListViewListener!=null){
-            iListViewListener.getData(page);
+        if (iRecycleViewListener != null) {
+            iRecycleViewListener.getData(page);
         }
     }
 
@@ -121,44 +120,41 @@ public class ListViewContainerFragment extends Fragment implements IListViewCont
     public void onLoadMore() {
         pageTemp = page;
         page++;
-        if(iListViewListener!=null){
-            iListViewListener.getData(page);
+        if (iRecycleViewListener != null) {
+            iRecycleViewListener.getData(page);
         }
     }
 
-    public void updateList(RetrofitBaseCallBack mRetrofitBaseCallBack){
-        listviewContainerBinding.xrv.stopRefresh();
-        listviewContainerBinding.xrv.stopLoadMore();
+    public void updateContainer(RetrofitBaseCallBack mRetrofitBaseCallBack) {
+        recycleviewContainerBinding.xrv.stopRefresh();
+        recycleviewContainerBinding.xrv.stopLoadMore();
 
-        listviewContainerBinding.xrvEmpty.stopRefresh();
+        recycleviewContainerBinding.xrvEmpty.stopRefresh();
 
         if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
             pageTemp = page;
             if (optionPullRefresh) {
                 optionPullRefresh = false;
-                if(iListViewListener!=null){
-                    iListViewListener.clearData();
+                if (iRecycleViewListener != null) {
+                    iRecycleViewListener.clearData();
                 }
             }
         } else {
             page = pageTemp;
         }
-        if(iListViewListener!=null){
-            iListViewListener.upDateList(mRetrofitBaseCallBack);
-        }
     }
 
-    public void upDateXrv(boolean isEmpty){//更新 xrefresh
+    public void setRecycleViewEmpty(boolean isEmpty) {//更新 xrefresh
         if (isEmpty) {//判断listview 数据是否为空
-            listviewContainerBinding.xrv.setVisibility(View.GONE);
-            listviewContainerBinding.xrvEmpty.setVisibility(View.VISIBLE);
+            recycleviewContainerBinding.xrv.setVisibility(View.GONE);
+            recycleviewContainerBinding.xrvEmpty.setVisibility(View.VISIBLE);
         } else {
-            listviewContainerBinding.xrv.setVisibility(View.VISIBLE);
-            listviewContainerBinding.xrvEmpty.setVisibility(View.GONE);
+            recycleviewContainerBinding.xrv.setVisibility(View.VISIBLE);
+            recycleviewContainerBinding.xrvEmpty.setVisibility(View.GONE);
         }
     }
 
-    public void setPullLoadEnable(boolean enable){//设置xrefresh是否可以上拉加载下一页
-        listviewContainerBinding.xrv.setPullLoadEnable(enable);
+    public void setPullLoadEnable(boolean enable) {//设置xrefresh是否可以上拉加载下一页
+        recycleviewContainerBinding.xrv.setPullLoadEnable(enable);
     }
 }
