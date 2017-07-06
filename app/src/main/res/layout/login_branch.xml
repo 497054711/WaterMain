@@ -33,6 +33,7 @@
             android:layout_marginRight="80dp"
             android:background="@drawable/shape_corner"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal"
             android:padding="8dp">
 
@@ -59,6 +60,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_corner"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal"
             android:padding="8dp">
 
