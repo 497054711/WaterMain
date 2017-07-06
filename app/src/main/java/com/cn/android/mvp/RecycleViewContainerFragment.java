@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.andview.refreshview.XRefreshView;
 import com.cn.android.R;
 import com.cn.android.adapter.BaseRecycleAdapter;
-import com.cn.android.databinding.ListviewContainerBinding;
 import com.cn.android.databinding.RecycleviewContainerBinding;
 import com.cn.android.nethelp.retrofit.HRetrofitNetHelper;
 import com.cn.android.nethelp.retrofit.RetrofitBaseCallBack;
