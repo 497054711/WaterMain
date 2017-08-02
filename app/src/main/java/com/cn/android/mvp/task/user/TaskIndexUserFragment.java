@@ -66,7 +66,6 @@ public class TaskIndexUserFragment extends BaseFragment implements ITaskIndexUse
         taskIndexUserBinding.rvTaskIndex.setLayoutManager(layoutManager);
         taskAdapter = new TaskAdapter(records, R.layout.task_index_user_item, BR.taskIndexUserRecord);
         taskIndexUserBinding.rvTaskIndex.setAdapter(taskAdapter);
-        initXrvMessageEmpty();
         initXrvMessage();
         task();
     }
@@ -96,25 +95,6 @@ public class TaskIndexUserFragment extends BaseFragment implements ITaskIndexUse
         Params paramsTask = new Params();
         paramsTask.setMapParams(mParamsMap);
         taskIndexUserPresent.task(paramsTask);
-    }
-
-    @Override
-    public void initXrvMessageEmpty() {
-        //初始化xrvLatestDynamicEmpty
-        taskIndexUserBinding.xrvIndexEmpty.setPullLoadEnable(false);
-        taskIndexUserBinding.xrvIndexEmpty.setPullRefreshEnable(true);
-        taskIndexUserBinding.xrvIndexEmpty.setMoveFootWhenDisablePullLoadMore(true);
-
-        //设置headler
-        CommonXRefreshViewHeader commonXRefreshViewHeaderEmpty = new CommonXRefreshViewHeader(this.getActivity());
-        taskIndexUserBinding.xrvIndexEmpty.setCustomHeaderView(commonXRefreshViewHeaderEmpty);
-        taskIndexUserBinding.xrvIndexEmpty.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
-            @Override
-            public void onRefresh(boolean isPullDown) {
-                super.onRefresh(isPullDown);
-                TaskIndexUserFragment.this.onRefresh();
-            }
-        });
     }
 
     @Override
@@ -152,8 +132,6 @@ public class TaskIndexUserFragment extends BaseFragment implements ITaskIndexUse
         taskIndexUserBinding.xrvIndex.stopRefresh();
         taskIndexUserBinding.xrvIndex.stopLoadMore();
 
-        taskIndexUserBinding.xrvIndexEmpty.stopRefresh();
-
         if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
             if (optionPullRefresh) {
                 records.clear();
@@ -170,11 +148,11 @@ public class TaskIndexUserFragment extends BaseFragment implements ITaskIndexUse
             page = pageTemp;
         }
         if (records.size() == 0) {
-            taskIndexUserBinding.xrvIndex.setVisibility(View.GONE);
-            taskIndexUserBinding.xrvIndexEmpty.setVisibility(View.VISIBLE);
+            taskIndexUserBinding.rvTaskIndex.setVisibility(View.GONE);
+            taskIndexUserBinding.includeEmptyView.lvBaseEmpty.setVisibility(View.VISIBLE);
         } else {
-            taskIndexUserBinding.xrvIndex.setVisibility(View.VISIBLE);
-            taskIndexUserBinding.xrvIndexEmpty.setVisibility(View.GONE);
+            taskIndexUserBinding.rvTaskIndex.setVisibility(View.VISIBLE);
+            taskIndexUserBinding.includeEmptyView.lvBaseEmpty.setVisibility(View.GONE);
         }
     }
 

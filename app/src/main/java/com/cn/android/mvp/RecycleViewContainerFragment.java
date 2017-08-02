@@ -53,26 +53,7 @@ public class RecycleViewContainerFragment extends Fragment implements IRecycleVi
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recycleviewContainerBinding.rv.setLayoutManager(layoutManager);
         recycleviewContainerBinding.rv.setAdapter(baseRecycleAdapter);
-        initXrvMessageEmpty();
         initXrvMessage();
-    }
-
-    @Override
-    public void initXrvMessageEmpty() {//初始化xrvLatestDynamicEmpty
-        recycleviewContainerBinding.xrvEmpty.setPullLoadEnable(false);
-        recycleviewContainerBinding.xrvEmpty.setPullRefreshEnable(true);
-        recycleviewContainerBinding.xrvEmpty.setMoveFootWhenDisablePullLoadMore(true);
-
-        //设置headler
-        CommonXRefreshViewHeader commonXRefreshViewHeaderEmpty = new CommonXRefreshViewHeader(this.getActivity());
-        recycleviewContainerBinding.xrvEmpty.setCustomHeaderView(commonXRefreshViewHeaderEmpty);
-        recycleviewContainerBinding.xrvEmpty.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
-            @Override
-            public void onRefresh(boolean isPullDown) {
-                super.onRefresh(isPullDown);
-                RecycleViewContainerFragment.this.onRefresh();
-            }
-        });
     }
 
     @Override
@@ -128,8 +109,6 @@ public class RecycleViewContainerFragment extends Fragment implements IRecycleVi
         recycleviewContainerBinding.xrv.stopRefresh();
         recycleviewContainerBinding.xrv.stopLoadMore();
 
-        recycleviewContainerBinding.xrvEmpty.stopRefresh();
-
         if (HRetrofitNetHelper.STATUS_SUCCESS == mRetrofitBaseCallBack.getRet()) {
             pageTemp = page;
             if (optionPullRefresh) {
@@ -145,11 +124,11 @@ public class RecycleViewContainerFragment extends Fragment implements IRecycleVi
 
     public void setRecycleViewEmpty(boolean isEmpty) {//更新 xrefresh
         if (isEmpty) {//判断listview 数据是否为空
-            recycleviewContainerBinding.xrv.setVisibility(View.GONE);
-            recycleviewContainerBinding.xrvEmpty.setVisibility(View.VISIBLE);
+            recycleviewContainerBinding.rv.setVisibility(View.GONE);
+            recycleviewContainerBinding.includeEmptyView.lvBaseEmpty.setVisibility(View.VISIBLE);
         } else {
-            recycleviewContainerBinding.xrv.setVisibility(View.VISIBLE);
-            recycleviewContainerBinding.xrvEmpty.setVisibility(View.GONE);
+            recycleviewContainerBinding.rv.setVisibility(View.VISIBLE);
+            recycleviewContainerBinding.includeEmptyView.lvBaseEmpty.setVisibility(View.GONE);
         }
     }
 

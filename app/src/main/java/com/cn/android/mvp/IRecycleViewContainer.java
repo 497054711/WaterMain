@@ -5,7 +5,6 @@ package com.cn.android.mvp;
  */
 
 public interface IRecycleViewContainer {
-    public void initXrvMessageEmpty();
     public void initXrvMessage();
     
     public void onRefresh();//刷新

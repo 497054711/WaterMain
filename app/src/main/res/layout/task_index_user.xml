@@ -37,36 +37,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_task_index"
-                        style="@style/contentPadding"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:divider="#00000000"
-                        android:listSelector="#00000000"
-                        android:overScrollMode="never"
-                        android:paddingTop="5dp"
-                        android:scrollbars="none" />
-
-                </com.andview.refreshview.XRefreshView>
-
-                <com.andview.refreshview.XRefreshView
-                    android:id="@+id/xrv_index_empty"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone">
-
-                    <com.andview.refreshview.XScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="120dp"
-                        android:scrollbars="none">
+                        android:layout_height="match_parent">
 
                         <include
                             android:id="@+id/include_emptyView"
                             layout="@layout/base_empty_view" />
-                    </com.andview.refreshview.XScrollView>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_task_index"
+                            style="@style/contentPadding"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:divider="#00000000"
+                            android:listSelector="#00000000"
+                            android:overScrollMode="never"
+                            android:paddingTop="5dp"
+                            android:scrollbars="none" />
+                    </FrameLayout>
+
                 </com.andview.refreshview.XRefreshView>
+
             </LinearLayout>
         </LinearLayout>
 
